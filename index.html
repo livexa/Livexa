@@ -669,29 +669,3 @@ notify(name+' started! 🎮');
 }
 
 </script>
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
-  import { getAuth } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyDw6xvva8RJGdPcRXRQOeqO1dNeDLhIS0Q",
-    authDomain: "livexa-395eb.firebaseapp.com",
-    projectId: "livexa-395eb",
-    storageBucket: "livexa-395eb.firebasestorage.app",
-    messagingSenderId: "675906359055",
-    appId: "1:675906359055:web:cb3011eae73bb4d8a1387a",
-    measurementId: "G-XR9DYXQVY1"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-
-  window.livexaFirebase = {
-    app,
-    auth
-  };
-
-  console.log("Livexa Firebase connected!");
-</script>
-</body>
-</html>
