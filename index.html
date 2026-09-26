@@ -663,17 +663,146 @@ notify('Gift sent successfully 🎁');
 }
 
 function playGame(name){
+  const old = document.getElementById('gameOverlay');
+  if(old) old.remove();
 
-notify(name+' started! 🎮');
+  const overlay = document.createElement('div');
+  overlay.id = 'gameOverlay';
+  overlay.style.cssText = `
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.85);
+    z-index:9999;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+  `;
 
+  const box = document.createElement('div');
+  box.style.cssText = `
+    width:min(500px,95%);
+    background:#0d1235;
+    border:2px solid #8b4dff;
+    border-radius:25px;
+    padding:25px;
+    text-align:center;
+    color:white;
+    font-family:Arial;
+  `;
+
+  box.innerHTML = `
+    <h2 style="font-size:28px;margin-top:0">${name} 🎮</h2>
+    <div id="gameArea"></div>
+    <button id="closeGame"
+      style="margin-top:20px;padding:12px 28px;border:0;border-radius:20px;background:#8b2cff;color:white;font-size:17px;">
+      Close
+    </button>
+  `;
+
+  overlay.appendChild(box);
+  document.body.appendChild(overlay);
+
+  document.getElementById('closeGame').onclick = () => overlay.remove();
+
+  const area = document.getElementById('gameArea');
+
+  if(name === 'Color Box'){
+    const colors = ['red','blue','green','yellow'];
+    const correct = colors[Math.floor(Math.random()*colors.length)];
+
+    area.innerHTML = `
+      <p style="font-size:19px">Choose: <b>${correct}</b></p>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+        ${colors.map(c => `
+          <button onclick="checkColor('${c}','${correct}')"
+            style="width:90px;height:70px;background:${c};border:3px solid white;border-radius:15px;">
+          </button>
+        `).join('')}
+      </div>
+      <p id="gameResult"></p>
+    `;
+  }
+
+  if(name === 'Lucky 8'){
+    const nums = Array.from({length:12},(_,i)=>i+1)
+      .sort(()=>Math.random()-.5);
+
+    area.innerHTML = `
+      <p style="font-size:19px">Find number <b>8</b> 🎯</p>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px">
+        ${nums.map(n => `
+          <button onclick="checkLucky(${n})"
+            style="padding:18px;border:0;border-radius:12px;background:#633cff;color:white;font-size:20px;">
+            ${n}
+          </button>
+        `).join('')}
+      </div>
+      <p id="gameResult"></p>
+    `;
+  }
+
+  if(name === 'Bubble Burst'){
+    let count = 0;
+
+    area.innerHTML = `
+      <p style="font-size:19px">Pop 5 bubbles! 🫧</p>
+      <div id="bubbles" style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap"></div>
+      <p id="gameResult"></p>
+    `;
+
+    const bubbles = document.getElementById('bubbles');
+
+    for(let i=0;i<10;i++){
+      const b = document.createElement('button');
+      b.textContent = '🫧';
+      b.style.cssText = `
+        font-size:35px;
+        background:none;
+        border:0;
+        cursor:pointer;
+      `;
+
+      b.onclick = () => {
+        if(b.disabled) return;
+        b.disabled = true;
+        b.textContent = '💥';
+        count++;
+
+        if(count >= 5){
+          document.getElementById('gameResult').innerHTML =
+            '<b style="color:#00ff99;font-size:22px">You won! 🎉</b>';
+        }
+      };
+
+      bubbles.appendChild(b);
+    }
+  }
 }
 
-</script>
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
-import { getAuth } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
-import { getFirestore } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+function checkColor(selected, correct){
+  const result = document.getElementById('gameResult');
 
+  if(selected === correct){
+    result.innerHTML =
+      '<b style="color:#00ff99;font-size:22px">Correct! 🎉</b>';
+  }else{
+    result.innerHTML =
+      '<b style="color:#ff5555;font-size:22px">Wrong! Try again ❌</b>';
+  }
+}
+
+function checkLucky(number){
+  const result = document.getElementById('gameResult');
+
+  if(number === 8){
+    result.innerHTML =
+      '<b style="color:#00ff99;font-size:22px">You found 8! 🎉🏆</b>';
+  }else{
+    result.innerHTML =
+      '<b style="color:#ff5555">Not 8! Try again 😄</b>';
+  }
+}
 const firebaseConfig = {
   apiKey: "AIzaSyDw6xvva8RJGdPcRXRQ0eq01dNeDLhISQ",
   authDomain: "live xa-395eb.firebaseapp.com",
