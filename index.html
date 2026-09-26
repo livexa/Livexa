@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Livexa</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial,sans-serif;
+}
+
+body{
+  background:#050816;
+  color:white;
+  min-height:100vh;
+}
+
+header{
+  height:70px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 22px;
+  background:#090d24;
+  border-bottom:1px solid #252b66;
+  position:sticky;
+  top:0;
+  z-index:10;
+}
+
+.logo{
+  font-size:27px;
+  font-weight:bold;
+  color:#fff;
+}
+
+.logo span{
+  color:#b84cff;
+}
+
+.coins{
+  background:#151938;
+  border:1px solid #694cff;
+  border-radius:25px;
+  padding:10px 15px;
+  color:#ffd75a;
+}
+
+.layout{
+  display:flex;
+  min-height:calc(100vh - 70px);
+}
+
+nav{
+  width:210px;
+  background:#080c20;
+  border-right:1px solid #202653;
+  padding:20px 12px;
+}
+
+nav button{
+  width:100%;
+  background:transparent;
+  border:0;
+  color:#cfd3ef;
+  text-align:left;
+  padding:15px;
+  margin-bottom:6px;
+  border-radius:12px;
+  font-size:16px;
+  cursor:pointer;
+}
+
+nav button:hover,
+nav button.active{
+  background:linear-gradient(90deg,#711cff,#a83cff);
+  color:white;
+}
+
+main{
+  flex:1;
+  padding:24px;
+  overflow:hidden;
+}
+
+.page{
+  display:none;
+}
+
+.page.active{
+  display:block;
+}
+
+.hero{
+  background:linear-gradient(135deg,#170b3b,#35106e,#071b43);
+  border:1px solid #7e42ff;
+  border-radius:22px;
+  padding:30px;
+  margin-bottom:25px;
+  box-shadow:0 0 35px rgba(120,40,255,.25);
+}
+
+.hero h1{
+  font-size:36px;
+  margin-bottom:10px;
+}
+
+.hero p{
+  color:#c8cbea;
+  margin-bottom:20px;
+}
+
+.primary{
+  border:0;
+  border-radius:25px;
+  padding:12px 24px;
+  color:white;
+  font-weight:bold;
+  background:linear-gradient(90deg,#7b22ff,#e033ff);
+  cursor:pointer;
+}
+
+.section-title{
+  margin:25px 0 15px;
+  font-size:22px;
+}
+
+.rooms{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:16px;
+}
+
+.card{
+  background:#0d1230;
+  border:1px solid #303879;
+  border-radius:18px;
+  padding:18px;
+  transition:.2s;
+}
+
+.card:hover{
+  transform:translateY(-3px);
+  border-color:#a64cff;
+}
+
+.avatar{
+  width:65px;
+  height:65px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:27px;
+  background:linear-gradient(135deg,#7d26ff,#ff42c8);
+  margin-bottom:12px;
+}
+
+.live{
+  color:#ff536d;
+  font-weight:bold;
+}
+
+.card h3{
+  margin-bottom:8px;
+}
+
+.card p{
+  color:#aeb3d2;
+  font-size:14px;
+  margin-bottom:14px;
+}
+
+.room{
+  background:linear-gradient(135deg,#100b2c,#071a39);
+  border:1px solid #4d43a0;
+  border-radius:20px;
+  padding:22px;
+}
+
+.room-screen{
+  min-height:260px;
+  border-radius:18px;
+  background:radial-gradient(circle,#63258b,#10152d 65%);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  margin-bottom:18px;
+}
+
+.room-screen .big-avatar{
+  width:100px;
+  height:100px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#ff4fc8,#712cff);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:45px;
+  margin-bottom:15px;
+}
+
+.chat{
+  background:#080d22;
+  border:1px solid #292f61;
+  border-radius:15px;
+  padding:15px;
+  margin-top:15px;
+}
+
+.chat p{
+  margin:9px 0;
+  color:#d6d8ee;
+}
+
+.games{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:15px;
+}
+
+.game{
+  padding:20px;
+  background:#0c1230;
+  border:1px solid #343c80;
+  border-radius:18px;
+  text-align:center;
+}
+
+.game-icon{
+  font-size:42px;
+  margin-bottom:12px;
+}
+
+.gift-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:15px;
+}
+
+.gift{
+  text-align:center;
+  background:#0c1230;
+  border:1px solid #343c80;
+  border-radius:18px;
+  padding:20px 10px;
+}
+
+.gift-icon{
+  font-size:42px;
+  margin-bottom:10px;
+}
+
+.profile{
+  max-width:600px;
+  margin:auto;
+  text-align:center;
+  background:#0c1230;
+  border:1px solid #343c80;
+  border-radius:22px;
+  padding:35px;
+}
+
+.profile-avatar{
+  width:110px;
+  height:110px;
+  border-radius:50%;
+  margin:auto auto 15px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:50px;
+  background:linear-gradient(135deg,#ff38c7,#6f2cff);
+}
+
+.stats{
+  display:flex;
+  justify-content:space-around;
+  margin:25px 0;
+}
+
+.stat strong{
+  display:block;
+  font-size:20px;
+}
+
+.stat span{
+  color:#9298bd;
+  font-size:13px;
+}
+
+.notice{
+  position:fixed;
+  bottom:20px;
+  left:50%;
+  transform:translateX(-50%);
+  background:#171d43;
+  border:1px solid #754cff;
+  padding:14px 22px;
+  border-radius:25px;
+  display:none;
+  z-index:100;
+}
+
+@media(max-width:700px){
+  nav{
+    width:72px;
+  }
+
+  nav button{
+    text-align:center;
+    font-size:0;
+    padding:15px 5px;
+  }
+
+  nav button::first-letter{
+    font-size:22px;
+  }
+
+  main{
+    padding:15px;
+  }
+
+  .hero h1{
+    font-size:28px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">▶ <span>Livexa</span></div>
+  <div class="coins">🪙 <span id="coinCount">12,450</span></div>
+</header>
+
+<div class="layout">
+
+<nav>
+  <button class="active" onclick="showPage('home',this)">🏠 Home</button>
+  <button onclick="showPage('live',this)">🔴 Live</button>
+  <button onclick="showPage('rooms',this)">👥 Rooms</button>
+  <button onclick="showPage('games',this)">🎮 Games</button>
+  <button onclick="showPage('gifts',this)">🎁 Gifts</button>
+  <button onclick="showPage('profile',this)">👤 Profile</button>
+</nav>
+
+<main>
+
+<section id="home" class="page active">
+
+<div class="hero">
+  <h1>Welcome to Livexa ✨</h1>
+  <p>Live • Connect • Be Yourself</p>
+  <button class="primary" onclick="showPage('rooms')">
+    Explore Rooms
+  </button>
+</div>
+
+<h2 class="section-title">🔥 Popular Live Rooms</h2>
+
+<div class="rooms">
+
+<div class="card">
+<div class="avatar">👩🏻</div>
+<h3>Dream Girl 👑</h3>
+<p><span class="live">● LIVE</span> · 8.6K viewers</p>
+<button class="primary" onclick="openRoom('Dream Girl')">Join Room</button>
+</div>
+
+<div class="card">
+<div class="avatar">👩🏼</div>
+<h3>Queen Sara ✨</h3>
+<p><span class="live">● LIVE</span> · 5.2K viewers</p>
+<button class="primary" onclick="openRoom('Queen Sara')">Join Room</button>
+</div>
+
+<div class="card">
+<div class="avatar">👨🏻</div>
+<h3>King 777 👑</h3>
+<p><span class="live">● LIVE</span> · 3.8K viewers</p>
+<button class="primary" onclick="openRoom('King 777')">Join Room</button>
+</div>
+
+</div>
+
+</section>
+
+
+<section id="live" class="page">
+
+<h1 class="section-title">🔴 Live Now</h1>
+
+<div class="rooms">
+
+<div class="card">
+<div class="avatar">🎤</div>
+<h3>Music Night</h3>
+<p>Live music · 12.8K viewers</p>
+<button class="primary" onclick="openRoom('Music Night')">Watch</button>
+</div>
+
+<div class="card">
+<div class="avatar">🎮</div>
+<h3>Gaming Room</h3>
+<p>Gaming · 7.4K viewers</p>
+<button class="primary" onclick="openRoom('Gaming Room')">Watch</button>
+</div>
+
+<div class="card">
+<div class="avatar">💬</div>
+<h3>Talk & Friends</h3>
+<p>Chat · 4.1K viewers</p>
+<button class="primary" onclick="openRoom('Talk & Friends')">Watch</button>
+</div>
+
+</div>
+
+</section>
+
+
+<section id="rooms" class="page">
+
+<h1 class="section-title">👥 Rooms</h1>
+
+<div id="roomContainer">
+
+<div class="rooms">
+
+<div class="card">
+<div class="avatar">🌟</div>
+<h3>Dream Room</h3>
+<p>8 Seats · Friends · Music</p>
+<button class="primary" onclick="openRoom('Dream Room')">Join</button>
+</div>
+
+<div class="card">
+<div class="avatar">🔥</div>
+<h3>Fun Zone</h3>
+<p>8 Seats · Games · Chat</p>
+<button class="primary" onclick="openRoom('Fun Zone')">Join</button>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section id="games" class="page">
+
+<h1 class="section-title">🎮 Exciting Games</h1>
+
+<div class="games">
+
+<div class="game">
+<div class="game-icon">🧩</div>
+<h3>Color Box</h3>
+<p>Choose the correct color</p>
+<button class="primary" onclick="playGame('Color Box')">Play</button>
+</div>
+
+<div class="game">
+<div class="game-icon">🎯</div>
+<h3>Lucky 8</h3>
+<p>Find number 8</p>
+<button class="primary" onclick="playGame('Lucky 8')">Play</button>
+</div>
+
+<div class="game">
+<div class="game-icon">🫧</div>
+<h3>Bubble Burst</h3>
+<p>Pop the bubbles</p>
+<button class="primary" onclick="playGame('Bubble Burst')">Play</button>
+</div>
+
+<div class="game">
+<div class="game-icon">🃏</div>
+<h3>Card Flip</h3>
+<p>Match the cards</p>
+<button class="primary" onclick="playGame('Card Flip')">Play</button>
+</div>
+
+</div>
+
+</section>
+
+
+<section id="gifts" class="page">
+
+<h1 class="section-title">🎁 Gifts</h1>
+
+<div class="gift-grid">
+
+<div class="gift">
+<div class="gift-icon">🌹</div>
+<h3>Rose</h3>
+<p>200 Coins</p>
+<button class="primary" onclick="sendGift(200)">Send</button>
+</div>
+
+<div class="gift">
+<div class="gift-icon">❤️</div>
+<h3>Heart</h3>
+<p>500 Coins</p>
+<button class="primary" onclick="sendGift(500)">Send</button>
+</div>
+
+<div class="gift">
+<div class="gift-icon">💎</div>
+<h3>Diamond</h3>
+<p>1,000 Coins</p>
+<button class="primary" onclick="sendGift(1000)">Send</button>
+</div>
+
+<div class="gift">
+<div class="gift-icon">👑</div>
+<h3>Crown</h3>
+<p>5,000 Coins</p>
+<button class="primary" onclick="sendGift(5000)">Send</button>
+</div>
+
+</div>
+
+</section>
+
+
+<section id="profile" class="page">
+
+<div class="profile">
+
+<div class="profile-avatar">👤</div>
+
+<h1>Livexa User</h1>
+<p style="color:#999fc4;margin-top:8px;">Lv. 1 · New Member</p>
+
+<div class="stats">
+<div class="stat">
+<strong>12.4K</strong>
+<span>Coins</span>
+</div>
+
+<div class="stat">
+<strong>0</strong>
+<span>Followers</span>
+</div>
+
+<div class="stat">
+<strong>0</strong>
+<span>Following</span>
+</div>
+</div>
+
+<button class="primary" onclick="notify('Profile editing will be added soon ✨')">
+Edit Profile
+</button>
+
+</div>
+
+</section>
+
+</main>
+</div>
+
+<div id="notice" class="notice"></div>
+
+<script>
+
+let coins = 12450;
+
+function showPage(page,button){
+
+document.querySelectorAll('.page')
+.forEach(p=>p.classList.remove('active'));
+
+document.getElementById(page)
+.classList.add('active');
+
+document.querySelectorAll('nav button')
+.forEach(b=>b.classList.remove('active'));
+
+if(button) button.classList.add('active');
+
+}
+
+function notify(message){
+
+const box=document.getElementById('notice');
+
+box.textContent=message;
+box.style.display='block';
+
+setTimeout(()=>{
+box.style.display='none';
+},2200);
+
+}
+
+function openRoom(name){
+
+document.getElementById('roomContainer').innerHTML=`
+
+<div class="room">
+
+<div class="room-screen">
+
+<div class="big-avatar">👑</div>
+
+<h2>${name}</h2>
+
+<p style="color:#b9bedb;margin-top:8px;">
+🔴 LIVE · 8 Seats
+</p>
+
+</div>
+
+<button class="primary"
+onclick="notify('You joined the room ✨')">
+Join Room
+</button>
+
+<div class="chat">
+
+<h3>💬 Chat</h3>
+
+<p>👤 King_777: Welcome everyone!</p>
+<p>👤 Queen_Sara: Hello Livexa ❤️</p>
+<p>👤 David_88: Amazing room!</p>
+
+</div>
+
+</div>
+`;
+
+showPage('rooms');
+
+}
+
+function sendGift(amount){
+
+if(coins<amount){
+
+notify('Not enough coins 🪙');
+return;
+
+}
+
+coins-=amount;
+
+document.getElementById('coinCount')
+.textContent=coins.toLocaleString();
+
+notify('Gift sent successfully 🎁');
+
+}
+
+function playGame(name){
+
+notify(name+' started! 🎮');
+
+}
+
+</script>
+
+</body>
+</html>
