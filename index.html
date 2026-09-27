@@ -1376,6 +1376,257 @@ a{
     border-radius:18px !important;
   }
 }
+/* ===== LiveXa Modern ME Page ===== */
+
+#profile{
+  background:#f7fbfa !important;
+  color:#182322 !important;
+  min-height:100vh;
+  padding:18px 14px 95px !important;
+  overflow-y:auto !important;
+}
+
+/* Profile header */
+#profile .me-header{
+  background:linear-gradient(145deg,#dffaf4,#f8fffd) !important;
+  border-radius:28px !important;
+  padding:22px 18px !important;
+  margin-bottom:14px !important;
+  box-shadow:0 8px 28px rgba(25,80,70,.08) !important;
+  border:1px solid rgba(32,211,178,.12) !important;
+  text-align:center;
+}
+
+#profile .me-avatar{
+  width:82px !important;
+  height:82px !important;
+  margin:0 auto 10px !important;
+  border-radius:50% !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  font-size:38px !important;
+  background:linear-gradient(145deg,#ffffff,#d8f8f1) !important;
+  border:4px solid #fff !important;
+  box-shadow:0 7px 20px rgba(25,80,70,.12) !important;
+}
+
+#profile .me-info h2{
+  margin:4px 0 5px !important;
+  color:#182322 !important;
+  font-size:21px !important;
+  font-weight:800 !important;
+}
+
+#profile .me-info p{
+  margin:0 0 4px !important;
+  color:#7b8987 !important;
+  font-size:12px !important;
+}
+
+#profile .me-info span{
+  color:#647371 !important;
+  font-size:13px !important;
+}
+
+/* Edit button */
+#profile .edit-profile{
+  margin-top:12px !important;
+  padding:8px 18px !important;
+  border:1px solid #d8e9e5 !important;
+  border-radius:20px !important;
+  background:#fff !important;
+  color:#20b99e !important;
+  font-weight:700 !important;
+}
+
+/* Stats */
+#profile .me-stats{
+  display:grid !important;
+  grid-template-columns:repeat(3,1fr) !important;
+  gap:8px !important;
+  margin-top:18px !important;
+  padding-top:15px !important;
+  border-top:1px solid rgba(100,130,125,.12) !important;
+}
+
+#profile .me-stats > div{
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  gap:3px !important;
+}
+
+#profile .me-stats strong{
+  color:#182322 !important;
+  font-size:17px !important;
+  font-weight:800 !important;
+}
+
+#profile .me-stats span{
+  color:#899593 !important;
+  font-size:11px !important;
+}
+
+/* Menu card */
+#profile .me-menu{
+  background:#fff !important;
+  border-radius:24px !important;
+  padding:6px !important;
+  box-shadow:0 8px 28px rgba(25,80,70,.07) !important;
+  border:1px solid #edf4f2 !important;
+  margin-bottom:14px !important;
+}
+
+/* Menu buttons */
+#profile .me-menu button{
+  width:100% !important;
+  min-height:58px !important;
+  display:flex !important;
+  align-items:center !important;
+  gap:13px !important;
+  padding:9px 12px !important;
+  border:0 !important;
+  border-bottom:1px solid #f0f4f3 !important;
+  background:transparent !important;
+  color:#263432 !important;
+  text-align:left !important;
+  font-size:14px !important;
+  font-weight:650 !important;
+}
+
+#profile .me-menu button:last-child{
+  border-bottom:0 !important;
+}
+
+#profile .me-menu button:active{
+  background:#f4fbf9 !important;
+  border-radius:16px !important;
+}
+
+/* Icons */
+#profile .me-icon{
+  width:38px !important;
+  height:38px !important;
+  min-width:38px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  border-radius:13px !important;
+  background:#eefaf7 !important;
+  font-size:18px !important;
+}
+
+/* Different icon colors */
+#profile .me-menu button:nth-child(1) .me-icon{
+  background:#e7f8f4 !important;
+}
+
+#profile .me-menu button:nth-child(2) .me-icon{
+  background:#fff5df !important;
+}
+
+#profile .me-menu button:nth-child(3) .me-icon{
+  background:#edf1ff !important;
+}
+
+#profile .me-menu button:nth-child(4) .me-icon{
+  background:#fff0e5 !important;
+}
+
+#profile .me-menu button:nth-child(5) .me-icon{
+  background:#f0f1f4 !important;
+}
+
+#profile .me-menu button:nth-child(6) .me-icon{
+  background:#eaf7ff !important;
+}
+
+#profile .me-menu button:nth-child(7) .me-icon{
+  background:#f5f0ff !important;
+}
+
+#profile .me-menu button:nth-child(8) .me-icon{
+  background:#fff1f1 !important;
+}
+
+/* Arrow */
+#profile .me-menu button b{
+  margin-left:auto !important;
+  color:#a6b1af !important;
+  font-size:21px !important;
+  font-weight:400 !important;
+}
+
+/* SVIP */
+#profile .me-menu button:has(.me-icon){
+  position:relative;
+}
+
+#profile .me-menu button:nth-child(4){
+  background:linear-gradient(90deg,#fffaf3,#fff) !important;
+}
+
+#profile .me-menu button:nth-child(4) .me-icon{
+  color:#b87918 !important;
+  background:#fff1d7 !important;
+}
+
+/* VIP banner */
+#profile .vip-banner{
+  margin-top:14px !important;
+  border-radius:22px !important;
+  padding:18px !important;
+  background:linear-gradient(135deg,#202522,#3c4742) !important;
+  color:#fff !important;
+  box-shadow:0 9px 24px rgba(25,35,32,.15) !important;
+}
+
+#profile .vip-banner h3{
+  margin:0 0 5px !important;
+  font-size:17px !important;
+}
+
+#profile .vip-banner p{
+  margin:0 !important;
+  color:#d7dfdc !important;
+  font-size:12px !important;
+}
+
+/* Mobile */
+@media(max-width:600px){
+
+  #profile{
+    padding-left:12px !important;
+    padding-right:12px !important;
+  }
+
+  #profile .me-header{
+    padding:20px 14px !important;
+    border-radius:25px !important;
+  }
+
+  #profile .me-avatar{
+    width:76px !important;
+    height:76px !important;
+  }
+
+  #profile .me-menu{
+    border-radius:22px !important;
+  }
+
+  #profile .me-menu button{
+    min-height:55px !important;
+    font-size:13px !important;
+  }
+
+  #profile .me-icon{
+    width:36px !important;
+    height:36px !important;
+    min-width:36px !important;
+    font-size:17px !important;
+  }
+}      
 </style>
 </head>
 
@@ -1723,26 +1974,117 @@ a{
 
 <section id="profile" class="page">
 
-  <h1 class="section-title">👤 Profile</h1>
+  <div class="me-header">
+    <div class="me-avatar">👤</div>
 
-  <div class="card">
+    <div class="me-info">
+      <h2>LiveXa User 👑</h2>
+      <p>ID 297415</p>
+      <span>Good Vibes Only 🖤</span>
+    </div>
 
-    <div class="avatar">🙂</div>
+    <button class="edit-profile">✎ Edit</button>
+  </div>
 
-    <h2>Livexa User</h2>
+  <div class="me-stats">
+    <div>
+      <strong>532</strong>
+      <span>Followers</span>
+    </div>
 
-    <p>Welcome to your profile</p>
+    <div>
+      <strong>13</strong>
+      <span>Following</span>
+    </div>
 
-    <p>
-      🪙 Coins:
-      <strong id="profileCoins">12450</strong>
-    </p>
+    <div>
+      <strong>2K</strong>
+      <span>Visitors</span>
+    </div>
+  </div>
 
-    <button class="primary"
-            onclick="showPage('wallet')">
-      My Wallet
+  <div class="me-menu">
+
+    <button onclick="showPage('wallet')">
+      <span class="me-icon">💳</span>
+      <span>Wallet</span>
+      <b>›</b>
     </button>
 
+    <button>
+      <span class="me-icon">💰</span>
+      <span>Earn Cash</span>
+      <b>›</b>
+    </button>
+
+    <button>
+      <span class="me-icon">👥</span>
+      <span>Invite Friends</span>
+      <b>›</b>
+    </button>
+
+    <button>
+      <span class="me-icon">👑</span>
+      <span>SVIP</span>
+      <b>›</b>
+    </button>
+
+    <button>
+      <span class="me-icon">🏠</span>
+      <span>Family</span>
+      <b>›</b>
+    </button>
+
+    <button>
+      <span class="me-icon">🤝</span>
+      <span>CP/Friends</span>
+      <b>›</b>
+    </button>
+
+    <button>
+      <span class="me-icon">⭐</span>
+      <span>Level</span>
+      <small>Lv.140</small>
+      <b>›</b>
+    </button>
+
+    <button>
+      <span class="me-icon">🎁</span>
+      <span>My Items</span>
+      <b>›</b>
+    </button>
+
+  </div>
+
+  <div class="me-menu me-settings">
+
+    <button>
+      <span class="me-icon">🌐</span>
+      <span>Language</span>
+      <small>English</small>
+      <b>›</b>
+    </button>
+
+    <button>
+      <span class="me-icon">✉️</span>
+      <span>Feedback</span>
+      <b>›</b>
+    </button>
+
+    <button>
+      <span class="me-icon">⚙️</span>
+      <span>Settings</span>
+      <b>›</b>
+    </button>
+
+  </div>
+
+  <div class="vip-banner">
+    <div>
+      <strong>👑 Become VIP</strong>
+      <span>More privileges, more fun</span>
+    </div>
+    <b>›</b>
   </div>
 
 </section>
