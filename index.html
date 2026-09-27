@@ -2336,6 +2336,147 @@ body:has(#profile.active) > header{
     bottom:7px !important;
   }
                     }
+/* ===== LiveXa ME Header Upgrade ===== */
+
+#profile .me-header{
+  position:relative !important;
+  display:grid !important;
+  grid-template-columns:82px 1fr auto !important;
+  align-items:center !important;
+  gap:15px !important;
+
+  margin:-18px -12px 18px !important;
+  padding:30px 20px 26px !important;
+
+  background:
+    radial-gradient(circle at 8% 20%,rgba(255,255,255,.8),transparent 28%),
+    radial-gradient(circle at 90% 10%,rgba(191,241,255,.65),transparent 35%),
+    linear-gradient(135deg,#dffaf7 0%,#e7f8ff 52%,#d9f1ff 100%) !important;
+
+  border-radius:0 0 32px 32px !important;
+  box-shadow:0 8px 25px rgba(70,145,165,.10) !important;
+}
+
+/* Avatar */
+#profile .me-avatar{
+  width:76px !important;
+  height:76px !important;
+  min-width:76px !important;
+
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+
+  border-radius:50% !important;
+  background:linear-gradient(145deg,#ffffff,#e8fbfa) !important;
+
+  border:4px solid rgba(255,255,255,.95) !important;
+
+  box-shadow:
+    0 0 0 2px rgba(75,210,190,.18),
+    0 8px 22px rgba(50,130,150,.18) !important;
+
+  font-size:34px !important;
+}
+
+/* Small online indicator */
+#profile .me-avatar::after{
+  content:"" !important;
+  position:absolute !important;
+  width:14px !important;
+  height:14px !important;
+  margin:54px 0 0 55px !important;
+
+  background:#21d39f !important;
+  border:3px solid #fff !important;
+  border-radius:50% !important;
+}
+
+/* Name */
+#profile .me-info h2{
+  color:#172f4d !important;
+  font-size:21px !important;
+  font-weight:800 !important;
+  letter-spacing:-.3px !important;
+  margin-bottom:6px !important;
+}
+
+/* ID */
+#profile .me-info p{
+  display:inline-block !important;
+  padding:3px 9px !important;
+  margin-bottom:6px !important;
+
+  background:rgba(255,255,255,.55) !important;
+  border-radius:10px !important;
+
+  color:#7890a7 !important;
+  font-size:12px !important;
+}
+
+/* Bio */
+#profile .me-info span{
+  display:block !important;
+  color:#71869c !important;
+  font-size:12px !important;
+}
+
+/* Edit Profile */
+#profile .edit-profile{
+  position:relative !important;
+
+  padding:11px 15px !important;
+  min-width:76px !important;
+
+  border:1px solid rgba(255,255,255,.9) !important;
+  border-radius:25px !important;
+
+  background:rgba(255,255,255,.72) !important;
+  color:#506b86 !important;
+
+  font-size:12px !important;
+  font-weight:700 !important;
+
+  box-shadow:0 5px 16px rgba(50,120,145,.10) !important;
+  backdrop-filter:blur(10px) !important;
+}
+
+/* Mobile */
+@media(max-width:600px){
+
+  #profile .me-header{
+    grid-template-columns:76px 1fr auto !important;
+    gap:12px !important;
+
+    margin:-18px -12px 18px !important;
+    padding:27px 16px 24px !important;
+
+    border-radius:0 0 30px 30px !important;
+  }
+
+  #profile .me-avatar{
+    width:70px !important;
+    height:70px !important;
+    min-width:70px !important;
+    font-size:31px !important;
+  }
+
+  #profile .me-avatar::after{
+    width:13px !important;
+    height:13px !important;
+    margin:50px 0 0 50px !important;
+  }
+
+  #profile .me-info h2{
+    font-size:18px !important;
+  }
+
+  #profile .edit-profile{
+    min-width:70px !important;
+    padding:10px 12px !important;
+    font-size:11px !important;
+  }
+}
 </style>
 </head>
 
