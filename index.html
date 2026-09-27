@@ -2652,63 +2652,114 @@ body:has(#profile.active) > header{
     0 12px 35px rgba(100,180,205,.12),
     inset 0 1px 0 rgba(255,255,255,.95) !important;
 
-  backdrop-filter:blur(18px);
-  -webkit-backdrop-filter:blur(18px);
 }
+/* ===== LiveXa Sky Motion Profile Header ===== */
 
-/* آمار */
-#profile .me-stats{
-  background:rgba(255,255,255,.82) !important;
+#profile .me-header{
+  position:relative !important;
+  overflow:hidden !important;
 
-  border:1px solid rgba(255,255,255,.9) !important;
-
-  box-shadow:
-    0 10px 28px rgba(100,180,205,.10),
-    inset 0 1px 0 rgba(255,255,255,.9) !important;
-
-  backdrop-filter:blur(18px);
-  -webkit-backdrop-filter:blur(18px);
-}
-
-/* کارت اصلی منو */
-#profile .me-menu{
-  background:rgba(255,255,255,.86) !important;
-
-  border:1px solid rgba(255,255,255,.92) !important;
-
-  box-shadow:
-    0 14px 38px rgba(80,160,190,.12),
-    inset 0 1px 0 rgba(255,255,255,.95) !important;
-
-  backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
-}
-
-/* کارت تنظیمات */
-#profile .me-menu + .me-menu{
-  background:rgba(255,255,255,.82) !important;
-}
-
-/* SVIP خیلی ظریف */
-#profile .me-menu button:nth-child(4){
-  background:linear-gradient(
-    90deg,
-    rgba(255,248,225,.72),
-    rgba(255,255,255,.35)
-  ) !important;
-}
-
-/* VIP پایین */
-#profile .vip-banner{
   background:
     linear-gradient(
       135deg,
-      rgba(55,125,155,.92),
-      rgba(75,205,190,.82)
+      #b9e8f7 0%,
+      #8ed2e8 48%,
+      #a9e0ef 100%
     ) !important;
 
+  border:1px solid rgba(255,255,255,.75) !important;
+
   box-shadow:
-    0 12px 30px rgba(60,160,175,.20) !important;
+    0 14px 35px rgba(60,150,180,.22),
+    inset 0 1px 0 rgba(255,255,255,.8) !important;
+
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+}
+
+/* ابرهای متحرک */
+#profile .me-header::before{
+  content:"";
+  position:absolute;
+  width:230px;
+  height:85px;
+  left:-40px;
+  top:18px;
+
+  background:
+    radial-gradient(
+      circle at 25% 55%,
+      rgba(255,255,255,.72) 0 30px,
+      transparent 34px
+    ),
+    radial-gradient(
+      circle at 48% 40%,
+      rgba(255,255,255,.62) 0 42px,
+      transparent 46px
+    ),
+    radial-gradient(
+      circle at 72% 58%,
+      rgba(255,255,255,.55) 0 30px,
+      transparent 35px
+    );
+
+  filter:blur(5px);
+  opacity:.75;
+  pointer-events:none;
+
+  animation:lxCloudMove 12s ease-in-out infinite alternate;
+}
+
+/* ابر دوم */
+#profile .me-header::after{
+  content:"";
+  position:absolute;
+  width:210px;
+  height:75px;
+  right:-45px;
+  bottom:8px;
+
+  background:
+    radial-gradient(
+      circle at 25% 55%,
+      rgba(255,255,255,.58) 0 27px,
+      transparent 31px
+    ),
+    radial-gradient(
+      circle at 50% 40%,
+      rgba(255,255,255,.5) 0 38px,
+      transparent 42px
+    ),
+    radial-gradient(
+      circle at 76% 58%,
+      rgba(255,255,255,.45) 0 27px,
+      transparent 32px
+    );
+
+  filter:blur(6px);
+  opacity:.65;
+  pointer-events:none;
+
+  animation:lxCloudMove2 16s ease-in-out infinite alternate;
+}
+
+/* حرکت آرام ابرها */
+@keyframes lxCloudMove{
+  from{
+    transform:translateX(-25px);
+  }
+  to{
+    transform:translateX(55px);
+  }
+}
+
+@keyframes lxCloudMove2{
+  from{
+    transform:translateX(35px);
+  }
+  to{
+    transform:translateX(-45px);
+  }
 }
 </style>
 </head>
