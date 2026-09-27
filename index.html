@@ -2477,66 +2477,114 @@ body:has(#profile.active) > header{
     font-size:11px !important;
   }
 }
-/* ===== LiveXa Sky Glass Background ===== */
+}
+/* ===== LiveXa Sky Glass + Cloud Background ===== */
 
 #profile{
   position:relative !important;
   overflow:hidden !important;
 
   background:
-    radial-gradient(circle at 15% 10%, rgba(255,255,255,.95) 0 8%, transparent 25%),
-    radial-gradient(circle at 90% 18%, rgba(255,255,255,.85) 0 7%, transparent 24%),
+    radial-gradient(circle at 15% 10%,
+      rgba(255,255,255,.98) 0 7%,
+      transparent 25%),
+
+    radial-gradient(circle at 85% 18%,
+      rgba(255,255,255,.90) 0 8%,
+      transparent 26%),
+
+    radial-gradient(circle at 50% 55%,
+      rgba(255,255,255,.70) 0 10%,
+      transparent 30%),
+
     linear-gradient(
       180deg,
-      #dff9ff 0%,
+      #d9f8ff 0%,
       #eafcff 35%,
-      #f4fbff 70%,
+      #f6fdff 70%,
       #ffffff 100%
     ) !important;
 }
 
-/* ابرهای نرم */
+/* ☁️ ابر اول */
 #profile::before{
   content:"";
   position:absolute;
-  width:240px;
-  height:110px;
+
+  width:260px;
+  height:120px;
+
   top:55px;
-  left:-70px;
+  left:-80px;
 
   background:
-    radial-gradient(circle at 30% 65%, rgba(255,255,255,.82) 0 30px, transparent 31px),
-    radial-gradient(circle at 50% 45%, rgba(255,255,255,.88) 0 42px, transparent 43px),
-    radial-gradient(circle at 72% 65%, rgba(255,255,255,.78) 0 32px, transparent 33px);
+    radial-gradient(circle at 25% 55%,
+      rgba(255,255,255,.90) 0 35px,
+      transparent 36px),
 
-  filter:blur(5px);
+    radial-gradient(circle at 48% 40%,
+      rgba(255,255,255,.95) 0 48px,
+      transparent 49px),
+
+    radial-gradient(circle at 72% 60%,
+      rgba(255,255,255,.85) 0 38px,
+      transparent 39px);
+
+  filter:blur(7px);
+  opacity:.85;
+  pointer-events:none;
+}
+
+/* ☁️ ابر دوم */
+#profile::after{
+  content:"";
+  position:absolute;
+
+  width:300px;
+  height:130px;
+
+  right:-90px;
+  top:280px;
+
+  background:
+    radial-gradient(circle at 25% 60%,
+      rgba(255,255,255,.78) 0 38px,
+      transparent 39px),
+
+    radial-gradient(circle at 50% 42%,
+      rgba(255,255,255,.90) 0 52px,
+      transparent 53px),
+
+    radial-gradient(circle at 75% 65%,
+      rgba(255,255,255,.72) 0 32px,
+      transparent 33px);
+
+  filter:blur(9px);
   opacity:.75;
   pointer-events:none;
 }
 
-/* ابر دوم */
-#profile::after{
-  content:"";
-  position:absolute;
-  width:280px;
-  height:120px;
-  right:-100px;
-  top:260px;
-
-  background:
-    radial-gradient(circle at 30% 60%, rgba(255,255,255,.72) 0 34px, transparent 35px),
-    radial-gradient(circle at 52% 40%, rgba(255,255,255,.82) 0 45px, transparent 46px),
-    radial-gradient(circle at 75% 62%, rgba(255,255,255,.68) 0 30px, transparent 31px);
-
-  filter:blur(7px);
-  opacity:.7;
-  pointer-events:none;
-}
-
-/* محتوای پروفایل بالای افکت بماند */
+/* ✨ لایه شیشه‌ای روی محتوا */
 #profile > *{
   position:relative;
   z-index:2;
+}
+
+/* شیشه‌ای شدن کارت‌ها */
+#profile .me-stats,
+#profile .me-menu,
+#profile .me-extra,
+#profile .vip-banner{
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+
+  background:rgba(255,255,255,.78) !important;
+
+  border:1px solid rgba(255,255,255,.90) !important;
+
+  box-shadow:
+    0 12px 35px rgba(60,150,170,.10),
+    inset 0 1px 0 rgba(255,255,255,.95) !important;
 }
 </style>
 </head>
