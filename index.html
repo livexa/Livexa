@@ -3222,6 +3222,12 @@ body:has(#profile.active) > header{
     flex-basis:50px;
   }
 
+/* ================= MESSAGES HEADER CLEAN ================= */
+
+body:has(#messages.active) header .logo,
+body:has(#messages.active) header .coin-wallet,
+body:has(#messages.active) .messages-search {
+    display: none !important;
 }
 </style>
 </head>
