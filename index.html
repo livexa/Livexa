@@ -2784,6 +2784,445 @@ body:has(#profile.active) > header{
     transform:translateX(-45px);
   }
 }
+/* =====================================================
+   LIVEXA MESSAGES PAGE
+   ===================================================== */
+
+#messages{
+  background:linear-gradient(
+    180deg,
+    #f8fffd 0%,
+    #f2f8f7 100%
+  ) !important;
+
+  color:#182322 !important;
+
+  min-height:100vh;
+
+  padding:18px 12px 100px !important;
+
+  overflow-y:auto !important;
+}
+
+
+.messages-wrap{
+  width:100%;
+  max-width:760px;
+  margin:0 auto;
+}
+
+
+/* ================= HEADER ================= */
+
+.messages-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  gap:12px;
+
+  margin-bottom:16px;
+}
+
+
+.messages-title{
+  margin:0;
+
+  font-size:25px;
+
+  font-weight:850;
+
+  letter-spacing:-.3px;
+}
+
+
+.messages-subtitle{
+  margin:4px 0 0;
+
+  color:#82908e;
+
+  font-size:12px;
+}
+
+
+.messages-search{
+  width:42px;
+  height:42px;
+
+  border:1px solid rgba(210,225,222,.9);
+
+  border-radius:15px;
+
+  background:rgba(255,255,255,.82);
+
+  box-shadow:
+    0 6px 18px rgba(30,80,80,.07);
+
+  font-size:19px;
+
+  cursor:pointer;
+}
+
+
+/* ================= TABS ================= */
+
+.messages-tabs{
+  display:grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap:5px;
+
+  padding:5px;
+
+  margin-bottom:14px;
+
+  border:
+    1px solid rgba(210,225,222,.8);
+
+  border-radius:18px;
+
+  background:
+    rgba(255,255,255,.72);
+
+  backdrop-filter:blur(14px);
+
+  -webkit-backdrop-filter:blur(14px);
+
+  box-shadow:
+    0 7px 22px rgba(30,80,80,.06);
+}
+
+
+.messages-tab{
+  border:0;
+
+  border-radius:14px;
+
+  padding:11px 8px;
+
+  background:transparent;
+
+  color:#7b8987;
+
+  font-size:13px;
+
+  font-weight:750;
+
+  cursor:pointer;
+}
+
+
+.messages-tab.active{
+  background:#e1faf5;
+
+  color:#19ad95;
+
+  box-shadow:
+    0 4px 12px rgba(25,180,155,.10);
+}
+
+
+/* ================= PANELS ================= */
+
+.messages-panel{
+  display:none;
+}
+
+
+.messages-panel.active{
+  display:block;
+}
+
+
+/* ================= CHAT CARD ================= */
+
+.message-card{
+  width:100%;
+
+  display:flex;
+
+  align-items:center;
+
+  gap:12px;
+
+  padding:13px 12px;
+
+  margin-bottom:9px;
+
+  border:
+    1px solid rgba(218,230,227,.92);
+
+  border-radius:20px;
+
+  background:
+    rgba(255,255,255,.84);
+
+  box-shadow:
+    0 8px 24px rgba(34,82,78,.07);
+
+  text-align:left;
+
+  cursor:pointer;
+
+  transition:
+    transform .16s ease,
+    box-shadow .16s ease;
+}
+
+
+.message-card:active{
+  transform:scale(.985);
+
+  box-shadow:
+    0 4px 12px rgba(34,82,78,.08);
+}
+
+
+/* ================= AVATAR ================= */
+
+.message-avatar{
+  position:relative;
+
+  flex:0 0 52px;
+
+  width:52px;
+  height:52px;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  border-radius:50%;
+
+  background:
+    linear-gradient(
+      145deg,
+      #e8fbf7,
+      #d5eee9
+    );
+
+  font-size:27px;
+
+  border:
+    2px solid #ffffff;
+
+  box-shadow:
+    0 5px 14px rgba(30,80,80,.10);
+}
+
+
+/* ================= ONLINE STATUS ================= */
+
+.message-status{
+  position:absolute;
+
+  right:-1px;
+  bottom:1px;
+
+  width:12px;
+  height:12px;
+
+  border-radius:50%;
+
+  background:#31c875;
+
+  border:
+    2px solid #ffffff;
+}
+
+
+.message-status.offline{
+  background:#b6c1bf;
+}
+
+
+/* ================= MESSAGE CONTENT ================= */
+
+.message-main{
+  min-width:0;
+
+  flex:1;
+}
+
+
+.message-row{
+  display:flex;
+
+  align-items:center;
+
+  justify-content:
+    space-between;
+
+  gap:8px;
+}
+
+
+.message-name{
+  color:#1d2b29;
+
+  font-size:14px;
+
+  font-weight:800;
+
+  white-space:nowrap;
+
+  overflow:hidden;
+
+  text-overflow:ellipsis;
+}
+
+
+.message-time{
+  flex:0 0 auto;
+
+  color:#98a5a3;
+
+  font-size:10px;
+}
+
+
+.message-preview{
+  margin-top:5px;
+
+  color:#7c8987;
+
+  font-size:12px;
+
+  white-space:nowrap;
+
+  overflow:hidden;
+
+  text-overflow:ellipsis;
+}
+
+
+/* ================= UNREAD BADGE ================= */
+
+.message-badge{
+  flex:0 0 auto;
+
+  min-width:20px;
+
+  height:20px;
+
+  padding:0 6px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  border-radius:10px;
+
+  background:#20b99e;
+
+  color:#ffffff;
+
+  font-size:10px;
+
+  font-weight:800;
+}
+
+
+/* ================= REQUEST CARD ================= */
+
+.request-card{
+  display:flex;
+
+  align-items:center;
+
+  gap:12px;
+
+  padding:14px 12px;
+
+  margin-bottom:9px;
+
+  border:
+    1px solid rgba(218,230,227,.92);
+
+  border-radius:20px;
+
+  background:
+    rgba(255,255,255,.84);
+
+  box-shadow:
+    0 8px 24px rgba(34,82,78,.07);
+}
+
+
+.request-actions{
+  display:flex;
+
+  gap:6px;
+
+  flex:0 0 auto;
+}
+
+
+.request-btn{
+  border:0;
+
+  border-radius:13px;
+
+  padding:8px 10px;
+
+  font-size:11px;
+
+  font-weight:800;
+
+  cursor:pointer;
+}
+
+
+.request-accept{
+  background:#20b99e;
+
+  color:#ffffff;
+}
+
+
+.request-ignore{
+  background:#edf2f1;
+
+  color:#657371;
+}
+
+
+/* ================= MOBILE ================= */
+
+@media(max-width:600px){
+
+  #messages{
+    padding:
+      16px
+      10px
+      92px !important;
+  }
+
+
+  .messages-title{
+    font-size:23px;
+  }
+
+
+  .message-card,
+  .request-card{
+    border-radius:18px;
+  }
+
+
+  .message-avatar{
+    width:50px;
+    height:50px;
+
+    flex-basis:50px;
+  }
+
+}
 </style>
 </head>
 
@@ -3436,7 +3875,93 @@ No transactions yet.
 
 </section>
 
+/* ================= MESSAGES PAGE ================= */
 
+window.showMessagesTab = function(tab){
+
+  var chats =
+    document.getElementById("messagesChatsPanel");
+
+  var requests =
+    document.getElementById("messagesRequestsPanel");
+
+  var chatsTab =
+    document.getElementById("messagesChatsTab");
+
+  var requestsTab =
+    document.getElementById("messagesRequestsTab");
+
+  if(!chats || !requests){
+    return;
+  }
+
+  var showRequests =
+    tab === "requests";
+
+  chats.classList.toggle(
+    "active",
+    !showRequests
+  );
+
+  requests.classList.toggle(
+    "active",
+    showRequests
+  );
+
+  chatsTab.classList.toggle(
+    "active",
+    !showRequests
+  );
+
+  requestsTab.classList.toggle(
+    "active",
+    showRequests
+  );
+
+};
+
+
+window.openLivexaConversation = function(name){
+
+  livexaNotify(
+    "💬 Opening chat with " + name
+  );
+
+};
+
+
+window.acceptLivexaRequest =
+function(button,name){
+
+  var card =
+    button.closest(".request-card");
+
+  if(card){
+    card.remove();
+  }
+
+  livexaNotify(
+    "✅ " + name + " accepted"
+  );
+
+};
+
+
+window.ignoreLivexaRequest =
+function(button){
+
+  var card =
+    button.closest(".request-card");
+
+  if(card){
+    card.remove();
+  }
+
+  livexaNotify(
+    "Request removed"
+  );
+
+};
 <!-- ================= JAVASCRIPT ================= -->
 
 <script>
