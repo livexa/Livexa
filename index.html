@@ -1926,7 +1926,869 @@ main{
 })();
 
 </script>
+<script>
+/* =====================================================
+   LIVEXA FULL SCREEN ROOM
+   ===================================================== */
 
+(function () {
+
+  var currentRoom = "";
+  var mySeat = null;
+  var micOn = false;
+
+  function esc(t) {
+    return String(t || "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  function hideApp() {
+    document.querySelectorAll("header,.bottom-nav,.page")
+      .forEach(function (el) {
+        if (!el.closest("#roomContainer")) {
+          el.dataset.roomHidden = "1";
+          el.style.display = "none";
+        }
+      });
+
+    document.body.style.margin = "0";
+    document.body.style.overflow = "hidden";
+  }
+
+  function showApp() {
+    document.querySelectorAll("header,.bottom-nav,.page")
+      .forEach(function (el) {
+        if (el.dataset.roomHidden) {
+          el.style.display = "";
+          delete el.dataset.roomHidden;
+        }
+      });
+
+    document.body.style.margin = "";
+    document.body.style.overflow = "";
+  }
+
+  function getContainer() {
+    var c = document.getElementById("roomContainer");
+
+    if (!c) {
+      c = document.createElement("div");
+      c.id = "roomContainer";
+      document.body.appendChild(c);
+    }
+
+    return c;
+  }
+
+  /* =====================================================
+     OPEN ROOM
+     ===================================================== */
+
+  window.openRoom = function (roomName) {
+
+    currentRoom = roomName || "Livexa Room";
+    mySeat = null;
+    micOn = false;
+
+    hideApp();
+
+    var c = getContainer();
+
+    c.innerHTML = "";
+    c.style.cssText = `
+      position:fixed;
+      inset:0;
+      z-index:999999;
+      display:block;
+      background:#10121d;
+      color:white;
+      overflow:hidden;
+    `;
+
+    var room = document.createElement("div");
+
+    room.id = "livexaRoom";
+
+    room.style.cssText = `
+      width:100%;
+      height:100%;
+      display:flex;
+      flex-direction:column;
+      background:
+        radial-gradient(circle at 50% 0%,
+        rgba(115,80,255,.25),
+        transparent 35%),
+        linear-gradient(180deg,#111421,#181b2b 55%,#0e1019);
+      font-family:Arial,sans-serif;
+    `;
+
+    room.innerHTML = `
+
+      <!-- HEADER -->
+
+      <div style="
+        height:62px;
+        min-height:62px;
+        display:flex;
+        align-items:center;
+        padding:0 12px;
+        gap:10px;
+        border-bottom:1px solid rgba(255,255,255,.08);
+        background:rgba(8,10,18,.8);
+      ">
+
+        <button
+          onclick="closeRoom()"
+          style="
+            width:40px;
+            height:40px;
+            border:0;
+            border-radius:50%;
+            background:rgba(255,255,255,.09);
+            color:white;
+            font-size:22px;
+          ">
+          ←
+        </button>
+
+        <div style="flex:1;min-width:0;">
+
+          <div style="
+            font-size:16px;
+            font-weight:bold;
+            white-space:nowrap;
+            overflow:hidden;
+            text-overflow:ellipsis;
+          ">
+            ${esc(currentRoom)}
+          </div>
+
+          <div style="
+            font-size:10px;
+            opacity:.55;
+            margin-top:3px;
+          ">
+            Room ID: LX-${Math.floor(100000 + Math.random()*900000)}
+          </div>
+
+        </div>
+
+        <span style="
+          padding:7px 10px;
+          border-radius:20px;
+          background:rgba(255,60,90,.15);
+          color:#ff7083;
+          font-size:11px;
+          font-weight:bold;
+        ">
+          🔴 LIVE
+        </span>
+
+        <button
+          onclick="shareLivexaRoom()"
+          style="
+            width:40px;
+            height:40px;
+            border:0;
+            border-radius:50%;
+            background:rgba(255,255,255,.08);
+            color:white;
+            font-size:18px;
+          ">
+          ↗
+        </button>
+
+      </div>
+
+
+      <!-- ROOM INFO -->
+
+      <div style="
+        padding:12px 15px 5px;
+        display:flex;
+        justify-content:space-between;
+      ">
+
+        <div>
+
+          <div style="
+            font-size:11px;
+            opacity:.55;
+          ">
+            🎙️ Voice Room
+          </div>
+
+          <div style="
+            font-size:14px;
+            font-weight:bold;
+            margin-top:4px;
+          ">
+            Come on mic and chat together
+          </div>
+
+        </div>
+
+        <div style="
+          font-size:12px;
+          opacity:.6;
+        ">
+          👥 1
+        </div>
+
+      </div>
+
+
+      <!-- ANNOUNCEMENT -->
+
+      <div style="
+        margin:8px 14px;
+        padding:11px 13px;
+        border-radius:13px;
+        background:rgba(115,80,255,.14);
+        border:1px solid rgba(255,255,255,.06);
+        font-size:12px;
+      ">
+        📢 Welcome to ${esc(currentRoom)}!
+      </div>
+
+
+      <!-- MAIN CONTENT -->
+
+      <div style="
+        flex:1;
+        overflow:auto;
+        padding:5px 12px 12px;
+      ">
+
+        <div id="livexaSeats"
+          style="
+            display:grid;
+            grid-template-columns:repeat(4,1fr);
+            gap:13px 7px;
+            max-width:520px;
+            margin:auto;
+          ">
+        </div>
+
+
+        <!-- CHAT -->
+
+        <div style="
+          margin-top:15px;
+          border-radius:15px;
+          background:rgba(255,255,255,.045);
+          border:1px solid rgba(255,255,255,.07);
+          overflow:hidden;
+        ">
+
+          <div style="
+            padding:11px 13px;
+            font-size:13px;
+            font-weight:bold;
+            border-bottom:1px solid rgba(255,255,255,.06);
+          ">
+            💬 Room Chat
+          </div>
+
+          <div id="livexaRoomChat"
+            style="
+              min-height:90px;
+              max-height:150px;
+              overflow:auto;
+              padding:9px;
+              font-size:12px;
+            ">
+
+            <div style="opacity:.55;padding:7px;">
+              👋 Welcome to the room!
+            </div>
+
+          </div>
+
+          <div style="
+            display:flex;
+            gap:7px;
+            padding:9px;
+            border-top:1px solid rgba(255,255,255,.06);
+          ">
+
+            <input
+              id="livexaChatInput"
+              placeholder="Write a message..."
+              onkeydown="
+                if(event.key==='Enter')
+                sendLivexaRoomMessage();
+              "
+              style="
+                flex:1;
+                min-width:0;
+                padding:10px;
+                border-radius:10px;
+                border:1px solid rgba(255,255,255,.1);
+                background:#111522;
+                color:white;
+                outline:none;
+              ">
+
+            <button
+              onclick="sendLivexaRoomMessage()"
+              style="
+                padding:0 14px;
+                border:0;
+                border-radius:10px;
+                background:#7657ff;
+                color:white;
+                font-weight:bold;
+              ">
+              Send
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- BOTTOM BAR -->
+
+      <div style="
+        min-height:72px;
+        display:flex;
+        align-items:center;
+        justify-content:space-around;
+        padding:8px 7px;
+        box-sizing:border-box;
+        border-top:1px solid rgba(255,255,255,.08);
+        background:rgba(7,9,16,.96);
+      ">
+
+        <button
+          id="livexaMic"
+          onclick="toggleLivexaMic()"
+          style="
+            width:58px;
+            height:50px;
+            border:0;
+            border-radius:15px;
+            background:rgba(255,255,255,.08);
+            color:white;
+            font-size:20px;
+          ">
+          🎙️
+          <small style="display:block;font-size:9px;">
+            Mic
+          </small>
+        </button>
+
+        <button
+          onclick="joinLivexaSeat()"
+          style="
+            width:58px;
+            height:50px;
+            border:0;
+            border-radius:15px;
+            background:rgba(255,255,255,.08);
+            color:white;
+            font-size:20px;
+          ">
+          🪑
+          <small style="display:block;font-size:9px;">
+            Seat
+          </small>
+        </button>
+
+        <button
+          onclick="sendLivexaGift()"
+          style="
+            width:58px;
+            height:50px;
+            border:0;
+            border-radius:15px;
+            background:rgba(255,255,255,.08);
+            color:white;
+            font-size:20px;
+          ">
+          🎁
+          <small style="display:block;font-size:9px;">
+            Gift
+          </small>
+        </button>
+
+        <button
+          onclick="shareLivexaRoom()"
+          style="
+            width:58px;
+            height:50px;
+            border:0;
+            border-radius:15px;
+            background:rgba(255,255,255,.08);
+            color:white;
+            font-size:20px;
+          ">
+          🔗
+          <small style="display:block;font-size:9px;">
+            Share
+          </small>
+        </button>
+
+        <button
+          onclick="closeRoom()"
+          style="
+            width:58px;
+            height:50px;
+            border:0;
+            border-radius:15px;
+            background:rgba(255,70,90,.14);
+            color:#ff7182;
+            font-size:20px;
+          ">
+          🚪
+          <small style="display:block;font-size:9px;">
+            Exit
+          </small>
+        </button>
+
+      </div>
+
+    `;
+
+    c.appendChild(room);
+
+    createLivexaSeats();
+
+    addLivexaRoomMessage(
+      "System",
+      "Welcome to " + currentRoom + "!"
+    );
+  };
+
+
+  /* =====================================================
+     SEATS
+     ===================================================== */
+
+  function createLivexaSeats() {
+
+    var area =
+      document.getElementById("livexaSeats");
+
+    if (!area) return;
+
+    area.innerHTML = "";
+
+    for (var i=1; i<=12; i++) {
+
+      var b =
+        document.createElement("button");
+
+      b.dataset.seat = i;
+
+      b.onclick = function () {
+
+        selectLivexaSeat(
+          Number(this.dataset.seat)
+        );
+
+      };
+
+      b.style.cssText = `
+        border:0;
+        background:transparent;
+        color:white;
+        padding:2px;
+      `;
+
+      b.innerHTML = `
+        <div id="seatCircle${i}" style="
+          width:54px;
+          height:54px;
+          margin:auto;
+          border-radius:50%;
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          background:
+            ${i===1
+              ? "linear-gradient(135deg,#7657ff,#a45cff)"
+              : "#25293a"};
+          border:2px solid
+            ${i===1
+              ? "rgba(190,160,255,.8)"
+              : "rgba(255,255,255,.07)"};
+          font-size:21px;
+        ">
+          ${i===1 ? "👑" : "🎧"}
+        </div>
+
+        <div id="seatName${i}" style="
+          margin-top:5px;
+          font-size:10px;
+          white-space:nowrap;
+          overflow:hidden;
+          text-overflow:ellipsis;
+        ">
+          ${i===1 ? "Host" : "Seat "+i}
+        </div>
+
+        <div id="seatStatus${i}" style="
+          margin-top:2px;
+          font-size:8px;
+          opacity:.45;
+        ">
+          ${i===1 ? "Live" : "Tap to join"}
+        </div>
+      `;
+
+      area.appendChild(b);
+    }
+  }
+
+
+  window.selectLivexaSeat = function (seat) {
+
+    if (mySeat === seat) {
+
+      mySeat = null;
+      micOn = false;
+
+      updateSeats();
+
+      roomNotice(
+        "You left Seat " + seat
+      );
+
+      return;
+    }
+
+    mySeat = seat;
+
+    updateSeats();
+
+    roomNotice(
+      "You joined Seat " + seat
+    );
+  };
+
+
+  window.joinLivexaSeat = function () {
+
+    if (!mySeat) {
+      selectLivexaSeat(2);
+    } else {
+      roomNotice(
+        "You are already on Seat " + mySeat
+      );
+    }
+  };
+
+
+  function updateSeats() {
+
+    for (var i=1; i<=12; i++) {
+
+      var circle =
+        document.getElementById(
+          "seatCircle"+i
+        );
+
+      var name =
+        document.getElementById(
+          "seatName"+i
+        );
+
+      var status =
+        document.getElementById(
+          "seatStatus"+i
+        );
+
+      if (!circle) continue;
+
+      if (i === mySeat) {
+
+        circle.style.background =
+          "linear-gradient(135deg,#00b894,#00cec9)";
+
+        circle.style.borderColor =
+          "white";
+
+        circle.innerHTML = "🎙️";
+
+        name.textContent = "You";
+
+        status.textContent =
+          micOn ? "Mic ON" : "Mic OFF";
+
+      } else if (i === 1) {
+
+        circle.innerHTML = "👑";
+        name.textContent = "Host";
+        status.textContent = "Live";
+
+      } else {
+
+        circle.style.background = "#25293a";
+        circle.style.borderColor =
+          "rgba(255,255,255,.07)";
+
+        circle.innerHTML = "🎧";
+
+        name.textContent =
+          "Seat " + i;
+
+        status.textContent =
+          "Tap to join";
+      }
+    }
+  }
+
+
+  /* =====================================================
+     MICROPHONE
+     ===================================================== */
+
+  window.toggleLivexaMic = function () {
+
+    if (!mySeat) {
+
+      roomNotice(
+        "First choose a seat 🎙️"
+      );
+
+      return;
+    }
+
+    micOn = !micOn;
+
+    var b =
+      document.getElementById(
+        "livexaMic"
+      );
+
+    if (b) {
+
+      b.innerHTML =
+        micOn
+          ? '🔊<small style="display:block;font-size:9px;">Mute</small>'
+          : '🎙️<small style="display:block;font-size:9px;">Mic</small>';
+    }
+
+    updateSeats();
+
+    roomNotice(
+      micOn
+        ? "Microphone enabled"
+        : "Microphone muted"
+    );
+  };
+
+
+  /* =====================================================
+     CHAT
+     ===================================================== */
+
+  window.sendLivexaRoomMessage = function () {
+
+    var input =
+      document.getElementById(
+        "livexaChatInput"
+      );
+
+    if (!input) return;
+
+    var text =
+      input.value.trim();
+
+    if (!text) return;
+
+    addLivexaRoomMessage(
+      "You",
+      text
+    );
+
+    input.value = "";
+  };
+
+
+  function addLivexaRoomMessage(
+    user,
+    text
+  ) {
+
+    var chat =
+      document.getElementById(
+        "livexaRoomChat"
+      );
+
+    if (!chat) return;
+
+    var row =
+      document.createElement("div");
+
+    row.style.cssText = `
+      padding:7px 8px;
+      margin-bottom:4px;
+      border-radius:8px;
+      background:rgba(255,255,255,.04);
+    `;
+
+    row.innerHTML =
+      "<b>" + esc(user) + "</b> " +
+      "<span style='opacity:.75'>" +
+      esc(text) +
+      "</span>";
+
+    chat.appendChild(row);
+
+    chat.scrollTop =
+      chat.scrollHeight;
+  }
+
+
+  /* =====================================================
+     GIFT
+     ===================================================== */
+
+  window.sendLivexaGift = function () {
+
+    if (
+      typeof window.sendGift ===
+      "function"
+    ) {
+
+      window.sendGift(
+        "Rose",
+        100
+      );
+
+    } else {
+
+      roomNotice(
+        "🌹 Rose gift sent!"
+      );
+    }
+  };
+
+
+  /* =====================================================
+     SHARE
+     ===================================================== */
+
+  window.shareLivexaRoom = function () {
+
+    var text =
+      "Join me in Livexa Room: " +
+      currentRoom;
+
+    if (
+      navigator.share
+    ) {
+
+      navigator.share({
+        title: currentRoom,
+        text: text
+      }).catch(function(){});
+
+    } else if (
+      navigator.clipboard
+    ) {
+
+      navigator.clipboard
+        .writeText(text)
+        .then(function(){
+          roomNotice(
+            "🔗 Room link copied!"
+          );
+        });
+
+    } else {
+
+      roomNotice(
+        "🔗 Room ready to share!"
+      );
+    }
+  };
+
+
+  /* =====================================================
+     NOTICE
+     ===================================================== */
+
+  function roomNotice(message) {
+
+    var old =
+      document.getElementById(
+        "livexaRoomNotice"
+      );
+
+    if (old) old.remove();
+
+    var n =
+      document.createElement("div");
+
+    n.id =
+      "livexaRoomNotice";
+
+    n.style.cssText = `
+      position:fixed;
+      left:50%;
+      bottom:88px;
+      transform:translateX(-50%);
+      z-index:1000001;
+      padding:10px 16px;
+      border-radius:22px;
+      background:rgba(0,0,0,.88);
+      color:white;
+      font-size:12px;
+      white-space:nowrap;
+    `;
+
+    n.textContent = message;
+
+    document.body.appendChild(n);
+
+    setTimeout(function(){
+      if (n) n.remove();
+    },2200);
+  }
+
+
+  /* =====================================================
+     CLOSE ROOM
+     ===================================================== */
+
+  window.closeRoom = function () {
+
+    var c =
+      document.getElementById(
+        "roomContainer"
+      );
+
+    if (c) {
+
+      c.innerHTML = "";
+
+      c.style.display = "none";
+    }
+
+    currentRoom = "";
+    mySeat = null;
+    micOn = false;
+
+    showApp();
+
+    window.scrollTo({
+      top:0,
+      behavior:"smooth"
+    });
+  };
+
+
+})();
+</script>
 
 </body>
 </html>
