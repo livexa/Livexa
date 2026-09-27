@@ -3256,6 +3256,224 @@ body:has(#messages.active) header::after{
     text-shadow:0 2px 6px rgba(0,0,0,.15);
     pointer-events:none;
 }
+/* =====================================================
+   LIVEXA CHAT WINDOW
+   ===================================================== */
+
+#livexaChatWindow{
+    position:fixed;
+    left:12px;
+    right:12px;
+    bottom:80px;
+    height:70vh;
+    max-height:650px;
+    z-index:9999;
+
+    display:flex;
+    flex-direction:column;
+
+    background:rgba(255,255,255,.96);
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+
+    border:1px solid rgba(255,255,255,.8);
+    border-radius:24px;
+
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+
+    overflow:hidden;
+}
+
+
+/* CHAT HEADER */
+
+#livexaChatWindow .livexa-chat-header{
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    padding:14px 16px;
+
+    background:linear-gradient(
+        135deg,
+        rgba(20,30,60,.98),
+        rgba(60,80,130,.95)
+    );
+
+    color:white;
+}
+
+
+#livexaChatWindow .livexa-chat-header button{
+    width:40px;
+    height:40px;
+
+    border:0;
+    border-radius:50%;
+
+    background:rgba(255,255,255,.15);
+    color:white;
+
+    font-size:28px;
+    line-height:1;
+}
+
+
+.livexa-chat-user{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+
+.livexa-chat-avatar{
+    width:42px;
+    height:42px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.18);
+
+    font-size:22px;
+}
+
+
+.livexa-chat-user strong{
+    display:block;
+    font-size:16px;
+}
+
+
+.livexa-chat-user small{
+    display:block;
+    margin-top:3px;
+
+    color:#8cffb0;
+    font-size:12px;
+}
+
+
+/* MESSAGES */
+
+.livexa-chat-messages{
+    flex:1;
+
+    padding:18px 14px;
+
+    overflow-y:auto;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(240,245,255,.95),
+            rgba(255,255,255,.98)
+        );
+}
+
+
+.livexa-message{
+    max-width:78%;
+
+    margin-bottom:12px;
+
+    padding:11px 14px;
+
+    border-radius:18px;
+
+    font-size:14px;
+    line-height:1.4;
+
+    word-wrap:break-word;
+}
+
+
+.livexa-message.received{
+    margin-right:auto;
+
+    background:white;
+
+    color:#263044;
+
+    border-bottom-left-radius:5px;
+
+    box-shadow:0 4px 15px rgba(40,60,100,.08);
+}
+
+
+.livexa-message.sent{
+    margin-left:auto;
+
+    background:#263b68;
+
+    color:white;
+
+    border-bottom-right-radius:5px;
+
+    box-shadow:0 4px 15px rgba(30,50,100,.15);
+}
+
+
+/* INPUT */
+
+.livexa-chat-input{
+    display:flex;
+    align-items:center;
+    gap:8px;
+
+    padding:10px;
+
+    background:white;
+
+    border-top:1px solid #e8ebf2;
+}
+
+
+.livexa-chat-input input{
+    flex:1;
+
+    min-width:0;
+
+    height:44px;
+
+    padding:0 15px;
+
+    border:1px solid #dfe4ed;
+    border-radius:22px;
+
+    outline:none;
+
+    background:#f7f8fb;
+
+    color:#222;
+    font-size:14px;
+}
+
+
+.livexa-chat-input input:focus{
+    border-color:#7186b5;
+    background:white;
+}
+
+
+.livexa-chat-input button{
+    width:44px;
+    height:44px;
+
+    flex-shrink:0;
+
+    border:0;
+    border-radius:50%;
+
+    background:#263b68;
+
+    color:white;
+
+    font-size:20px;
+}
 </style>
 </head>
 
@@ -4061,11 +4279,113 @@ window.showMessagesTab = function(tab){
    OPEN CONVERSATION
    ===================================================== */
 
+/* =====================================================
+   LIVEXA CHAT WINDOW
+   ===================================================== */
+
 window.openLivexaConversation = function(name){
 
-    if(typeof livexaNotify === "function"){
-        livexaNotify("💬 Opening chat with " + name);
+    var oldChat = document.getElementById("livexaChatWindow");
+
+    if(oldChat){
+        oldChat.remove();
     }
+
+    var chat = document.createElement("div");
+
+    chat.id = "livexaChatWindow";
+
+    chat.innerHTML = `
+        <div class="livexa-chat-header">
+            <button onclick="closeLivexaConversation()">‹</button>
+
+            <div class="livexa-chat-user">
+                <div class="livexa-chat-avatar">👤</div>
+                <div>
+                    <strong>${name}</strong>
+                    <small>● Online</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="livexa-chat-messages" id="livexaChatMessages">
+
+            <div class="livexa-message received">
+                Hello! How are you?
+            </div>
+
+            <div class="livexa-message sent">
+                I'm good 😊
+            </div>
+
+        </div>
+
+        <div class="livexa-chat-input">
+
+            <input
+                id="livexaMessageInput"
+                type="text"
+                placeholder="Write a message..."
+                onkeydown="if(event.key==='Enter') sendLivexaMessage()"
+            >
+
+            <button onclick="sendLivexaMessage()">
+                ➤
+            </button>
+
+        </div>
+    `;
+
+    document.body.appendChild(chat);
+
+};
+
+
+/* =====================================================
+   CLOSE CHAT
+   ===================================================== */
+
+window.closeLivexaConversation = function(){
+
+    var chat = document.getElementById("livexaChatWindow");
+
+    if(chat){
+        chat.remove();
+    }
+
+};
+
+
+/* =====================================================
+   SEND MESSAGE
+   ===================================================== */
+
+window.sendLivexaMessage = function(){
+
+    var input = document.getElementById("livexaMessageInput");
+    var messages = document.getElementById("livexaChatMessages");
+
+    if(!input || !messages){
+        return;
+    }
+
+    var text = input.value.trim();
+
+    if(!text){
+        return;
+    }
+
+    var message = document.createElement("div");
+
+    message.className = "livexa-message sent";
+
+    message.textContent = text;
+
+    messages.appendChild(message);
+
+    input.value = "";
+
+    messages.scrollTop = messages.scrollHeight;
 
 };
 
