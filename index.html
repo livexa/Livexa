@@ -1313,3 +1313,620 @@ main{
       <p>🎮 Gaming · 7.4K viewers</p>
 
       <button class="prima
+<button class="primary"
+        onclick="openRoom('Gaming Room')">
+  Watch
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= LIVE ROOM ================= -->
+
+<div id="roomContainer"></div>
+
+
+<!-- ================= EXTRA PAGES ================= -->
+
+<section id="games" class="page">
+
+  <h1 class="section-title">🎮 Games</h1>
+
+  <div class="rooms">
+
+    <div class="card">
+      <div class="avatar">🎯</div>
+      <h3>Lucky Game</h3>
+      <p>🎮 Play and win coins</p>
+
+      <button class="primary"
+              onclick="playGame('Lucky Game')">
+        Play
+      </button>
+    </div>
+
+    <div class="card">
+      <div class="avatar">🎲</div>
+      <h3>Dice Room</h3>
+      <p>🎲 Challenge other players</p>
+
+      <button class="primary"
+              onclick="playGame('Dice Room')">
+        Play
+      </button>
+    </div>
+
+  </div>
+
+</section>
+
+
+<section id="gifts" class="page">
+
+  <h1 class="section-title">🎁 Gifts</h1>
+
+  <div class="rooms">
+
+    <div class="card">
+      <div class="avatar">🌹</div>
+      <h3>Rose</h3>
+      <p>100 Coins</p>
+
+      <button class="primary"
+              onclick="sendGift('Rose',100)">
+        Send
+      </button>
+    </div>
+
+    <div class="card">
+      <div class="avatar">💎</div>
+      <h3>Diamond</h3>
+      <p>500 Coins</p>
+
+      <button class="primary"
+              onclick="sendGift('Diamond',500)">
+        Send
+      </button>
+    </div>
+
+    <div class="card">
+      <div class="avatar">👑</div>
+      <h3>Crown</h3>
+      <p>1000 Coins</p>
+
+      <button class="primary"
+              onclick="sendGift('Crown',1000)">
+        Send
+      </button>
+    </div>
+
+  </div>
+
+</section>
+
+
+<section id="profile" class="page">
+
+  <h1 class="section-title">👤 Profile</h1>
+
+  <div class="card">
+
+    <div class="avatar">🙂</div>
+
+    <h2>Livexa User</h2>
+
+    <p>Welcome to your profile</p>
+
+    <p>
+      🪙 Coins:
+      <strong id="profileCoins">12450</strong>
+    </p>
+
+    <button class="primary"
+            onclick="showPage('wallet')">
+      My Wallet
+    </button>
+
+  </div>
+
+</section>
+
+
+<section id="wallet" class="page">
+
+  <h1 class="section-title">🪙 Wallet</h1>
+
+  <div class="card">
+
+    <div class="avatar">🪙</div>
+
+    <h2 id="walletCoins">12,450</h2>
+
+    <p>Your Livexa Coins</p>
+
+    <button class="primary"
+            onclick="buyCoins(1000)">
+      + 1,000 Coins
+    </button>
+
+    <br><br>
+
+    <button class="primary"
+            onclick="buyCoins(5000)">
+      + 5,000 Coins
+    </button>
+
+  </div>
+
+</section>
+
+
+<section id="ranking" class="page">
+
+  <h1 class="section-title">🏆 Ranking</h1>
+
+  <div class="card">
+    <h2>🏆 Today's Ranking</h2>
+    <p>🥇 Top User — 25,400 Coins</p>
+    <p>🥈 Rising Star — 18,200 Coins</p>
+    <p>🥉 Live King — 14,900 Coins</p>
+  </div>
+
+</section>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+(function () {
+
+  /* ================= COINS ================= */
+
+  if (!window.__livexaCoins) {
+    window.__livexaCoins = 12450;
+  }
+
+  window.updateCoins = function () {
+
+    var value = window.__livexaCoins.toLocaleString();
+
+    var ids = [
+      "coinCount",
+      "walletCoins",
+      "profileCoins"
+    ];
+
+    ids.forEach(function(id) {
+
+      var el = document.getElementById(id);
+
+      if (el) {
+        el.textContent = value;
+      }
+
+    });
+
+  };
+
+
+  /* ================= NOTIFICATION ================= */
+
+  window.livexaNotify = function(message) {
+
+    var old = document.getElementById("livexaNotification");
+
+    if (old) {
+      old.remove();
+    }
+
+    var box = document.createElement("div");
+
+    box.id = "livexaNotification";
+
+    box.textContent = message;
+
+    box.style.position = "fixed";
+    box.style.left = "50%";
+    box.style.bottom = "90px";
+    box.style.transform = "translateX(-50%)";
+    box.style.background = "#171a35";
+    box.style.color = "white";
+    box.style.padding = "14px 20px";
+    box.style.borderRadius = "14px";
+    box.style.zIndex = "99999";
+    box.style.boxShadow = "0 10px 30px rgba(0,0,0,.4)";
+    box.style.fontSize = "14px";
+
+    document.body.appendChild(box);
+
+    setTimeout(function() {
+
+      if (box) {
+        box.remove();
+      }
+
+    }, 2200);
+
+  };
+
+
+  /* ================= PAGE NAVIGATION ================= */
+
+  window.showPage = function(page, button) {
+
+    var pages = document.querySelectorAll(".page");
+
+    pages.forEach(function(p) {
+      p.classList.remove("active");
+    });
+
+    var target = document.getElementById(page);
+
+    if (!target) {
+
+      if (page === "rooms") {
+        target = document.getElementById("rooms");
+      }
+
+    }
+
+    if (target) {
+      target.classList.add("active");
+    }
+
+    var buttons = document.querySelectorAll(".nav-btn");
+
+    buttons.forEach(function(b) {
+      b.classList.remove("active");
+    });
+
+    if (button) {
+      button.classList.add("active");
+    }
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
+  };
+
+
+  /* ================= OPEN ROOM ================= */
+
+  window.openRoom = function(roomName) {
+
+    var container =
+      document.getElementById("roomContainer");
+
+    if (!container) {
+      return;
+    }
+
+    var seats = "";
+
+    for (var i = 1; i <= 8; i++) {
+
+      seats += `
+        <div class="card"
+             style="text-align:center;padding:18px">
+
+          <div class="avatar"
+               style="margin:auto">
+            ${i <= 3 ? "🎙️" : "🎤"}
+          </div>
+
+          <strong>
+            Seat ${i}
+          </strong>
+
+          <p style="opacity:.7">
+            ${i <= 3 ? "Live" : "Empty"}
+          </p>
+
+        </div>
+      `;
+
+    }
+
+    container.innerHTML = `
+
+      <section class="page active">
+
+        <div style="
+          padding:20px;
+          max-width:900px;
+          margin:auto;
+        ">
+
+          <button
+            class="primary"
+            onclick="closeRoom()">
+            ← Back
+          </button>
+
+          <div class="card"
+               style="margin-top:15px">
+
+            <h1>
+              🎙️ ${escapeHtml(roomName)}
+            </h1>
+
+            <p>
+              🔴 LIVE
+              &nbsp; • &nbsp;
+              8 Seats
+            </p>
+
+            <p>
+              💬 Come on mic and chat together
+            </p>
+
+          </div>
+
+          <div
+            style="
+              display:grid;
+              grid-template-columns:
+              repeat(2,minmax(0,1fr));
+              gap:12px;
+              margin-top:15px;
+            ">
+
+            ${seats}
+
+          </div>
+
+          <div class="card"
+               style="margin-top:15px">
+
+            <h3>💬 Room Chat</h3>
+
+            <div id="roomChat"
+                 style="
+                   min-height:100px;
+                   margin:10px 0;
+                 ">
+
+              <p>
+                👋 Welcome to the room!
+              </p>
+
+            </div>
+
+            <div
+              style="
+                display:flex;
+                gap:8px;
+              ">
+
+              <input
+                id="roomMessage"
+                placeholder="Write a message..."
+                style="
+                  flex:1;
+                  padding:12px;
+                  border-radius:10px;
+                  border:1px solid #444;
+                  background:#101329;
+                  color:white;
+                "
+              >
+
+              <button
+                class="primary"
+                onclick="sendRoomMessage()">
+                Send
+              </button>
+
+            </div>
+
+          </div>
+
+          <div
+            style="
+              display:flex;
+              gap:10px;
+              margin-top:15px;
+            ">
+
+            <button
+              class="primary"
+              onclick="livexaNotify('🎤 Microphone enabled')">
+              🎤 Mic
+            </button>
+
+            <button
+              class="primary"
+              onclick="sendGift('Rose',100)">
+              🌹 Gift
+            </button>
+
+            <button
+              class="primary"
+              onclick="livexaNotify('🔗 Room link copied')">
+              🔗 Share
+            </button>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    `;
+
+    window.scrollTo({
+      top:0,
+      behavior:"smooth"
+    });
+
+  };
+
+
+  /* ================= CLOSE ROOM ================= */
+
+  window.closeRoom = function() {
+
+    var container =
+      document.getElementById("roomContainer");
+
+    if (container) {
+      container.innerHTML = "";
+    }
+
+    window.showPage("home");
+
+  };
+
+
+  /* ================= CHAT ================= */
+
+  window.sendRoomMessage = function() {
+
+    var input =
+      document.getElementById("roomMessage");
+
+    var chat =
+      document.getElementById("roomChat");
+
+    if (!input || !chat) {
+      return;
+    }
+
+    var text =
+      input.value.trim();
+
+    if (!text) {
+      return;
+    }
+
+    var message =
+      document.createElement("p");
+
+    message.innerHTML =
+      "<strong>You:</strong> " +
+      escapeHtml(text);
+
+    chat.appendChild(message);
+
+    input.value = "";
+
+  };
+
+
+  /* ================= ESCAPE HTML ================= */
+
+  window.escapeHtml = function(text) {
+
+    return String(text)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+
+  };
+
+
+  /* ================= GIFTS ================= */
+
+  window.sendGift = function(name, price) {
+
+    if (window.__livexaCoins < price) {
+
+      livexaNotify(
+        "❌ Not enough Coins"
+      );
+
+      return;
+    }
+
+    window.__livexaCoins -= price;
+
+    updateCoins();
+
+    livexaNotify(
+      "🎁 " +
+      name +
+      " sent! -" +
+      price.toLocaleString() +
+      " Coins"
+    );
+
+  };
+
+
+  /* ================= BUY COINS ================= */
+
+  window.buyCoins = function(amount) {
+
+    window.__livexaCoins += amount;
+
+    updateCoins();
+
+    livexaNotify(
+      "🪙 +" +
+      amount.toLocaleString() +
+      " Coins"
+    );
+
+  };
+
+
+  /* ================= GAMES ================= */
+
+  window.playGame = function(name) {
+
+    livexaNotify(
+      "🎮 " +
+      name +
+      " started!"
+    );
+
+  };
+
+
+  /* ================= INITIALIZE ================= */
+
+  function initLivexa() {
+
+    updateCoins();
+
+    var home =
+      document.getElementById("home");
+
+    if (home) {
+      home.classList.add("active");
+    }
+
+  }
+
+
+  if (
+    document.readyState === "loading"
+  ) {
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      initLivexa
+    );
+
+  } else {
+
+    initLivexa();
+
+  }
+
+})();
+
+</script>
+
+
+</body>
+</html>
