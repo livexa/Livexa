@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
 <title>Livexa</title>
 
 <style>
@@ -10,261 +12,745 @@
   box-sizing:border-box;
   margin:0;
   padding:0;
-  font-family:Arial,sans-serif;
+  -webkit-tap-highlight-color:transparent;
+  font-family:Arial,Helvetica,sans-serif;
+}
+
+:root{
+  --bg:#050712;
+  --panel:#0b1027;
+  --panel2:#101637;
+  --purple:#7b2cff;
+  --purple2:#b735ff;
+  --gold:#ffd45c;
+  --text:#fff;
+  --muted:#9298b8;
+  --border:#272f67;
+  --green:#43e69a;
+  --red:#ff526e;
 }
 
 body{
-  background:#050816;
-  color:white;
+  background:
+    radial-gradient(circle at 50% -10%,#281050 0%,transparent 35%),
+    #050712;
+  color:var(--text);
   min-height:100vh;
+  overflow-x:hidden;
 }
 
+/* ================= HEADER ================= */
+
 header{
-  height:70px;
+  height:68px;
+  position:sticky;
+  top:0;
+  z-index:100;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:0 22px;
-  background:#090d24;
-  border-bottom:1px solid #252b66;
-  position:sticky;
-  top:0;
-  z-index:10;
+  padding:0 18px;
+  background:rgba(7,10,28,.95);
+  backdrop-filter:blur(15px);
+  border-bottom:1px solid #252b5d;
 }
 
 .logo{
-  font-size:27px;
-  font-weight:bold;
-  color:#fff;
+  font-size:26px;
+  font-weight:800;
+  letter-spacing:-1px;
 }
 
 .logo span{
-  color:#b84cff;
+  color:#b54cff;
 }
 
-.coins{
-  background:#151938;
-  border:1px solid #694cff;
-  border-radius:25px;
-  padding:10px 15px;
-  color:#ffd75a;
-}
-
-.layout{
+.coin-wallet{
   display:flex;
-  min-height:calc(100vh - 70px);
+  align-items:center;
+  gap:7px;
+  background:#121735;
+  border:1px solid #7249ff;
+  border-radius:30px;
+  padding:9px 15px;
+  color:#ffd85c;
+  font-weight:bold;
+  box-shadow:0 0 18px rgba(115,65,255,.2);
 }
 
-nav{
-  width:210px;
-  background:#080c20;
-  border-right:1px solid #202653;
-  padding:20px 12px;
-}
-
-nav button{
-  width:100%;
-  background:transparent;
+.coin-wallet button{
   border:0;
-  color:#cfd3ef;
-  text-align:left;
-  padding:15px;
-  margin-bottom:6px;
-  border-radius:12px;
-  font-size:16px;
+  width:23px;
+  height:23px;
+  border-radius:50%;
+  background:#8535ff;
+  color:white;
   cursor:pointer;
 }
 
-nav button:hover,
-nav button.active{
-  background:linear-gradient(90deg,#711cff,#a83cff);
+/* ================= LAYOUT ================= */
+
+.layout{
+  display:flex;
+  min-height:calc(100vh - 68px);
+}
+
+nav{
+  width:92px;
+  flex-shrink:0;
+  background:#080c20;
+  border-right:1px solid #202653;
+  padding:15px 10px;
+  position:sticky;
+  top:68px;
+  height:calc(100vh - 68px);
+}
+
+.nav-btn{
+  width:100%;
+  border:0;
+  background:transparent;
+  color:#c6cbe4;
+  border-radius:17px;
+  padding:12px 5px;
+  margin-bottom:8px;
+  cursor:pointer;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:5px;
+  transition:.2s;
+}
+
+.nav-icon{
+  font-size:25px;
+}
+
+.nav-text{
+  font-size:11px;
+}
+
+.nav-btn:hover,
+.nav-btn.active{
+  background:linear-gradient(145deg,#7520ff,#aa31ff);
   color:white;
+  box-shadow:0 8px 25px rgba(137,40,255,.25);
 }
 
 main{
   flex:1;
-  padding:24px;
-  overflow:hidden;
+  min-width:0;
+  padding:20px;
 }
 
 .page{
   display:none;
+  animation:pageIn .25s ease;
 }
 
 .page.active{
   display:block;
 }
 
+@keyframes pageIn{
+  from{
+    opacity:0;
+    transform:translateY(8px);
+  }
+  to{
+    opacity:1;
+    transform:none;
+  }
+}
+
+/* ================= HERO ================= */
+
 .hero{
-  background:linear-gradient(135deg,#170b3b,#35106e,#071b43);
-  border:1px solid #7e42ff;
-  border-radius:22px;
-  padding:30px;
-  margin-bottom:25px;
-  box-shadow:0 0 35px rgba(120,40,255,.25);
+  position:relative;
+  overflow:hidden;
+  border:1px solid #7344ef;
+  border-radius:25px;
+  padding:28px;
+  min-height:220px;
+  background:
+    radial-gradient(circle at 80% 20%,rgba(178,58,255,.4),transparent 28%),
+    linear-gradient(135deg,#180936,#33116b,#071a3a);
+  box-shadow:0 0 45px rgba(110,40,255,.2);
+}
+
+.hero:after{
+  content:"";
+  position:absolute;
+  width:220px;
+  height:220px;
+  border-radius:50%;
+  background:rgba(161,54,255,.12);
+  right:-70px;
+  bottom:-90px;
 }
 
 .hero h1{
   font-size:36px;
-  margin-bottom:10px;
+  margin-bottom:9px;
+  position:relative;
+  z-index:1;
 }
 
 .hero p{
-  color:#c8cbea;
-  margin-bottom:20px;
+  color:#c5c9df;
+  margin-bottom:22px;
+  position:relative;
+  z-index:1;
 }
 
 .primary{
   border:0;
-  border-radius:25px;
-  padding:12px 24px;
-  color:white;
+  border-radius:28px;
+  padding:12px 23px;
+  color:#fff;
   font-weight:bold;
-  background:linear-gradient(90deg,#7b22ff,#e033ff);
+  background:linear-gradient(90deg,#7020ff,#d72eff);
+  cursor:pointer;
+  box-shadow:0 7px 22px rgba(157,40,255,.2);
+  transition:.18s;
+}
+
+.primary:hover{
+  transform:translateY(-2px);
+}
+
+.secondary{
+  border:1px solid #5744b9;
+  border-radius:25px;
+  padding:10px 18px;
+  color:#fff;
+  background:#111738;
   cursor:pointer;
 }
 
 .section-title{
-  margin:25px 0 15px;
+  margin:27px 0 15px;
   font-size:22px;
 }
 
+/* ================= CARDS ================= */
+
 .rooms{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-  gap:16px;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:15px;
 }
 
 .card{
-  background:#0d1230;
-  border:1px solid #303879;
-  border-radius:18px;
+  background:
+    linear-gradient(145deg,#101633,#090d23);
+  border:1px solid #2c3671;
+  border-radius:20px;
   padding:18px;
   transition:.2s;
+  position:relative;
+  overflow:hidden;
 }
 
 .card:hover{
   transform:translateY(-3px);
-  border-color:#a64cff;
+  border-color:#9a52ff;
+}
+
+.card-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
 
 .avatar{
-  width:65px;
-  height:65px;
+  width:64px;
+  height:64px;
   border-radius:50%;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:27px;
-  background:linear-gradient(135deg,#7d26ff,#ff42c8);
+  font-size:28px;
+  background:linear-gradient(135deg,#7927ff,#f238cf);
+  border:2px solid rgba(255,255,255,.18);
   margin-bottom:12px;
 }
 
 .live{
-  color:#ff536d;
+  color:#ff5069;
   font-weight:bold;
 }
 
+.viewer{
+  color:#aeb4d1;
+  font-size:13px;
+}
+
 .card h3{
-  margin-bottom:8px;
+  margin-bottom:7px;
 }
 
 .card p{
-  color:#aeb3d2;
+  color:#a8aecb;
   font-size:14px;
-  margin-bottom:14px;
-}
-
-.room{
-  background:linear-gradient(135deg,#100b2c,#071a39);
-  border:1px solid #4d43a0;
-  border-radius:20px;
-  padding:22px;
-}
-
-.room-screen{
-  min-height:260px;
-  border-radius:18px;
-  background:radial-gradient(circle,#63258b,#10152d 65%);
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  margin-bottom:18px;
-}
-
-.room-screen .big-avatar{
-  width:100px;
-  height:100px;
-  border-radius:50%;
-  background:linear-gradient(135deg,#ff4fc8,#712cff);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:45px;
   margin-bottom:15px;
 }
 
+.live-dot{
+  width:8px;
+  height:8px;
+  display:inline-block;
+  background:#ff4665;
+  border-radius:50%;
+  box-shadow:0 0 10px #ff4665;
+}
+
+/* ================= QUICK MENU ================= */
+
+.quick-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+}
+
+.quick{
+  background:#0d1330;
+  border:1px solid #303875;
+  border-radius:18px;
+  padding:17px 10px;
+  text-align:center;
+  cursor:pointer;
+}
+
+.quick-icon{
+  font-size:30px;
+  margin-bottom:7px;
+}
+
+.quick span{
+  display:block;
+  color:#b8bed8;
+  font-size:13px;
+}
+
+/* ================= ROOM ================= */
+
+.room{
+  border-radius:25px;
+  overflow:hidden;
+  border:1px solid #453a91;
+  background:#080c20;
+  box-shadow:0 20px 70px rgba(0,0,0,.4);
+}
+
+.room-header{
+  min-height:175px;
+  padding:20px;
+  position:relative;
+  background:
+    radial-gradient(circle at 50% 0%,rgba(185,61,255,.4),transparent 38%),
+    linear-gradient(145deg,#180a3c,#091b3d);
+}
+
+.room-header-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:10px;
+}
+
+.room-info h2{
+  font-size:25px;
+  margin-bottom:7px;
+}
+
+.room-info p{
+  color:#b8bed8;
+  font-size:13px;
+}
+
+.room-actions{
+  display:flex;
+  gap:8px;
+}
+
+.icon-btn{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  border:1px solid #6154a8;
+  background:#111536;
+  color:#fff;
+  cursor:pointer;
+  font-size:18px;
+}
+
+.icon-btn.active{
+  background:#8a2eff;
+}
+
+.friend-banner{
+  margin:25px auto -15px;
+  width:min(520px,95%);
+  min-height:92px;
+  border-radius:45px;
+  padding:12px 22px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:18px;
+  background:
+    linear-gradient(90deg,#3c0e6f,#7724c9,#35115f);
+  border:1px solid #a951ff;
+  position:relative;
+  z-index:5;
+  box-shadow:0 8px 30px rgba(0,0,0,.35);
+}
+
+.friend-avatar{
+  width:58px;
+  height:58px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#292d40,#a35aff);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:27px;
+  border:2px solid #fff;
+}
+
+.friend-center{
+  text-align:center;
+}
+
+.friend-center b{
+  display:block;
+  font-size:18px;
+  margin-bottom:4px;
+}
+
+.friend-center span{
+  font-size:12px;
+  color:#e5cfff;
+}
+
+/* ================= SEATS ================= */
+
+.seats{
+  padding:42px 18px 20px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px 10px;
+}
+
+.seat{
+  text-align:center;
+  min-width:0;
+}
+
+.seat-avatar{
+  width:72px;
+  height:72px;
+  margin:auto;
+  border-radius:50%;
+  background:
+    radial-gradient(circle at 35% 25%,#765cff,#28145e);
+  border:2px solid #5749b3;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:31px;
+  position:relative;
+  box-shadow:0 0 22px rgba(108,53,255,.18);
+}
+
+.seat.active .seat-avatar{
+  border-color:#ffcd4b;
+  box-shadow:
+    0 0 0 4px rgba(255,206,75,.08),
+    0 0 25px rgba(255,190,50,.3);
+}
+
+.seat-number{
+  position:absolute;
+  bottom:-7px;
+  left:50%;
+  transform:translateX(-50%);
+  background:#6b32e6;
+  border:1px solid #b481ff;
+  border-radius:12px;
+  padding:2px 8px;
+  font-size:10px;
+}
+
+.seat-name{
+  margin-top:10px;
+  font-size:12px;
+  color:#d7daf0;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.mic-small{
+  color:#f9d46a;
+  font-size:12px;
+}
+
+.empty-seat{
+  color:#8e95b5;
+  font-size:11px;
+}
+
+/* ================= ROOM BOTTOM ================= */
+
+.room-bottom{
+  padding:0 18px 20px;
+}
+
 .chat{
-  background:#080d22;
-  border:1px solid #292f61;
-  border-radius:15px;
+  background:#080d20;
+  border:1px solid #282e5e;
+  border-radius:17px;
   padding:15px;
-  margin-top:15px;
+  max-height:190px;
+  overflow:auto;
+}
+
+.chat-title{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:8px;
 }
 
 .chat p{
-  margin:9px 0;
-  color:#d6d8ee;
+  margin:8px 0;
+  color:#d4d7e8;
+  font-size:13px;
 }
+
+.chat-user{
+  color:#b56cff;
+  font-weight:bold;
+}
+
+.room-toolbar{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  margin-top:12px;
+}
+
+.chat-input{
+  flex:1;
+  background:#121733;
+  border:1px solid #343d76;
+  border-radius:25px;
+  color:white;
+  padding:12px 15px;
+  outline:none;
+}
+
+.send-btn{
+  width:43px;
+  height:43px;
+  border-radius:50%;
+  border:0;
+  background:#8d32ff;
+  color:white;
+  cursor:pointer;
+}
+
+/* ================= GAMES ================= */
 
 .games{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
   gap:15px;
 }
 
 .game{
-  padding:20px;
   background:#0c1230;
   border:1px solid #343c80;
-  border-radius:18px;
+  border-radius:20px;
+  padding:23px;
   text-align:center;
 }
 
 .game-icon{
-  font-size:42px;
+  font-size:44px;
   margin-bottom:12px;
 }
 
+.game h3{
+  margin-bottom:8px;
+}
+
+.game p{
+  color:#aeb4d1;
+  margin-bottom:17px;
+}
+
+/* ================= GIFTS ================= */
+
 .gift-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-  gap:15px;
+  grid-template-columns:repeat(auto-fit,minmax(145px,1fr));
+  gap:14px;
 }
 
 .gift{
   text-align:center;
   background:#0c1230;
   border:1px solid #343c80;
-  border-radius:18px;
-  padding:20px 10px;
+  border-radius:19px;
+  padding:19px 10px;
 }
 
 .gift-icon{
-  font-size:42px;
-  margin-bottom:10px;
+  font-size:43px;
+  margin-bottom:9px;
 }
 
+.gift-price{
+  color:#ffd75a;
+  margin:9px 0 13px;
+  font-weight:bold;
+}
+
+/* ================= CONTRIBUTION ================= */
+
+.tabs{
+  display:flex;
+  gap:6px;
+  background:#0b1029;
+  border:1px solid #282e5e;
+  padding:5px;
+  border-radius:15px;
+  margin-bottom:18px;
+}
+
+.tab{
+  flex:1;
+  padding:12px;
+  border:0;
+  border-radius:11px;
+  background:transparent;
+  color:#999fbc;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.tab.active{
+  background:linear-gradient(90deg,#7125ff,#b22fff);
+  color:white;
+}
+
+.top-contribution{
+  text-align:center;
+  background:
+    radial-gradient(circle at 50% 0%,rgba(255,196,52,.25),transparent 30%),
+    #0c1230;
+  border:1px solid #5b478e;
+  border-radius:25px;
+  padding:25px 15px;
+  margin-bottom:18px;
+}
+
+.top-crown{
+  font-size:50px;
+}
+
+.rank-number{
+  color:#ffd45a;
+  font-weight:bold;
+  margin-top:5px;
+}
+
+.contribution-value{
+  margin-top:8px;
+  color:#ffd45a;
+  font-size:21px;
+  font-weight:bold;
+}
+
+.rank-list{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.rank-row{
+  display:flex;
+  align-items:center;
+  gap:13px;
+  padding:13px;
+  background:#0d1230;
+  border:1px solid #282f63;
+  border-radius:17px;
+}
+
+.rank{
+  width:38px;
+  font-weight:bold;
+  color:#aaa;
+  text-align:center;
+}
+
+.rank.gold{
+  color:#ffd44e;
+}
+
+.rank.silver{
+  color:#d9e0eb;
+}
+
+.rank.bronze{
+  color:#d98b55;
+}
+
+.rank-avatar{
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(135deg,#5220b8,#d238d5);
+  font-size:23px;
+}
+
+.rank-info{
+  flex:1;
+  min-width:0;
+}
+
+.rank-info strong{
+  display:block;
+  margin-bottom:4px;
+}
+
+.rank-info span{
+  color:#858cae;
+  font-size:12px;
+}
+
+.rank-coins{
+  color:#ffd45a;
+  font-weight:bold;
+  font-size:13px;
+}
+
+/* ================= PROFILE ================= */
+
 .profile{
-  max-width:600px;
+  max-width:620px;
   margin:auto;
   text-align:center;
   background:#0c1230;
   border:1px solid #343c80;
-  border-radius:22px;
-  padding:35px;
+  border-radius:25px;
+  padding:30px;
 }
 
 .profile-avatar{
@@ -277,12 +763,29 @@ main{
   justify-content:center;
   font-size:50px;
   background:linear-gradient(135deg,#ff38c7,#6f2cff);
+  border:3px solid #7d55ff;
+}
+
+.profile-name{
+  font-size:25px;
+  margin-bottom:5px;
+}
+
+.profile-level{
+  color:#9da4c5;
 }
 
 .stats{
-  display:flex;
-  justify-content:space-around;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
   margin:25px 0;
+}
+
+.stat{
+  padding:14px 5px;
+  border-radius:15px;
+  background:#111735;
 }
 
 .stat strong{
@@ -292,43 +795,252 @@ main{
 
 .stat span{
   color:#9298bd;
-  font-size:13px;
+  font-size:12px;
 }
+
+/* ================= WALLET ================= */
+
+.wallet{
+  max-width:700px;
+  margin:auto;
+}
+
+.balance-card{
+  border:1px solid #7749ed;
+  border-radius:25px;
+  padding:28px;
+  background:
+    radial-gradient(circle at 90% 20%,rgba(206,55,255,.28),transparent 30%),
+    linear-gradient(135deg,#160b38,#28105a);
+  text-align:center;
+}
+
+.balance-label{
+  color:#aaaed0;
+}
+
+.balance{
+  font-size:40px;
+  color:#ffd65c;
+  margin:10px 0 20px;
+  font-weight:bold;
+}
+
+.wallet-actions{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+}
+
+/* ================= NOTICE ================= */
 
 .notice{
   position:fixed;
-  bottom:20px;
   left:50%;
-  transform:translateX(-50%);
+  bottom:24px;
+  transform:translateX(-50%) translateY(20px);
+  z-index:99999;
+  min-width:220px;
+  max-width:90%;
+  text-align:center;
+  padding:13px 20px;
+  border-radius:27px;
   background:#171d43;
   border:1px solid #754cff;
-  padding:14px 22px;
-  border-radius:25px;
-  display:none;
-  z-index:100;
+  box-shadow:0 10px 35px rgba(0,0,0,.4);
+  opacity:0;
+  pointer-events:none;
+  transition:.25s;
 }
 
-@media(max-width:700px){
+.notice.show{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
+
+/* ================= MODAL ================= */
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.78);
+  backdrop-filter:blur(8px);
+  z-index:9998;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+}
+
+.modal-box{
+  width:min(520px,100%);
+  max-height:90vh;
+  overflow:auto;
+  background:#0b1028;
+  border:1px solid #7549ec;
+  border-radius:25px;
+  padding:23px;
+  box-shadow:0 20px 80px rgba(0,0,0,.65);
+}
+
+.modal-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:18px;
+}
+
+.close{
+  border:0;
+  background:#171d3d;
+  color:#fff;
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  cursor:pointer;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:760px){
+
+  header{
+    height:61px;
+    padding:0 12px;
+  }
+
+  .logo{
+    font-size:23px;
+  }
+
+  .coin-wallet{
+    padding:8px 11px;
+    font-size:13px;
+  }
+
+  .layout{
+    display:block;
+  }
+
   nav{
-    width:72px;
+    position:fixed;
+    left:0;
+    right:0;
+    bottom:0;
+    top:auto;
+    width:100%;
+    height:67px;
+    z-index:500;
+    padding:5px 5px 7px;
+    border-right:0;
+    border-top:1px solid #292e60;
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
   }
 
-  nav button{
-    text-align:center;
-    font-size:0;
-    padding:15px 5px;
+  .nav-btn{
+    margin:0;
+    border-radius:12px;
+    padding:5px 2px;
   }
 
-  nav button::first-letter{
-    font-size:22px;
+  .nav-icon{
+    font-size:21px;
+  }
+
+  .nav-text{
+    font-size:9px;
   }
 
   main{
-    padding:15px;
+    padding:13px 12px 83px;
+  }
+
+  .hero{
+    padding:23px;
+    min-height:205px;
   }
 
   .hero h1{
-    font-size:28px;
+    font-size:29px;
+  }
+
+  .quick-grid{
+    grid-template-columns:repeat(4,1fr);
+  }
+
+  .quick{
+    padding:12px 5px;
+  }
+
+  .quick-icon{
+    font-size:25px;
+  }
+
+  .quick span{
+    font-size:10px;
+  }
+
+  .rooms{
+    grid-template-columns:1fr;
+  }
+
+  .seats{
+    grid-template-columns:repeat(4,1fr);
+    gap:17px 4px;
+    padding-left:8px;
+    padding-right:8px;
+  }
+
+  .seat-avatar{
+    width:61px;
+    height:61px;
+    font-size:26px;
+  }
+
+  .seat-name{
+    font-size:10px;
+  }
+
+  .friend-banner{
+    gap:10px;
+    padding:10px 13px;
+  }
+
+  .friend-avatar{
+    width:48px;
+    height:48px;
+  }
+
+  .friend-center b{
+    font-size:14px;
+  }
+
+  .friend-center span{
+    font-size:10px;
+  }
+
+  .stats{
+    grid-template-columns:repeat(3,1fr);
+  }
+}
+
+@media(max-width:390px){
+  .nav-icon{
+    font-size:19px;
+  }
+
+  .nav-text{
+    font-size:8px;
+  }
+
+  .seat-avatar{
+    width:54px;
+    height:54px;
+  }
+
+  .coin-wallet{
+    font-size:12px;
   }
 }
 </style>
@@ -337,494 +1049,232 @@ main{
 <body>
 
 <header>
-  <div class="logo">▶ <span>Livexa</span></div>
-  <div class="coins">🪙 <span id="coinCount">12,450</span></div>
+
+  <div class="logo">
+    ▶ <span>Livexa</span>
+  </div>
+
+  <div class="coin-wallet">
+    🪙 <span id="coinCount">12,450</span>
+    <button onclick="showPage('wallet')">+</button>
+  </div>
+
 </header>
 
 <div class="layout">
 
 <nav>
-  <button class="active" onclick="showPage('home',this)">🏠 Home</button>
-  <button onclick="showPage('live',this)">🔴 Live</button>
-  <button onclick="showPage('rooms',this)">👥 Rooms</button>
-  <button onclick="showPage('games',this)">🎮 Games</button>
-  <button onclick="showPage('gifts',this)">🎁 Gifts</button>
-  <button onclick="showPage('profile',this)">👤 Profile</button>
+
+  <button class="nav-btn active"
+          onclick="showPage('home',this)">
+    <span class="nav-icon">🏠</span>
+    <span class="nav-text">Home</span>
+  </button>
+
+  <button class="nav-btn"
+          onclick="showPage('live',this)">
+    <span class="nav-icon">🔴</span>
+    <span class="nav-text">Live</span>
+  </button>
+
+  <button class="nav-btn"
+          onclick="showPage('rooms',this)">
+    <span class="nav-icon">👥</span>
+    <span class="nav-text">Rooms</span>
+  </button>
+
+  <button class="nav-btn"
+          onclick="showPage('games',this)">
+    <span class="nav-icon">🎮</span>
+    <span class="nav-text">Games</span>
+  </button>
+
+  <button class="nav-btn"
+          onclick="showPage('gifts',this)">
+    <span class="nav-icon">🎁</span>
+    <span class="nav-text">Gifts</span>
+  </button>
+
+  <button class="nav-btn"
+          onclick="showPage('profile',this)">
+    <span class="nav-icon">👤</span>
+    <span class="nav-text">Profile</span>
+  </button>
+
 </nav>
 
 <main>
 
+<!-- ================= HOME ================= -->
+
 <section id="home" class="page active">
 
-<div class="hero">
-  <h1>Welcome to Livexa ✨</h1>
-  <p>Live • Connect • Be Yourself</p>
-  <button class="primary" onclick="showPage('rooms')">
-    Explore Rooms
-  </button>
-</div>
+  <div class="hero">
 
-<h2 class="section-title">🔥 Popular Live Rooms</h2>
+    <h1>Welcome to Livexa ✨</h1>
 
-<div class="rooms">
+    <p>
+      Live rooms • Friends • Games • Gifts
+    </p>
 
-<div class="card">
-<div class="avatar">👩🏻</div>
-<h3>Dream Girl 👑</h3>
-<p><span class="live">● LIVE</span> · 8.6K viewers</p>
-<button class="primary" onclick="openRoom('Dream Girl')">Join Room</button>
-</div>
+    <button class="primary"
+            onclick="showPage('rooms')">
+      Explore Rooms
+    </button>
 
-<div class="card">
-<div class="avatar">👩🏼</div>
-<h3>Queen Sara ✨</h3>
-<p><span class="live">● LIVE</span> · 5.2K viewers</p>
-<button class="primary" onclick="openRoom('Queen Sara')">Join Room</button>
-</div>
+  </div>
 
-<div class="card">
-<div class="avatar">👨🏻</div>
-<h3>King 777 👑</h3>
-<p><span class="live">● LIVE</span> · 3.8K viewers</p>
-<button class="primary" onclick="openRoom('King 777')">Join Room</button>
-</div>
+  <h2 class="section-title">
+    ⚡ Quick Access
+  </h2>
 
-</div>
+  <div class="quick-grid">
+
+    <div class="quick"
+         onclick="showPage('live')">
+      <div class="quick-icon">🔴</div>
+      <span>Live</span>
+    </div>
+
+    <div class="quick"
+         onclick="showPage('rooms')">
+      <div class="quick-icon">🎙️</div>
+      <span>Rooms</span>
+    </div>
+
+    <div class="quick"
+         onclick="showPage('contribution')">
+      <div class="quick-icon">🏆</div>
+      <span>Ranking</span>
+    </div>
+
+    <div class="quick"
+         onclick="showPage('wallet')">
+      <div class="quick-icon">🪙</div>
+      <span>Coins</span>
+    </div>
+
+  </div>
+
+  <h2 class="section-title">
+    🔥 Popular Live Rooms
+  </h2>
+
+  <div class="rooms">
+
+    <div class="card">
+
+      <div class="avatar">👩🏻</div>
+
+      <h3>Dream Girl 👑</h3>
+
+      <p>
+        <span class="live">
+          <span class="live-dot"></span>
+          LIVE
+        </span>
+        · 8.6K viewers
+      </p>
+
+      <button class="primary"
+              onclick="openRoom('Dream Girl')">
+        Join Room
+      </button>
+
+    </div>
+
+    <div class="card">
+
+      <div class="avatar">👩🏼</div>
+
+      <h3>Queen Sara ✨</h3>
+
+      <p>
+        <span class="live">
+          <span class="live-dot"></span>
+          LIVE
+        </span>
+        · 5.2K viewers
+      </p>
+
+      <button class="primary"
+              onclick="openRoom('Queen Sara')">
+        Join Room
+      </button>
+
+    </div>
+
+    <div class="card">
+
+      <div class="avatar">👨🏻</div>
+
+      <h3>King 777 👑</h3>
+
+      <p>
+        <span class="live">
+          <span class="live-dot"></span>
+          LIVE
+        </span>
+        · 3.8K viewers
+      </p>
+
+      <button class="primary"
+              onclick="openRoom('King 777')">
+        Join Room
+      </button>
+
+    </div>
+
+  </div>
 
 </section>
 
+
+<!-- ================= LIVE ================= -->
 
 <section id="live" class="page">
 
-<h1 class="section-title">🔴 Live Now</h1>
+  <h1 class="section-title">
+    🔴 Live Now
+  </h1>
 
-<div class="rooms">
+  <div class="rooms">
 
-<div class="card">
-<div class="avatar">🎤</div>
-<h3>Music Night</h3>
-<p>Live music · 12.8K viewers</p>
-<button class="primary" onclick="openRoom('Music Night')">Watch</button>
-</div>
+    <div class="card">
+      <div class="avatar">🎤</div>
+      <h3>Music Night</h3>
+      <p>🎵 Music · 12.8K viewers</p>
+      <button class="primary"
+              onclick="openRoom('Music Night')">
+        Watch
+      </button>
+    </div>
 
-<div class="card">
-<div class="avatar">🎮</div>
-<h3>Gaming Room</h3>
-<p>Gaming · 7.4K viewers</p>
-<button class="primary" onclick="openRoom('Gaming Room')">Watch</button>
-</div>
+    <div class="card">
+      <div class="avatar">🎮</div>
+      <h3>Gaming Room</h3>
+      <p>🎮 Gaming · 7.4K viewers</p>
+      <button class="primary"
+              onclick="openRoom('Gaming Room')">
+        Watch
+      </button>
+    </div>
 
-<div class="card">
-<div class="avatar">💬</div>
-<h3>Talk & Friends</h3>
-<p>Chat · 4.1K viewers</p>
-<button class="primary" onclick="openRoom('Talk & Friends')">Watch</button>
-</div>
+    <div class="card">
+      <div class="avatar">💬</div>
+      <h3>Talk & Friends</h3>
+      <p>💬 Chat · 4.1K viewers</p>
+      <button class="primary"
+              onclick="openRoom('Talk & Friends')">
+        Watch
+      </button>
+    </div>
 
-</div>
-
-</section>
-
-
-<section id="rooms" class="page">
-
-<h1 class="section-title">👥 Rooms</h1>
-
-<div id="roomContainer">
-
-<div class="rooms">
-
-<div class="card">
-<div class="avatar">🌟</div>
-<h3>Dream Room</h3>
-<p>8 Seats · Friends · Music</p>
-<button class="primary" onclick="openRoom('Dream Room')">Join</button>
-</div>
-
-<div class="card">
-<div class="avatar">🔥</div>
-<h3>Fun Zone</h3>
-<p>8 Seats · Games · Chat</p>
-<button class="primary" onclick="openRoom('Fun Zone')">Join</button>
-</div>
-
-</div>
-
-</div>
+  </div>
 
 </section>
 
 
-<section id="games" class="page">
+<!-- ================= ROOMS ================= -->
 
-<h1 class="section-title">🎮 Exciting Games</h1>
-
-<div class="games">
-
-<div class="game">
-<div class="game-icon">🧩</div>
-<h3>Color Box</h3>
-<p>Choose the correct color</p>
-<button class="primary" onclick="playGame('Color Box')">Play</button>
-</div>
-
-<div class="game">
-<div class="game-icon">🎯</div>
-<h3>Lucky 8</h3>
-<p>Find number 8</p>
-<button class="primary" onclick="playGame('Lucky 8')">Play</button>
-</div>
-
-<div class="game">
-<div class="game-icon">🫧</div>
-<h3>Bubble Burst</h3>
-<p>Pop the bubbles</p>
-<button class="primary" onclick="playGame('Bubble Burst')">Play</button>
-</div>
-
-<div class="game">
-<div class="game-icon">🃏</div>
-<h3>Card Flip</h3>
-<p>Match the cards</p>
-<button class="primary" onclick="playGame('Card Flip')">Play</button>
-</div>
-
-</div>
-
-</section>
-
-
-<section id="gifts" class="page">
-
-<h1 class="section-title">🎁 Gifts</h1>
-
-<div class="gift-grid">
-
-<div class="gift">
-<div class="gift-icon">🌹</div>
-<h3>Rose</h3>
-<p>200 Coins</p>
-<button class="primary" onclick="sendGift(200)">Send</button>
-</div>
-
-<div class="gift">
-<div class="gift-icon">❤️</div>
-<h3>Heart</h3>
-<p>500 Coins</p>
-<button class="primary" onclick="sendGift(500)">Send</button>
-</div>
-
-<div class="gift">
-<div class="gift-icon">💎</div>
-<h3>Diamond</h3>
-<p>1,000 Coins</p>
-<button class="primary" onclick="sendGift(1000)">Send</button>
-</div>
-
-<div class="gift">
-<div class="gift-icon">👑</div>
-<h3>Crown</h3>
-<p>5,000 Coins</p>
-<button class="primary" onclick="sendGift(5000)">Send</button>
-</div>
-
-</div>
-
-</section>
-
-
-<section id="profile" class="page">
-
-<div class="profile">
-
-<div class="profile-avatar">👤</div>
-
-<h1>Livexa User</h1>
-<p style="color:#999fc4;margin-top:8px;">Lv. 1 · New Member</p>
-
-<div class="stats">
-<div class="stat">
-<strong>12.4K</strong>
-<span>Coins</span>
-</div>
-
-<div class="stat">
-<strong>0</strong>
-<span>Followers</span>
-</div>
-
-<div class="stat">
-<strong>0</strong>
-<span>Following</span>
-</div>
-</div>
-
-<button class="primary" onclick="notify('Profile editing will be added soon ✨')">
-Edit Profile
-</button>
-
-</div>
-
-</section>
-
-</main>
-</div>
-
-<div id="notice" class="notice"></div>
-
-<script>
-
-let coins = 12450;
-
-function showPage(page,button){
-
-document.querySelectorAll('.page')
-.forEach(p=>p.classList.remove('active'));
-
-document.getElementById(page)
-.classList.add('active');
-
-document.querySelectorAll('nav button')
-.forEach(b=>b.classList.remove('active'));
-
-if(button) button.classList.add('active');
-
-}
-
-function notify(message){
-
-const box=document.getElementById('notice');
-
-box.textContent=message;
-box.style.display='block';
-
-setTimeout(()=>{
-box.style.display='none';
-},2200);
-
-}
-
-function openRoom(name){
-
-document.getElementById('roomContainer').innerHTML=`
-
-<div class="room">
-
-<div class="room-screen">
-
-<div class="big-avatar">👑</div>
-
-<h2>${name}</h2>
-
-<p style="color:#b9bedb;margin-top:8px;">
-🔴 LIVE · 8 Seats
-</p>
-
-</div>
-
-<button class="primary"
-onclick="notify('You joined the room ✨')">
-Join Room
-</button>
-
-<div class="chat">
-
-<h3>💬 Chat</h3>
-
-<p>👤 King_777: Welcome everyone!</p>
-<p>👤 Queen_Sara: Hello Livexa ❤️</p>
-<p>👤 David_88: Amazing room!</p>
-
-</div>
-
-</div>
-`;
-
-showPage('rooms');
-
-}
-
-function sendGift(amount){
-
-if(coins<amount){
-
-notify('Not enough coins 🪙');
-return;
-
-}
-
-coins-=amount;
-
-document.getElementById('coinCount')
-.textContent=coins.toLocaleString();
-
-notify('Gift sent successfully 🎁');
-
-}
-
-function playGame(name){
-  const old = document.getElementById('gameOverlay');
-  if(old) old.remove();
-
-  const overlay = document.createElement('div');
-  overlay.id = 'gameOverlay';
-  overlay.style.cssText = `
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.85);
-    z-index:9999;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:20px;
-  `;
-
-  const box = document.createElement('div');
-  box.style.cssText = `
-    width:min(500px,95%);
-    background:#0d1235;
-    border:2px solid #8b4dff;
-    border-radius:25px;
-    padding:25px;
-    text-align:center;
-    color:white;
-    font-family:Arial;
-  `;
-
-  box.innerHTML = `
-    <h2 style="font-size:28px;margin-top:0">${name} 🎮</h2>
-    <div id="gameArea"></div>
-    <button id="closeGame"
-      style="margin-top:20px;padding:12px 28px;border:0;border-radius:20px;background:#8b2cff;color:white;font-size:17px;">
-      Close
-    </button>
-  `;
-
-  overlay.appendChild(box);
-  document.body.appendChild(overlay);
-
-  document.getElementById('closeGame').onclick = () => overlay.remove();
-
-  const area = document.getElementById('gameArea');
-
-  if(name === 'Color Box'){
-    const colors = ['red','blue','green','yellow'];
-    const correct = colors[Math.floor(Math.random()*colors.length)];
-
-    area.innerHTML = `
-      <p style="font-size:19px">Choose: <b>${correct}</b></p>
-      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
-        ${colors.map(c => `
-          <button onclick="checkColor('${c}','${correct}')"
-            style="width:90px;height:70px;background:${c};border:3px solid white;border-radius:15px;">
-          </button>
-        `).join('')}
-      </div>
-      <p id="gameResult"></p>
-    `;
-  }
-
-  if(name === 'Lucky 8'){
-    const nums = Array.from({length:12},(_,i)=>i+1)
-      .sort(()=>Math.random()-.5);
-
-    area.innerHTML = `
-      <p style="font-size:19px">Find number <b>8</b> 🎯</p>
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px">
-        ${nums.map(n => `
-          <button onclick="checkLucky(${n})"
-            style="padding:18px;border:0;border-radius:12px;background:#633cff;color:white;font-size:20px;">
-            ${n}
-          </button>
-        `).join('')}
-      </div>
-      <p id="gameResult"></p>
-    `;
-  }
-
-  if(name === 'Bubble Burst'){
-    let count = 0;
-
-    area.innerHTML = `
-      <p style="font-size:19px">Pop 5 bubbles! 🫧</p>
-      <div id="bubbles" style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap"></div>
-      <p id="gameResult"></p>
-    `;
-
-    const bubbles = document.getElementById('bubbles');
-
-    for(let i=0;i<10;i++){
-      const b = document.createElement('button');
-      b.textContent = '🫧';
-      b.style.cssText = `
-        font-size:35px;
-        background:none;
-        border:0;
-        cursor:pointer;
-      `;
-
-      b.onclick = () => {
-        if(b.disabled) return;
-        b.disabled = true;
-        b.textContent = '💥';
-        count++;
-
-        if(count >= 5){
-          document.getElementById('gameResult').innerHTML =
-            '<b style="color:#00ff99;font-size:22px">You won! 🎉</b>';
-        }
-      };
-
-      bubbles.appendChild(b);
-    }
-  }
-}
-
-function checkColor(selected, correct){
-  const result = document.getElementById('gameResult');
-
-  if(selected === correct){
-    result.innerHTML =
-      '<b style="color:#00ff99;font-size:22px">Correct! 🎉</b>';
-  }else{
-    result.innerHTML =
-      '<b style="color:#ff5555;font-size:22px">Wrong! Try again ❌</b>';
-  }
-}
-
-function checkLucky(number){
-  const result = document.getElementById('gameResult');
-
-  if(number === 8){
-    result.innerHTML =
-      '<b style="color:#00ff99;font-size:22px">You found 8! 🎉🏆</b>';
-  }else{
-    result.innerHTML =
-      '<b style="color:#ff5555">Not 8! Try again 😄</b>';
-  }
-}
-const firebaseConfig = {
-  apiKey: "AIzaSyDw6xvva8RJGdPcRXRQ0eq01dNeDLhISQ",
-  authDomain: "live xa-395eb.firebaseapp.com",
-  projectId: "livexa-395eb",
-  storageBucket: "livexa-395eb.firebasestorage.app",
-  messagingSenderId: "675906359055",
-  appId: "1:675906359055:web:cb3011eae73bb4d8a1387a",
-  measurementId: "G-XR9DYXQVY1"
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-
-window.livexaFirebase = {
-  app,
-  auth,
-  db
-};
-
-console.log("Livexa Firebase connected!");
-</script>
-
-</body>
-</html>
+<section id="rooms" clas
