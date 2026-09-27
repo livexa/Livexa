@@ -3228,6 +3228,20 @@ body:has(#messages.active) header .logo,
 body:has(#messages.active) header .coin-wallet,
 body:has(#messages.active) .messages-search {
     display: none !important;
+/* ================= MESSAGES GREEN HEADER TITLE ================= */
+
+body:has(#messages.active) header::after {
+    content: "Message";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: #ffffff;
+    font-size: 25px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    pointer-events: none;
 }
 </style>
 </head>
