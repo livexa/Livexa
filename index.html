@@ -3223,25 +3223,28 @@ body:has(#profile.active) > header{
   }
 
 /* ================= MESSAGES HEADER CLEAN ================= */
-
-body:has(#messages.active) header .logo,
-body:has(#messages.active) header .coin-wallet,
-body:has(#messages.active) .messages-search {
-    display: none !important;
 /* ================= MESSAGES GREEN HEADER TITLE ================= */
 
-body:has(#messages.active) header::after {
-    content: "Message";
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    color: #ffffff;
-    font-size: 25px;
-    font-weight: 800;
-    letter-spacing: 0.5px;
-    text-shadow: 0 2px 6px rgba(0,0,0,0.15);
-    pointer-events: none;
+body:has(#messages.active) header{
+    position:relative !important;
+}
+
+body:has(#messages.active) header::after{
+    content:"Message" !important;
+    display:block !important;
+    position:absolute !important;
+    left:50% !important;
+    top:50% !important;
+    transform:translate(-50%,-50%) !important;
+    color:#ffffff !important;
+    font-size:25px !important;
+    font-weight:800 !important;
+    letter-spacing:0.5px !important;
+    text-shadow:0 2px 6px rgba(0,0,0,0.20) !important;
+    z-index:9999 !important;
+    pointer-events:none !important;
+    white-space:nowrap !important;
+}
 }
 </style>
 </head>
