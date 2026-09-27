@@ -1899,6 +1899,443 @@ body:has(#profile.active) > header{
     font-size:11px !important;
   }
 }
+/* =========================
+   LiveXa Modern Bottom Nav
+   ========================= */
+
+.modern-bottom-nav{
+  position:fixed !important;
+  left:12px !important;
+  right:12px !important;
+  bottom:12px !important;
+  height:72px !important;
+
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-around !important;
+
+  background:rgba(255,255,255,.94) !important;
+  backdrop-filter:blur(18px) !important;
+  -webkit-backdrop-filter:blur(18px) !important;
+
+  border:1px solid rgba(210,225,225,.7) !important;
+  border-radius:28px !important;
+
+  box-shadow:0 10px 30px rgba(30,80,80,.12) !important;
+
+  padding:7px !important;
+  z-index:9999 !important;
+}
+
+.modern-bottom-nav .nav-btn{
+  flex:1 !important;
+  height:58px !important;
+
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:3px !important;
+
+  border:0 !important;
+  background:transparent !important;
+  border-radius:20px !important;
+
+  color:#879696 !important;
+  font-size:11px !important;
+  font-weight:600 !important;
+}
+
+.modern-bottom-nav .nav-icon{
+  width:34px !important;
+  height:30px !important;
+
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+
+  font-size:22px !important;
+}
+
+.modern-bottom-nav .nav-text{
+  font-size:11px !important;
+  font-weight:600 !important;
+}
+
+.modern-bottom-nav .nav-btn.active{
+  background:linear-gradient(135deg,#e3faf6,#d5f7f1) !important;
+  color:#20bfa8 !important;
+  box-shadow:0 5px 16px rgba(32,191,168,.12) !important;
+}
+
+.modern-bottom-nav .nav-btn.active .nav-icon{
+  color:#20bfa8 !important;
+}
+
+@media(max-width:600px){
+
+  .modern-bottom-nav{
+    left:8px !important;
+    right:8px !important;
+    bottom:8px !important;
+    height:68px !important;
+    border-radius:26px !important;
+  }
+
+  .modern-bottom-nav .nav-btn{
+    height:56px !important;
+  }
+
+  .modern-bottom-nav .nav-icon{
+    font-size:21px !important;
+  }
+
+  .modern-bottom-nav .nav-text{
+    font-size:10px !important;
+  }
+
+}
+/* ===== LiveXa ME - Final Modern UI ===== */
+
+body:has(#profile.active){
+  background:#eef8fc !important;
+}
+
+/* Hide old global header on Me */
+body:has(#profile.active) > header{
+  display:none !important;
+}
+
+/* Me page */
+#profile{
+  width:100% !important;
+  max-width:none !important;
+  min-height:100vh !important;
+  margin:0 !important;
+  padding:24px 16px 100px !important;
+  box-sizing:border-box !important;
+  background:
+    radial-gradient(circle at 0% 0%,rgba(190,245,239,.55),transparent 35%),
+    radial-gradient(circle at 100% 10%,rgba(215,240,255,.7),transparent 35%),
+    linear-gradient(180deg,#effcff 0%,#f7fbfc 55%,#eef8fc 100%) !important;
+  border-radius:0 !important;
+  text-align:left !important;
+}
+
+/* Profile top */
+#profile .me-header{
+  display:grid !important;
+  grid-template-columns:76px 1fr auto !important;
+  align-items:center !important;
+  gap:14px !important;
+  padding:8px 4px 22px !important;
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+}
+
+/* Avatar */
+#profile .me-avatar{
+  width:72px !important;
+  height:72px !important;
+  min-width:72px !important;
+  border-radius:50% !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  font-size:32px !important;
+  background:linear-gradient(145deg,#ffffff,#dff8f6) !important;
+  border:4px solid rgba(255,255,255,.9) !important;
+  box-shadow:0 5px 18px rgba(60,150,160,.18) !important;
+}
+
+/* User info */
+#profile .me-info{
+  min-width:0 !important;
+}
+
+#profile .me-info h2{
+  margin:0 0 5px !important;
+  color:#172a46 !important;
+  font-size:20px !important;
+  font-weight:800 !important;
+  line-height:1.2 !important;
+}
+
+#profile .me-info p{
+  margin:0 0 5px !important;
+  color:#71859d !important;
+  font-size:13px !important;
+}
+
+#profile .me-info span{
+  color:#7890a7 !important;
+  font-size:13px !important;
+}
+
+/* Edit button */
+#profile .edit-profile{
+  padding:11px 16px !important;
+  border:0 !important;
+  border-radius:25px !important;
+  background:rgba(255,255,255,.8) !important;
+  color:#526b87 !important;
+  font-size:13px !important;
+  font-weight:700 !important;
+  box-shadow:0 5px 18px rgba(70,130,150,.10) !important;
+  white-space:nowrap !important;
+}
+
+/* Stats */
+#profile .me-stats{
+  display:grid !important;
+  grid-template-columns:repeat(3,1fr) !important;
+  gap:0 !important;
+  margin:0 0 20px !important;
+  padding:17px 8px !important;
+  background:rgba(255,255,255,.82) !important;
+  border:1px solid rgba(255,255,255,.9) !important;
+  border-radius:25px !important;
+  box-shadow:0 8px 25px rgba(60,130,150,.08) !important;
+}
+
+#profile .me-stats > div{
+  text-align:center !important;
+  border-right:1px solid #dce9ed !important;
+}
+
+#profile .me-stats > div:last-child{
+  border-right:0 !important;
+}
+
+#profile .me-stats strong{
+  display:block !important;
+  color:#1b304b !important;
+  font-size:21px !important;
+  font-weight:800 !important;
+}
+
+#profile .me-stats span{
+  display:block !important;
+  margin-top:3px !important;
+  color:#8495a7 !important;
+  font-size:12px !important;
+}
+
+/* Main menu cards */
+#profile .me-menu{
+  margin:0 0 18px !important;
+  padding:5px 14px !important;
+  background:rgba(255,255,255,.9) !important;
+  border:1px solid rgba(255,255,255,.95) !important;
+  border-radius:27px !important;
+  box-shadow:0 10px 30px rgba(70,130,150,.09) !important;
+  overflow:hidden !important;
+}
+
+#profile .me-menu button{
+  width:100% !important;
+  min-height:63px !important;
+  display:flex !important;
+  align-items:center !important;
+  gap:14px !important;
+  padding:8px 2px !important;
+  border:0 !important;
+  border-bottom:1px solid #edf1f3 !important;
+  background:transparent !important;
+  color:#172a46 !important;
+  font-size:15px !important;
+  font-weight:600 !important;
+  text-align:left !important;
+}
+
+#profile .me-menu button:last-child{
+  border-bottom:0 !important;
+}
+
+#profile .me-menu button b{
+  margin-left:auto !important;
+  color:#91a4b5 !important;
+  font-size:22px !important;
+  font-weight:400 !important;
+}
+
+/* Menu icons */
+#profile .me-icon{
+  width:40px !important;
+  height:40px !important;
+  min-width:40px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  border-radius:14px !important;
+  font-size:20px !important;
+  background:linear-gradient(145deg,#e7faf7,#dff2ff) !important;
+}
+
+/* SVIP row */
+#profile .me-menu button:has(.me-icon){
+  transition:.2s ease !important;
+}
+
+#profile .me-menu button:nth-child(4) .me-icon{
+  background:linear-gradient(145deg,#fff5dc,#ffead0) !important;
+}
+
+/* Settings card */
+#profile .me-settings{
+  margin:0 0 18px !important;
+  padding:5px 14px !important;
+  background:rgba(255,255,255,.9) !important;
+  border-radius:27px !important;
+  box-shadow:0 10px 30px rgba(70,130,150,.08) !important;
+}
+
+/* VIP banner */
+#profile .vip-banner{
+  margin:0 0 18px !important;
+  padding:16px 18px !important;
+  min-height:62px !important;
+  box-sizing:border-box !important;
+  border-radius:22px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  background:linear-gradient(135deg,#35516c,#86d8d0) !important;
+  color:#fff !important;
+  box-shadow:0 10px 25px rgba(60,100,120,.15) !important;
+}
+
+#profile .vip-banner strong{
+  font-size:16px !important;
+  font-weight:800 !important;
+}
+
+#profile .vip-banner span{
+  color:rgba(255,255,255,.85) !important;
+  font-size:11px !important;
+}
+
+/* Modern bottom nav */
+.modern-bottom-nav{
+  position:fixed !important;
+  left:10px !important;
+  right:10px !important;
+  bottom:10px !important;
+  height:68px !important;
+  z-index:9999 !important;
+  display:grid !important;
+  grid-template-columns:repeat(3,1fr) !important;
+  align-items:center !important;
+  padding:5px !important;
+  background:rgba(255,255,255,.94) !important;
+  backdrop-filter:blur(18px) !important;
+  -webkit-backdrop-filter:blur(18px) !important;
+  border:1px solid rgba(255,255,255,.95) !important;
+  border-radius:28px !important;
+  box-shadow:0 8px 30px rgba(50,100,120,.14) !important;
+}
+
+.modern-bottom-nav .nav-btn{
+  height:58px !important;
+  border:0 !important;
+  border-radius:22px !important;
+  background:transparent !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:2px !important;
+  color:#8495a7 !important;
+}
+
+.modern-bottom-nav .nav-btn.active{
+  background:#e5faf7 !important;
+  color:#20bfa7 !important;
+}
+
+.modern-bottom-nav .nav-icon{
+  font-size:21px !important;
+  line-height:24px !important;
+}
+
+.modern-bottom-nav .nav-text{
+  font-size:10px !important;
+  font-weight:600 !important;
+}
+
+/* Mobile */
+@media(max-width:600px){
+
+  #profile{
+    padding:18px 12px 100px !important;
+  }
+
+  #profile .me-header{
+    grid-template-columns:68px 1fr auto !important;
+    gap:11px !important;
+    padding:6px 3px 18px !important;
+  }
+
+  #profile .me-avatar{
+    width:64px !important;
+    height:64px !important;
+    min-width:64px !important;
+    font-size:29px !important;
+  }
+
+  #profile .me-info h2{
+    font-size:17px !important;
+  }
+
+  #profile .me-info p,
+  #profile .me-info span{
+    font-size:12px !important;
+  }
+
+  #profile .edit-profile{
+    padding:9px 12px !important;
+    font-size:11px !important;
+  }
+
+  #profile .me-stats{
+    padding:15px 4px !important;
+    border-radius:22px !important;
+  }
+
+  #profile .me-stats strong{
+    font-size:19px !important;
+  }
+
+  #profile .me-menu{
+    padding:4px 12px !important;
+    border-radius:25px !important;
+  }
+
+  #profile .me-menu button{
+    min-height:58px !important;
+    font-size:14px !important;
+  }
+
+  #profile .me-icon{
+    width:38px !important;
+    height:38px !important;
+    min-width:38px !important;
+    border-radius:13px !important;
+    font-size:18px !important;
+  }
+
+  #profile .vip-banner{
+    border-radius:20px !important;
+    padding:14px 16px !important;
+  }
+
+  .modern-bottom-nav{
+    left:7px !important;
+    right:7px !important;
+    bottom:7px !important;
+  }
+                    }
 </style>
 </head>
 
@@ -1922,46 +2359,28 @@ body:has(#profile.active) > header{
 
 
 <div class="layout">
-
-<nav>
+<nav class="modern-bottom-nav">
 
   <button class="nav-btn active"
           onclick="showPage('home',this)">
-    <span class="nav-icon">🏠</span>
+    <span class="nav-icon">⌂</span>
     <span class="nav-text">Home</span>
   </button>
 
   <button class="nav-btn"
-          onclick="showPage('live',this)">
-    <span class="nav-icon">🔴</span>
-    <span class="nav-text">Live</span>
-  </button>
-
-  <button class="nav-btn"
-          onclick="showPage('rooms',this)">
-    <span class="nav-icon">👥</span>
-    <span class="nav-text">Rooms</span>
-  </button>
-
-  <button class="nav-btn"
-          onclick="showPage('games',this)">
-    <span class="nav-icon">🎮</span>
-    <span class="nav-text">Games</span>
-  </button>
-
-  <button class="nav-btn"
-          onclick="showPage('gifts',this)">
-    <span class="nav-icon">🎁</span>
-    <span class="nav-text">Gifts</span>
+          onclick="showPage('messages',this)">
+    <span class="nav-icon">💬</span>
+    <span class="nav-text">Message</span>
   </button>
 
   <button class="nav-btn"
           onclick="showPage('profile',this)">
-    <span class="nav-icon">👤</span>
-    <span class="nav-text">Profile</span>
+    <span class="nav-icon">●</span>
+    <span class="nav-text">Me</span>
   </button>
 
 </nav>
+
 
 
 <main>
