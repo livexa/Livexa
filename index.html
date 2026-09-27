@@ -3874,7 +3874,209 @@ No transactions yet.
   </div>
 
 </section>
+<!-- ================= MESSAGES PAGE ================= -->
 
+<section id="messages" class="page">
+
+    <div class="messages-wrap">
+
+        <div class="messages-head">
+
+            <div>
+                <h1 class="messages-title">Messages</h1>
+                <p class="messages-subtitle">Your conversations</p>
+            </div>
+
+            <button class="messages-search" onclick="livexaNotify('🔍 Search coming soon')">
+                🔍
+            </button>
+
+        </div>
+
+        <div class="messages-tabs">
+
+            <button
+                id="messagesChatsTab"
+                class="messages-tab active"
+                onclick="showMessagesTab('chats')">
+                Chats
+            </button>
+
+            <button
+                id="messagesRequestsTab"
+                class="messages-tab"
+                onclick="showMessagesTab('requests')">
+                Requests
+            </button>
+
+        </div>
+
+
+        <!-- ================= CHATS ================= -->
+
+        <div id="messagesChatsPanel" class="messages-panel active">
+
+            <div
+                class="message-card"
+                onclick="openLivexaConversation('Sara')">
+
+                <div class="message-avatar">
+                    👩
+                    <span class="message-status"></span>
+                </div>
+
+                <div class="message-main">
+
+                    <div class="message-row">
+                        <span class="message-name">Sara</span>
+                        <span class="message-time">2m</span>
+                    </div>
+
+                    <div class="message-preview">
+                        Hello! How are you?
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="message-card"
+                onclick="openLivexaConversation('Alex')">
+
+                <div class="message-avatar">
+                    👨
+                    <span class="message-status"></span>
+                </div>
+
+                <div class="message-main">
+
+                    <div class="message-row">
+                        <span class="message-name">Alex</span>
+                        <span class="message-time">15m</span>
+                    </div>
+
+                    <div class="message-preview">
+                        Welcome to LIVEXA 🎉
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="message-card"
+                onclick="openLivexaConversation('Mina')">
+
+                <div class="message-avatar">
+                    👩‍🦰
+                    <span class="message-status offline"></span>
+                </div>
+
+                <div class="message-main">
+
+                    <div class="message-row">
+                        <span class="message-name">Mina</span>
+                        <span class="message-time">1h</span>
+                    </div>
+
+                    <div class="message-preview">
+                        See you in the room!
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= REQUESTS ================= -->
+
+        <div id="messagesRequestsPanel" class="messages-panel">
+
+            <div class="request-card">
+
+                <div class="message-avatar">
+                    👩
+                    <span class="message-status"></span>
+                </div>
+
+                <div class="message-main">
+
+                    <div class="message-row">
+                        <span class="message-name">Lina</span>
+                        <span class="message-time">5m</span>
+                    </div>
+
+                    <div class="message-preview">
+                        wants to send you a message
+                    </div>
+
+                    <div class="request-actions">
+
+                        <button
+                            class="primary"
+                            onclick="acceptLivexaRequest(this,'Lina')">
+                            Accept
+                        </button>
+
+                        <button
+                            onclick="ignoreLivexaRequest(this)">
+                            Ignore
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="request-card">
+
+                <div class="message-avatar">
+                    👨‍🦱
+                    <span class="message-status"></span>
+                </div>
+
+                <div class="message-main">
+
+                    <div class="message-row">
+                        <span class="message-name">David</span>
+                        <span class="message-time">1h</span>
+                    </div>
+
+                    <div class="message-preview">
+                        wants to send you a message
+                    </div>
+
+                    <div class="request-actions">
+
+                        <button
+                            class="primary"
+                            onclick="acceptLivexaRequest(this,'David')">
+                            Accept
+                        </button>
+
+                        <button
+                            onclick="ignoreLivexaRequest(this)">
+                            Ignore
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
 <!-- ================= JAVASCRIPT ================= -->
 
 <script>
