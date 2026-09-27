@@ -1740,7 +1740,12 @@ window.addDiamonds = function(amount) {
     amount.toLocaleString() +
     " Diamonds"
   );
+addDiamondHistory(
+  "add",
+  "💎 +" + amount.toLocaleString() + " Diamonds"
+);
 
+showDiamondHistory();
 };
 
 
@@ -1776,7 +1781,15 @@ function(diamondAmount, coinAmount) {
     coinAmount;
 
 
-  saveDiamonds();
+addDiamondHistory(
+  "exchange",
+  "💎 -" +
+  diamondAmount.toLocaleString() +
+  " → 🪙 +" +
+  coinAmount.toLocaleString()
+);
+
+showDiamondHistory();  saveDiamonds();
 
   updateDiamonds();
 
@@ -1856,6 +1869,84 @@ window.showWalletTab = function(tab) {
   }
 
 };
+/* ================= DIAMOND HISTORY ================= */
+
+function addDiamondHistory(type, text) {
+
+  var history = [];
+
+  try {
+    history = JSON.parse(
+      localStorage.getItem("livexaDiamondHistory") || "[]"
+    );
+  } catch (e) {
+    history = [];
+  }
+
+  history.unshift({
+    type: type,
+    text: text,
+    date: new Date().toLocaleString()
+  });
+
+  try {
+    localStorage.setItem(
+      "livexaDiamondHistory",
+      JSON.stringify(history.slice(0, 20))
+    );
+  } catch (e) {}
+
+}
+
+
+/* SHOW HISTORY */
+
+window.showDiamondHistory = function() {
+
+  var box =
+    document.getElementById("diamondHistory");
+
+  if (!box) {
+    return;
+  }
+
+  var history = [];
+
+  try {
+    history = JSON.parse(
+      localStorage.getItem("livexaDiamondHistory") || "[]"
+    );
+  } catch (e) {
+    history = [];
+  }
+
+  if (!history.length) {
+
+    box.innerHTML =
+      "No transactions yet.";
+
+    return;
+  }
+
+  box.innerHTML = history.map(function(item) {
+
+    return `
+      <div class="card" style="margin-top:8px">
+
+        <strong>
+          ${escapeHtml(item.text)}
+        </strong>
+
+        <p style="opacity:.65;font-size:12px">
+          ${escapeHtml(item.date)}
+        </p>
+
+      </div>
+    `;
+
+  }).join("");
+
+};      
   /* ================= COINS ================= */
 
   if (!window.__livexaCoins) {
