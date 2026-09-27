@@ -2476,115 +2476,137 @@ body:has(#profile.active) > header{
     padding:10px 12px !important;
     font-size:11px !important;
   }
-}
-}
-/* ===== LiveXa Sky Glass + Cloud Background ===== */
+/* ===== LIVE XA FIRE GLASS ===== */
 
 #profile{
   position:relative !important;
   overflow:hidden !important;
 
   background:
-    radial-gradient(circle at 15% 10%,
-      rgba(255,255,255,.98) 0 7%,
-      transparent 25%),
+    radial-gradient(circle at 15% 15%,
+      rgba(255,95,40,.22) 0,
+      transparent 28%),
 
-    radial-gradient(circle at 85% 18%,
-      rgba(255,255,255,.90) 0 8%,
-      transparent 26%),
-
-    radial-gradient(circle at 50% 55%,
-      rgba(255,255,255,.70) 0 10%,
+    radial-gradient(circle at 85% 35%,
+      rgba(255,170,40,.20) 0,
       transparent 30%),
+
+    radial-gradient(circle at 50% 90%,
+      rgba(255,60,20,.16) 0,
+      transparent 35%),
 
     linear-gradient(
       180deg,
-      #d9f8ff 0%,
-      #eafcff 35%,
-      #f6fdff 70%,
+      #fff7ef 0%,
+      #fff1e5 38%,
+      #fff8f2 72%,
       #ffffff 100%
     ) !important;
 }
 
-/* ☁️ ابر اول */
+/* 🔥 شعله نرم سمت چپ */
 #profile::before{
   content:"";
   position:absolute;
 
-  width:260px;
-  height:120px;
+  width:280px;
+  height:360px;
 
-  top:55px;
-  left:-80px;
+  left:-120px;
+  top:40px;
 
   background:
-    radial-gradient(circle at 25% 55%,
-      rgba(255,255,255,.90) 0 35px,
-      transparent 36px),
+    radial-gradient(
+      ellipse at 60% 70%,
+      rgba(255,70,20,.42) 0,
+      rgba(255,130,30,.24) 28%,
+      transparent 62%
+    );
 
-    radial-gradient(circle at 48% 40%,
-      rgba(255,255,255,.95) 0 48px,
-      transparent 49px),
+  filter:blur(22px);
+  opacity:.8;
 
-    radial-gradient(circle at 72% 60%,
-      rgba(255,255,255,.85) 0 38px,
-      transparent 39px);
+  animation:lxFireLeft 5s ease-in-out infinite alternate;
 
-  filter:blur(7px);
-  opacity:.85;
   pointer-events:none;
+  z-index:0;
 }
 
-/* ☁️ ابر دوم */
+/* 🔥 شعله نرم سمت راست */
 #profile::after{
   content:"";
   position:absolute;
 
   width:300px;
-  height:130px;
+  height:380px;
 
-  right:-90px;
-  top:280px;
+  right:-130px;
+  top:180px;
 
   background:
-    radial-gradient(circle at 25% 60%,
-      rgba(255,255,255,.78) 0 38px,
-      transparent 39px),
+    radial-gradient(
+      ellipse at 40% 60%,
+      rgba(255,170,30,.38) 0,
+      rgba(255,80,20,.20) 30%,
+      transparent 65%
+    );
 
-    radial-gradient(circle at 50% 42%,
-      rgba(255,255,255,.90) 0 52px,
-      transparent 53px),
-
-    radial-gradient(circle at 75% 65%,
-      rgba(255,255,255,.72) 0 32px,
-      transparent 33px);
-
-  filter:blur(9px);
+  filter:blur(24px);
   opacity:.75;
+
+  animation:lxFireRight 6s ease-in-out infinite alternate;
+
   pointer-events:none;
+  z-index:0;
 }
 
-/* ✨ لایه شیشه‌ای روی محتوا */
+/* ✨ کارت‌ها روی افکت آتش */
 #profile > *{
   position:relative;
   z-index:2;
 }
 
-/* شیشه‌ای شدن کارت‌ها */
+/* شیشه‌ای */
 #profile .me-stats,
 #profile .me-menu,
 #profile .me-extra,
 #profile .vip-banner{
+  background:rgba(255,255,255,.78) !important;
+
   backdrop-filter:blur(18px);
   -webkit-backdrop-filter:blur(18px);
 
-  background:rgba(255,255,255,.78) !important;
-
-  border:1px solid rgba(255,255,255,.90) !important;
+  border:1px solid rgba(255,255,255,.9) !important;
 
   box-shadow:
-    0 12px 35px rgba(60,150,170,.10),
+    0 14px 40px rgba(180,70,20,.10),
     inset 0 1px 0 rgba(255,255,255,.95) !important;
+}
+
+/* 🔥 حرکت شعله */
+@keyframes lxFireLeft{
+  0%{
+    transform:translate3d(0,0,0) scale(1);
+  }
+  50%{
+    transform:translate3d(18px,-12px,0) scale(1.08);
+  }
+  100%{
+    transform:translate3d(-8px,10px,0) scale(.96);
+  }
+}
+
+@keyframes lxFireRight{
+  0%{
+    transform:translate3d(0,0,0) scale(1);
+  }
+  50%{
+    transform:translate3d(-20px,12px,0) scale(1.06);
+  }
+  100%{
+    transform:translate3d(10px,-10px,0) scale(.95);
+  }
+}
 }
 </style>
 </head>
