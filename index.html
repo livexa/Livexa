@@ -1438,29 +1438,194 @@ main{
 
 <section id="wallet" class="page">
 
-  <h1 class="section-title">🪙 Wallet</h1>
+<h1 class="section-title">💎 Wallet</h1>
 
-  <div class="card">
+<div class="card">
 
-    <div class="avatar">🪙</div>
+<div style="display:flex;gap:8px;margin-bottom:18px;">
 
-    <h2 id="walletCoins">12,450</h2>
+<button
+id="walletCoinsTab"
+class="primary"
+style="flex:1"
+onclick="showWalletTab('coins')">
+🪙 Coins
+</button>
 
-    <p>Your Livexa Coins</p>
+<button
+id="walletDiamondsTab"
+class="primary"
+style="flex:1;opacity:.55"
+onclick="showWalletTab('diamonds')">
+💎 Diamonds
+</button>
 
-    <button class="primary"
-            onclick="buyCoins(1000)">
-      + 1,000 Coins
-    </button>
+</div>
 
-    <br><br>
 
-    <button class="primary"
-            onclick="buyCoins(5000)">
-      + 5,000 Coins
-    </button>
+<div id="walletCoinsPanel">
 
-  </div>
+<div class="avatar">🪙</div>
+
+<h2 id="walletCoins">12,450</h2>
+
+<p>Your Livexa Coins</p>
+
+<button
+class="primary"
+onclick="buyCoins(1000)">
++ 1,000 Coins
+</button>
+
+<br><br>
+
+<button
+class="primary"
+onclick="buyCoins(5000)">
++ 5,000 Coins
+</button>
+
+</div>
+
+
+<div
+id="walletDiamondsPanel"
+style="display:none">
+
+<div class="avatar">💎</div>
+
+<p>My Diamonds</p>
+
+<h2
+id="diamondCount"
+style="color:#70e7ff">
+823.0
+</h2>
+
+
+<button
+class="primary"
+onclick="addDiamonds(1000)">
++ 1,000 Diamonds
+</button>
+
+<br><br>
+
+<button
+class="primary"
+onclick="addDiamonds(10000)">
++ 10,000 Diamonds
+</button>
+
+
+<hr style="margin:25px 0">
+
+
+<h2>💎 Exchange Diamonds to Coins</h2>
+
+<p>1 Diamond = 0.33 Coin</p>
+
+
+<div class="card">
+
+<p>💎 1,000 → 🪙 330</p>
+
+<button
+class="primary"
+onclick="exchangeDiamonds(1000,330)">
+Exchange
+</button>
+
+</div>
+
+
+<div class="card">
+
+<p>💎 10,000 → 🪙 3,300</p>
+
+<button
+class="primary"
+onclick="exchangeDiamonds(10000,3300)">
+Exchange
+</button>
+
+</div>
+
+
+<div class="card">
+
+<p>💎 100,000 → 🪙 33,000</p>
+
+<button
+class="primary"
+onclick="exchangeDiamonds(100000,33000)">
+Exchange
+</button>
+
+</div>
+
+
+<div class="card">
+
+<p>💎 1,000,000 → 🪙 330,000</p>
+
+<button
+class="primary"
+onclick="exchangeDiamonds(1000000,330000)">
+Exchange
+</button>
+
+</div>
+
+
+<div class="card">
+
+<p>💎 10,000,000 → 🪙 3,300,000</p>
+
+<button
+class="primary"
+onclick="exchangeDiamonds(10000000,3300000)">
+Exchange
+</button>
+
+</div>
+
+
+<div class="card">
+
+<p>💎 100,000,000 → 🪙 33,000,000</p>
+
+<button
+class="primary"
+onclick="exchangeDiamonds(100000000,33000000)">
+Exchange
+</button>
+
+</div>
+
+
+<div class="card">
+
+<p>💎 1,000,000,000 → 🪙 330,000,000</p>
+
+<button
+class="primary"
+onclick="exchangeDiamonds(1000000000,330000000)">
+Exchange
+</button>
+
+</div>
+
+
+<h2>📜 History</h2>
+
+<div id="diamondHistory">
+No transactions yet.
+</div>
+
+</div>
+
+</div>
 
 </section>
 
@@ -1484,7 +1649,213 @@ main{
 <script>
 
 (function () {
+/* ================= DIAMONDS ================= */
 
+if (!window.__livexaDiamonds) {
+
+  var savedDiamonds = 823.0;
+
+  try {
+
+    var storedDiamonds =
+      localStorage.getItem("livexaDiamonds");
+
+    if (storedDiamonds !== null) {
+      savedDiamonds = parseFloat(storedDiamonds);
+    }
+
+  } catch (e) {}
+
+  if (
+    !isFinite(savedDiamonds) ||
+    savedDiamonds < 0
+  ) {
+    savedDiamonds = 823.0;
+  }
+
+  window.__livexaDiamonds =
+    savedDiamonds;
+
+}
+
+
+/* UPDATE DIAMONDS */
+
+window.updateDiamonds = function() {
+
+  var el =
+    document.getElementById("diamondCount");
+
+  if (el) {
+
+    el.textContent =
+      Number(
+        window.__livexaDiamonds
+      ).toLocaleString(
+        undefined,
+        {
+          minimumFractionDigits:1,
+          maximumFractionDigits:1
+        }
+      );
+
+  }
+
+};
+
+
+/* SAVE DIAMONDS */
+
+window.saveDiamonds = function() {
+
+  try {
+
+    localStorage.setItem(
+      "livexaDiamonds",
+      String(
+        window.__livexaDiamonds
+      )
+    );
+
+  } catch (e) {}
+
+};
+
+
+/* ADD DIAMONDS */
+
+window.addDiamonds = function(amount) {
+
+  amount = Number(amount);
+
+  window.__livexaDiamonds +=
+    amount;
+
+  saveDiamonds();
+
+  updateDiamonds();
+
+  livexaNotify(
+    "💎 +" +
+    amount.toLocaleString() +
+    " Diamonds"
+  );
+
+};
+
+
+/* EXCHANGE DIAMONDS */
+
+window.exchangeDiamonds =
+function(diamondAmount, coinAmount) {
+
+  diamondAmount =
+    Number(diamondAmount);
+
+  coinAmount =
+    Number(coinAmount);
+
+
+  if (
+    window.__livexaDiamonds <
+    diamondAmount
+  ) {
+
+    livexaNotify(
+      "❌ Not enough Diamonds"
+    );
+
+    return;
+  }
+
+
+  window.__livexaDiamonds -=
+    diamondAmount;
+
+  window.__livexaCoins +=
+    coinAmount;
+
+
+  saveDiamonds();
+
+  updateDiamonds();
+
+  updateCoins();
+
+
+  livexaNotify(
+    "💎 " +
+    diamondAmount.toLocaleString() +
+    " → 🪙 " +
+    coinAmount.toLocaleString()
+  );
+
+};
+
+
+/* WALLET TABS */
+
+window.showWalletTab = function(tab) {
+
+  var coins =
+    document.getElementById(
+      "walletCoinsPanel"
+    );
+
+  var diamonds =
+    document.getElementById(
+      "walletDiamondsPanel"
+    );
+
+  var coinsTab =
+    document.getElementById(
+      "walletCoinsTab"
+    );
+
+  var diamondsTab =
+    document.getElementById(
+      "walletDiamondsTab"
+    );
+
+
+  if (!coins || !diamonds) {
+    return;
+  }
+
+
+  if (tab === "diamonds") {
+
+    coins.style.display =
+      "none";
+
+    diamonds.style.display =
+      "block";
+
+    coinsTab.style.opacity =
+      ".55";
+
+    diamondsTab.style.opacity =
+      "1";
+
+    updateDiamonds();
+
+  } else {
+
+    coins.style.display =
+      "block";
+
+    diamonds.style.display =
+      "none";
+
+    coinsTab.style.opacity =
+      "1";
+
+    diamondsTab.style.opacity =
+      ".55";
+
+  }
+
+};
   /* ================= COINS ================= */
 
   if (!window.__livexaCoins) {
