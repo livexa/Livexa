@@ -3875,97 +3875,127 @@ No transactions yet.
 
 </section>
 
-/* ================= MESSAGES PAGE ================= */
-
-window.showMessagesTab = function(tab){
-
-  var chats =
-    document.getElementById("messagesChatsPanel");
-
-  var requests =
-    document.getElementById("messagesRequestsPanel");
-
-  var chatsTab =
-    document.getElementById("messagesChatsTab");
-
-  var requestsTab =
-    document.getElementById("messagesRequestsTab");
-
-  if(!chats || !requests){
-    return;
-  }
-
-  var showRequests =
-    tab === "requests";
-
-  chats.classList.toggle(
-    "active",
-    !showRequests
-  );
-
-  requests.classList.toggle(
-    "active",
-    showRequests
-  );
-
-  chatsTab.classList.toggle(
-    "active",
-    !showRequests
-  );
-
-  requestsTab.classList.toggle(
-    "active",
-    showRequests
-  );
-
-};
-
-
-window.openLivexaConversation = function(name){
-
-  livexaNotify(
-    "💬 Opening chat with " + name
-  );
-
-};
-
-
-window.acceptLivexaRequest =
-function(button,name){
-
-  var card =
-    button.closest(".request-card");
-
-  if(card){
-    card.remove();
-  }
-
-  livexaNotify(
-    "✅ " + name + " accepted"
-  );
-
-};
-
-
-window.ignoreLivexaRequest =
-function(button){
-
-  var card =
-    button.closest(".request-card");
-
-  if(card){
-    card.remove();
-  }
-
-  livexaNotify(
-    "Request removed"
-  );
-
-};
 <!-- ================= JAVASCRIPT ================= -->
 
 <script>
+/* =====================================================
+   LIVEXA MESSAGES — MESSAGE PAGE JAVASCRIPT
+   ===================================================== */
 
+window.showMessagesTab = function(tab){
+
+    var chats = document.getElementById("messagesChatsPanel");
+    var requests = document.getElementById("messagesRequestsPanel");
+
+    var chatsTab = document.getElementById("messagesChatsTab");
+    var requestsTab = document.getElementById("messagesRequestsTab");
+
+    if(!chats || !requests){
+        return;
+    }
+
+    var showRequests = tab === "requests";
+
+    chats.classList.toggle("active", !showRequests);
+    requests.classList.toggle("active", showRequests);
+
+    if(chatsTab){
+        chatsTab.classList.toggle("active", !showRequests);
+    }
+
+    if(requestsTab){
+        requestsTab.classList.toggle("active", showRequests);
+    }
+};
+
+
+/* =====================================================
+   OPEN CONVERSATION
+   ===================================================== */
+
+window.openLivexaConversation = function(name){
+
+    if(typeof livexaNotify === "function"){
+        livexaNotify("💬 Opening chat with " + name);
+    }
+
+};
+
+
+/* =====================================================
+   ACCEPT MESSAGE REQUEST
+   ===================================================== */
+
+window.acceptLivexaRequest = function(button, name){
+
+    var card = null;
+
+    if(button){
+        card = button.closest(".request-card");
+    }
+
+    if(card){
+        card.remove();
+    }
+
+    if(typeof livexaNotify === "function"){
+        livexaNotify("✅ " + name + " accepted");
+    }
+
+};
+
+
+/* =====================================================
+   IGNORE MESSAGE REQUEST
+   ===================================================== */
+
+window.ignoreLivexaRequest = function(button){
+
+    var card = null;
+
+    if(button){
+        card = button.closest(".request-card");
+    }
+
+    if(card){
+        card.remove();
+    }
+
+    if(typeof livexaNotify === "function"){
+        livexaNotify("Request removed");
+    }
+
+};
+
+
+/* =====================================================
+   MESSAGES PAGE — DEFAULT TAB
+   ===================================================== */
+
+document.addEventListener("DOMContentLoaded", function(){
+
+    var chats = document.getElementById("messagesChatsPanel");
+    var requests = document.getElementById("messagesRequestsPanel");
+
+    var chatsTab = document.getElementById("messagesChatsTab");
+    var requestsTab = document.getElementById("messagesRequestsTab");
+
+    if(!chats || !requests){
+        return;
+    }
+
+    if(!chats.classList.contains("active") &&
+       !requests.classList.contains("active")){
+
+        chats.classList.add("active");
+
+        if(chatsTab){
+            chatsTab.classList.add("active");
+        }
+
+    }
+
+});
 (function () {
 /* ================= DIAMONDS ================= */
 
