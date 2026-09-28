@@ -5547,9 +5547,8 @@ main{
 .lx-feature{
   height:94px;
 }
-
 }
-/* ===== FINAL SMALL HOME SIZE ===== */
+/* ===== LIVEXA HOME FINAL CLEAN CSS ===== */
 
 @media(max-width:760px){
 
@@ -5557,48 +5556,117 @@ main{
     height:100px !important;
     min-height:100px !important;
     max-height:100px !important;
-    padding:0 10px !important;
+    padding:0 12px !important;
     box-sizing:border-box !important;
+    background:linear-gradient(180deg,#19cdb0 0%,#42d9cf 100%) !important;
   }
 
   body:has(#home.active) .lx-home-header{
-    height:100px !important;
-    min-height:100px !important;
+    width:100% !important;
+    height:100% !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:space-between !important;
     padding:0 !important;
+    margin:0 !important;
     box-sizing:border-box !important;
   }
 
-  .lx-home-house,
-  .lx-home-search{
-    width:30px !important;
-    height:30px !important;
-    font-size:25px !important;
+  .lx-home-house{
+    width:38px !important;
+    height:38px !important;
+    flex:0 0 38px !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    padding:0 !important;
+    margin:0 !important;
+    border:0 !important;
+    background:transparent !important;
   }
 
-  .lx-home-search{
-    font-size:29px !important;
+  .lx-live-symbol{
+    width:32px !important;
+    height:32px !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    background:transparent !important;
+    border:0 !important;
+  }
+
+  .lx-live-symbol svg{
+    width:30px !important;
+    height:30px !important;
+    display:block !important;
+    fill:none !important;
+    stroke:#fff !important;
+    stroke-width:2.5 !important;
+    stroke-linecap:round !important;
+    stroke-linejoin:round !important;
   }
 
   .lx-home-switch{
-    gap:16px !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    gap:18px !important;
     margin:0 !important;
+    padding:0 !important;
   }
 
   .lx-home-switch button{
-    font-size:17px !important;
-    padding:2px 0 !important;
+    border:0 !important;
+    background:transparent !important;
+    color:rgba(255,255,255,.62) !important;
+    font-size:20px !important;
+    font-weight:700 !important;
+    line-height:1 !important;
+    padding:4px 0 !important;
+    margin:0 !important;
   }
 
   .lx-home-switch button.active{
-    font-size:21px !important;
+    color:#fff !important;
+    font-size:25px !important;
+    position:relative !important;
   }
 
   .lx-home-switch button.active:after{
-    width:18px !important;
-    height:2px !important;
-    bottom:-5px !important;
+    content:"" !important;
+    position:absolute !important;
+    left:50% !important;
+    bottom:-7px !important;
+    width:20px !important;
+    height:3px !important;
+    border-radius:5px !important;
+    background:#fff !important;
+    transform:translateX(-50%) !important;
   }
 
+  .lx-home-search{
+    width:38px !important;
+    height:38px !important;
+    flex:0 0 38px !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    padding:0 !important;
+    margin:0 !important;
+    border:0 !important;
+    background:transparent !important;
+  }
+
+  .lx-home-search svg{
+    width:30px !important;
+    height:30px !important;
+    display:block !important;
+    fill:none !important;
+    stroke:#fff !important;
+    stroke-width:2.4 !important;
+    stroke-linecap:round !important;
+    stroke-linejoin:round !important;
+  }
 
   body:has(#home.active) main{
     padding:0 12px 75px !important;
@@ -5609,7 +5677,6 @@ main{
     padding:0 !important;
     margin:0 !important;
   }
-
 
   .lx-home-banner{
     height:115px !important;
@@ -5627,6 +5694,7 @@ main{
 
   .lx-banner-copy strong{
     font-size:19px !important;
+    line-height:1.05 !important;
   }
 
   .lx-banner-copy span{
@@ -5654,7 +5722,6 @@ main{
     width:10px !important;
   }
 
-
   .lx-feature-row{
     gap:7px !important;
     margin:0 0 9px !important;
@@ -5676,275 +5743,6 @@ main{
   .lx-feature span{
     font-size:17px !important;
     letter-spacing:-4px !important;
-/* START: replacement for lines 5540-5732 */
-
-/* ===== FINAL LIVEXA HOME MOBILE SIZE ===== */
-
-@media(max-width:760px){
-
-  body:has(#home.active) header{
-    height:100px !important;
-    min-height:100px !important;
-    max-height:100px !important;
-    padding:0 12px !important;
-    box-sizing:border-box !important;
-  }
-
-  body:has(#home.active) .lx-home-header{
-    height:100px !important;
-    padding:0 !important;
-    box-sizing:border-box !important;
-  }
-
-
-  /* ===== LIVE ICON ===== */
-
-  .lx-home-house{
-    width:34px !important;
-    height:34px !important;
-    padding:0 !important;
-    font-size:0 !important;
-    position:relative !important;
-  }
-
-  .lx-live-symbol{
-    width:27px !important;
-    height:25px !important;
-    border:3px solid #fff !important;
-    border-radius:9px !important;
-    display:block !important;
-    position:relative !important;
-    box-sizing:border-box !important;
-  }
-
-  .lx-live-symbol:before{
-    content:"" !important;
-    position:absolute !important;
-    left:5px !important;
-    top:-7px !important;
-    width:11px !important;
-    height:11px !important;
-    border-left:3px solid #fff !important;
-    border-top:3px solid #fff !important;
-    transform:rotate(45deg) !important;
-    background:transparent !important;
-  }
-
-  .lx-live-symbol span{
-    position:absolute !important;
-    left:6px !important;
-    top:8px !important;
-    width:3px !important;
-    height:7px !important;
-    background:#fff !important;
-    border-radius:3px !important;
-  }
-
-  .lx-live-symbol i{
-    position:absolute !important;
-    left:12px !important;
-    top:6px !important;
-    width:3px !important;
-    height:9px !important;
-    background:#fff !important;
-    border-radius:3px !important;
-  }
-
-  .lx-live-symbol b{
-    position:absolute !important;
-    left:18px !important;
-    top:9px !important;
-    width:3px !important;
-    height:5px !important;
-    background:#fff !important;
-    border-radius:3px !important;
-  }
-
-
-  /* ===== MINE / POPULAR ===== */
-
-  .lx-home-switch{
-    gap:18px !important;
-    margin:0 !important;
-  }
-
-  .lx-home-switch button{
-    font-size:20px !important;
-    padding:2px 0 !important;
-  }
-
-  .lx-home-switch button.active{
-    font-size:27px !important;
-  }
-
-  .lx-home-switch button.active:after{
-    width:20px !important;
-    height:3px !important;
-    bottom:-7px !important;
-  }
-
-
-  /* ===== SEARCH ===== */
-
-  .lx-home-search{
-    width:34px !important;
-    height:34px !important;
-    font-size:32px !important;
-  }
-
-
-  /* ===== MAIN ===== */
-
-  body:has(#home.active) main{
-    padding:0 20px 92px !important;
-    margin:0 !important;
-  }
-
-  body:has(#home.active) #home{
-    padding:0 !important;
-    margin:0 !important;
-  }
-
-
-  /* ===== ROOM SUPPORT BANNER ===== */
-
-  .lx-home-banner{
-    height:194px !important;
-    min-height:194px !important;
-    max-height:194px !important;
-    margin:0 0 16px !important;
-    padding:22px 18px !important;
-    border-radius:0 0 15px 15px !important;
-    box-sizing:border-box !important;
-  }
-
-  .lx-banner-copy{
-    max-width:55% !important;
-  }
-
-  .lx-banner-copy strong{
-    font-size:29px !important;
-    line-height:1.05 !important;
-  }
-
-  .lx-banner-copy span{
-    margin-top:9px !important;
-    font-size:12px !important;
-  }
-
-  .lx-banner-art{
-    right:10px !important;
-    bottom:36px !important;
-    font-size:49px !important;
-    letter-spacing:-12px !important;
-  }
-
-  .lx-banner-dots{
-    bottom:10px !important;
-    gap:5px !important;
-  }
-
-  .lx-banner-dots i{
-    width:7px !important;
-    height:7px !important;
-  }
-
-  .lx-banner-dots i.on{
-    width:18px !important;
-  }
-
-
-  /* ===== RANKING / FAMILY / CP FRIEND ===== */
-/* ===== FINAL CLEAN HOME HEADER / LIVE / SEARCH / ROOM SIZE ===== */
-@media(max-width:760px){
-
-  body:has(#home.active) header{
-    height:100px !important;
-    min-height:100px !important;
-    max-height:100px !important;
-    padding:0 20px !important;
-    box-sizing:border-box !important;
-    background:linear-gradient(180deg,#19cdb0 0%,#42d9cf 100%) !important;
-  }
-
-  body:has(#home.active) .lx-home-header{
-    width:100% !important;
-    height:100% !important;
-    display:flex !important;
-    align-items:center !important;
-    justify-content:space-between !important;
-    padding:0 !important;
-    margin:0 !important;
-    box-sizing:border-box !important;
-  }
-
-  .lx-home-house,
-  .lx-home-search{
-    width:38px !important;
-    height:38px !important;
-    flex:0 0 38px !important;
-    display:flex !important;
-    align-items:center !important;
-    justify-content:center !important;
-    padding:0 !important;
-    margin:0 !important;
-    border:0 !important;
-    background:transparent !important;
-  }
-
-  .lx-home-house svg,
-  .lx-home-search svg{
-    width:30px !important;
-    height:30px !important;
-    display:block !important;
-    fill:none !important;
-    stroke:#fff !important;
-    stroke-width:2.3 !important;
-    stroke-linecap:round !important;
-    stroke-linejoin:round !important;
-  }
-
-  .lx-home-switch{
-    display:flex !important;
-    align-items:center !important;
-    justify-content:center !important;
-    gap:20px !important;
-    margin:0 !important;
-    padding:0 !important;
-  }
-
-  .lx-home-switch button{
-    border:0 !important;
-    background:transparent !important;
-    color:rgba(255,255,255,.62) !important;
-    font-size:20px !important;
-    font-weight:700 !important;
-    line-height:1 !important;
-    padding:4px 0 !important;
-    margin:0 !important;
-  }
-
-  .lx-home-switch button.active{
-    color:#fff !important;
-    font-size:27px !important;
-    position:relative !important;
-  }
-
-  .lx-home-switch button.active:after{
-    content:"" !important;
-    position:absolute !important;
-    left:50% !important;
-    bottom:-8px !important;
-    width:20px !important;
-    height:3px !important;
-    border-radius:5px !important;
-    background:#fff !important;
-    transform:translateX(-50%) !important;
-  }
-
-  body:has(#home.active) main{
-    padding:0 20px 92px !important;
-    margin:0 !important;
   }
 
   .lx-room-grid{
@@ -5954,9 +5752,9 @@ main{
   }
 
   .lx-room-image{
-    height:310px !important;
-    min-height:310px !important;
-    max-height:310px !important;
+    height:255px !important;
+    min-height:255px !important;
+    max-height:255px !important;
     border-radius:15px !important;
     box-sizing:border-box !important;
   }
@@ -5986,6 +5784,7 @@ main{
 }
 
 @media(max-width:390px){
+
   .lx-home-switch{
     gap:16px !important;
   }
@@ -5995,7 +5794,7 @@ main{
   }
 
   .lx-home-switch button.active{
-    font-size:25px !important;
+    font-size:24px !important;
   }
 
   .lx-room-image{
@@ -6004,7 +5803,8 @@ main{
     max-height:255px !important;
   }
 }
-/* ===== END FINAL CLEAN HOME HEADER / LIVE / SEARCH / ROOM SIZE ===== */
+
+/* ===== END LIVEXA HOME FINAL CLEAN CSS ===== */
 </style>
 
 <div class="profile-edit-screen">
