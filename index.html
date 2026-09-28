@@ -4731,30 +4731,6 @@ window.sendLivexaMessage = function(){
 
 };
 
-        return;
-    }
-
-    var text = input.value.trim();
-
-    if(!text){
-        return;
-    }
-
-    var message = document.createElement("div");
-
-    message.className = "livexa-message sent";
-
-    message.textContent = text;
-
-    messages.appendChild(message);
-
-    input.value = "";
-
-    messages.scrollTop = messages.scrollHeight;
-
-};
-
-
 /* =====================================================
    ACCEPT MESSAGE REQUEST
    ===================================================== */
