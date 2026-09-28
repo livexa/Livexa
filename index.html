@@ -3933,7 +3933,117 @@ body:has(#messages.active) header::after{
   </div>
 
 </section>
+<section id="profileEdit" class="page">
 
+  <div style="padding:18px;">
+
+    <h1 class="section-title">✎ Edit Profile</h1>
+
+    <div style="
+      background:#fff;
+      border-radius:22px;
+      padding:20px;
+      box-shadow:0 6px 22px rgba(25,80,70,.08);
+    ">
+
+      <div style="text-align:center;margin-bottom:20px;">
+
+        <div id="editProfileAvatar"
+          style="
+            width:100px;
+            height:100px;
+            margin:0 auto 12px;
+            border-radius:50%;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-size:46px;
+            background:#e8faf6;
+            border:4px solid #fff;
+            box-shadow:0 6px 18px rgba(25,80,70,.12);
+          ">
+          👤
+        </div>
+
+        <button type="button"
+          onclick="document.getElementById('profilePhotoInput').click()"
+          style="
+            border:0;
+            background:#e9faf6;
+            color:#12b99b;
+            padding:10px 18px;
+            border-radius:20px;
+            font-weight:700;
+          ">
+          📷 Change Photo
+        </button>
+
+        <input
+          id="profilePhotoInput"
+          type="file"
+          accept="image/*"
+          style="display:none"
+          onchange="previewProfilePhoto(event)"
+        >
+
+      </div>
+
+      <label style="display:block;margin-bottom:7px;font-weight:700;">
+        Name
+      </label>
+
+      <input
+        id="profileNameInput"
+        type="text"
+        placeholder="Enter your name"
+        maxlength="30"
+        style="
+          width:100%;
+          box-sizing:border-box;
+          padding:14px;
+          margin-bottom:16px;
+        "
+      >
+
+      <label style="display:block;margin-bottom:7px;font-weight:700;">
+        Bio
+      </label>
+
+      <textarea
+        id="profileBioInput"
+        placeholder="Tell people about yourself"
+        maxlength="120"
+        rows="4"
+        style="
+          width:100%;
+          box-sizing:border-box;
+          padding:14px;
+          resize:none;
+          margin-bottom:18px;
+        "
+      ></textarea>
+
+      <button
+        type="button"
+        onclick="saveProfileChanges()"
+        style="
+          width:100%;
+          padding:14px;
+          border:0;
+          border-radius:16px;
+          background:linear-gradient(135deg,#20d3b2,#42d9cf);
+          color:#fff;
+          font-size:16px;
+          font-weight:800;
+        ">
+        Save Changes
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
 <section id="language" class="page">
 
   <div style="padding:18px;">
