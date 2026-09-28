@@ -4214,15 +4214,20 @@ body:has(#profileDetail.active){
   </div>
 
 
-  <div class="lx-home-header"
-       aria-label="Home navigation">
-
+  <!-- START: replacement for lines 4220-4225 -->
     <button class="lx-home-house"
             type="button"
-            onclick="showPage('home',this)"
-            aria-label="Home">
-      ⌂
+            onclick="showPage('live',this)"
+            aria-label="Live">
+
+      <span class="lx-live-symbol">
+        <span></span>
+        <i></i>
+        <b></b>
+      </span>
+
     </button>
+<!-- END: replacement for lines 4220-4225 -->
 
 
     <div class="lx-home-switch">
