@@ -5803,7 +5803,15 @@ main{
     max-height:255px !important;
   }
 }
+/* ===== HIDE HOME HEADER ON OTHER PAGES ===== */
+@media(max-width:760px){
 
+  body:not(:has(#home.active)) .lx-home-header{
+    display:none !important;
+  }
+
+}
+/* ===== END HIDE HOME HEADER ON OTHER PAGES ===== */
 /* ===== END LIVEXA HOME FINAL CLEAN CSS ===== */
 </style>
 
