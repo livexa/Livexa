@@ -4221,11 +4221,12 @@ body:has(#profileDetail.active){
             onclick="showPage('live',this)"
             aria-label="Live">
 
-      <span class="lx-live-symbol" aria-hidden="true">
-        <span></span>
-        <i></i>
-        <b></b>
-      </span>
+            <span class="lx-live-symbol" aria-hidden="true">
+        <svg viewBox="0 0 32 32" focusable="false">
+          <path d="M7 14.5 16 7l9 7.5v9a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2z"></path>
+          <path d="M12 19v2M16 17v4M20 19v2"></path>
+        </svg>
+            </span>
 
     </button>
 
@@ -6090,10 +6091,92 @@ main{
     width:31px !important;
     height:31px !important;
     fill:none !important;
+/* ===== FINAL CLEAN HOME HEADER + ROOM SIZE ===== */
+@media(max-width:760px){
+
+  body:has(#home.active) header{
+    height:100px !important;
+    min-height:100px !important;
+    max-height:100px !important;
+    padding:0 20px !important;
+    box-sizing:border-box !important;
+    background:linear-gradient(180deg,#19cdb0 0%,#42d9cf 100%) !important;
+  }
+
+  body:has(#home.active) .lx-home-header{
+    width:100% !important;
+    height:100% !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:space-between !important;
+    padding:0 !important;
+    margin:0 !important;
+    box-sizing:border-box !important;
+  }
+
+  .lx-home-house,
+  .lx-home-search{
+    width:38px !important;
+    height:38px !important;
+    flex:0 0 38px !important;
+    border:0 !important;
+    background:transparent !important;
+    color:#fff !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    padding:0 !important;
+    margin:0 !important;
+  }
+
+  .lx-home-house svg,
+  .lx-home-search svg{
+    width:30px !important;
+    height:30px !important;
+    display:block !important;
+    fill:none !important;
     stroke:#fff !important;
     stroke-width:2.2 !important;
     stroke-linecap:round !important;
     stroke-linejoin:round !important;
+  }
+
+  .lx-home-switch{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    gap:20px !important;
+    margin:0 !important;
+    padding:0 !important;
+  }
+
+  .lx-home-switch button{
+    border:0 !important;
+    background:transparent !important;
+    color:rgba(255,255,255,.62) !important;
+    font-size:20px !important;
+    font-weight:700 !important;
+    line-height:1 !important;
+    padding:4px 0 !important;
+    margin:0 !important;
+  }
+
+  .lx-home-switch button.active{
+    color:#fff !important;
+    font-size:27px !important;
+    position:relative !important;
+  }
+
+  .lx-home-switch button.active:after{
+    content:"" !important;
+    position:absolute !important;
+    left:50% !important;
+    bottom:-8px !important;
+    width:20px !important;
+    height:3px !important;
+    border-radius:5px !important;
+    background:#fff !important;
+    transform:translateX(-50%) !important;
   }
 
   body:has(#home.active) main{
@@ -6108,15 +6191,32 @@ main{
   }
 
   .lx-room-image{
-    height:255px !important;
-    min-height:255px !important;
-    max-height:255px !important;
+    height:160px !important;
+    min-height:160px !important;
+    max-height:160px !important;
     border-radius:15px !important;
     box-sizing:border-box !important;
   }
 
+  .lx-level{
+    top:8px !important;
+    right:8px !important;
+    min-width:35px !important;
+    width:auto !important;
+    height:35px !important;
+    padding:0 7px !important;
+    border-radius:10px !important;
+    font-size:14px !important;
+  }
+
+  .lx-viewers{
+    right:9px !important;
+    bottom:9px !important;
+    font-size:13px !important;
+  }
+
   .lx-room-name{
-    padding:9px 2px 0 !important;
+    padding:7px 2px 0 !important;
     font-size:14px !important;
     line-height:1.35 !important;
   }
@@ -6137,12 +6237,12 @@ main{
   }
 
   .lx-room-image{
-    height:245px !important;
-    min-height:245px !important;
-    max-height:245px !important;
+    height:160px !important;
+    min-height:160px !important;
+    max-height:160px !important;
   }
 }
-/* ===== END HOME HEADER + ROOM SIZE FIX ===== */
+/* ===== END FINAL CLEAN HOME HEADER + ROOM SIZE ===== */
 </style>
 
 <div class="profile-edit-screen">
