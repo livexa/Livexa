@@ -5270,7 +5270,7 @@ window.showDiamondHistory = function() {
 
 
   /* PAGE NAVIGATION */
-const ROOT_PAGES = ["home", "messages", "me"];
+const ROOT_PAGES = ["home", "messages", "profile"];
 
 window.__livexaBackHistory = window.__livexaBackHistory || [];
 window.__livexaPageHistory = [];
@@ -5474,7 +5474,8 @@ window.showPage = function(
     if(
       currentId !== page
     ){
-
+window.__livexaPageHistory =
+  window.__livexaPageHistory || [];
       window.__livexaPageHistory.push({
 
         page: currentId,
