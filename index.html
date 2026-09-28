@@ -3904,14 +3904,13 @@ body:has(#messages.active) header::after{
   </div>
 
   <div class="me-menu me-settings">
-
-    <button>
-      <span class="me-icon">🌐</span>
-      <span>Language</span>
-      <small>English</small>
-      <b>›</b>
-    </button>
-
+<button onclick="showPage('language')">
+  <span class="me-icon">🌐</span>
+  <span>Language</span>
+  <small id="currentLanguage">English</small>
+  <b>›</b>
+</button>
+        
     <button>
       <span class="me-icon">✉️</span>
       <span>Feedback</span>
@@ -3936,7 +3935,52 @@ body:has(#messages.active) header::after{
 
 </section>
 
+<section id="language" class="page">
 
+  <div style="padding:18px;">
+
+    <h1 class="section-title">🌐 Language</h1>
+
+    <div style="
+      background:#fff;
+      border-radius:18px;
+      padding:12px 16px;
+      margin-bottom:16px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      box-shadow:0 4px 18px rgba(0,0,0,.06);
+    ">
+      <span style="font-size:22px;">🔎</span>
+
+      <input
+        id="languageSearch"
+        type="text"
+        placeholder="Search language..."
+        oninput="filterLanguages()"
+        style="
+          border:0;
+          outline:0;
+          width:100%;
+          font-size:16px;
+          background:transparent;
+        "
+      >
+    </div>
+
+    <div
+      id="languageList"
+      style="
+        background:#fff;
+        border-radius:20px;
+        overflow:hidden;
+        box-shadow:0 4px 20px rgba(0,0,0,.06);
+      ">
+    </div>
+
+  </div>
+
+</section>
 <section id="wallet" class="page">
 
 <h1 class="section-title">💎 Wallet</h1>
@@ -6865,6 +6909,211 @@ window.showPage = function(page, button, fromBack){
     behavior: "smooth"
   });
 };
+<script>
+const livexaLanguages = [
+  ["English","English"],
+  ["فارسی","Persian"],
+  ["دری","Dari"],
+  ["پښتو","Pashto"],
+  ["العربية","Arabic"],
+  ["اردو","Urdu"],
+  ["Türkçe","Turkish"],
+  ["Français","French"],
+  ["Deutsch","German"],
+  ["Español","Spanish"],
+  ["Italiano","Italian"],
+  ["Português","Portuguese"],
+  ["Русский","Russian"],
+  ["Українська","Ukrainian"],
+  ["Polski","Polish"],
+  ["Čeština","Czech"],
+  ["Slovenčina","Slovak"],
+  ["Magyar","Hungarian"],
+  ["Română","Romanian"],
+  ["Български","Bulgarian"],
+  ["Српски","Serbian"],
+  ["Hrvatski","Croatian"],
+  ["Bosanski","Bosnian"],
+  ["Slovenščina","Slovenian"],
+  ["Shqip","Albanian"],
+  ["Ελληνικά","Greek"],
+  ["Nederlands","Dutch"],
+  ["Svenska","Swedish"],
+  ["Norsk","Norwegian"],
+  ["Dansk","Danish"],
+  ["Suomi","Finnish"],
+  ["Íslenska","Icelandic"],
+  ["Eesti","Estonian"],
+  ["Latviešu","Latvian"],
+  ["Lietuvių","Lithuanian"],
+  ["Gaeilge","Irish"],
+  ["Gàidhlig","Scottish Gaelic"],
+  ["Cymraeg","Welsh"],
+  ["Català","Catalan"],
+  ["Galego","Galician"],
+  ["Euskara","Basque"],
+  ["Malti","Maltese"],
+  ["Lëtzebuergesch","Luxembourgish"],
+  ["Føroyskt","Faroese"],
+  ["Македонски","Macedonian"],
+  ["Беларуская","Belarusian"],
+  ["Հայերեն","Armenian"],
+  ["ქართული","Georgian"],
+  ["עברית","Hebrew"],
+  ["አማርኛ","Amharic"],
+  ["Kiswahili","Swahili"],
+  ["Soomaali","Somali"],
+  ["Hausa","Hausa"],
+  ["Yorùbá","Yoruba"],
+  ["Igbo","Igbo"],
+  ["isiZulu","Zulu"],
+  ["isiXhosa","Xhosa"],
+  ["Afrikaans","Afrikaans"],
+  ["हिन्दी","Hindi"],
+  ["বাংলা","Bengali"],
+  ["ਪੰਜਾਬੀ","Punjabi"],
+  ["ગુજરાતી","Gujarati"],
+  ["मराठी","Marathi"],
+  ["नेपाली","Nepali"],
+  ["සිංහල","Sinhala"],
+  ["தமிழ்","Tamil"],
+  ["తెలుగు","Telugu"],
+  ["ಕನ್ನಡ","Kannada"],
+  ["മലയാളം","Malayalam"],
+  ["অসমীয়া","Assamese"],
+  ["ଓଡ଼ିଆ","Odia"],
+  ["संस्कृतम्","Sanskrit"],
+  ["ไทย","Thai"],
+  ["မြန်မာ","Burmese"],
+  ["ខ្មែរ","Khmer"],
+  ["ລາວ","Lao"],
+  ["Tiếng Việt","Vietnamese"],
+  ["Bahasa Indonesia","Indonesian"],
+  ["Bahasa Melayu","Malay"],
+  ["Filipino","Filipino"],
+  ["中文","Chinese"],
+  ["日本語","Japanese"],
+  ["한국어","Korean"],
+  ["Монгол","Mongolian"],
+  ["ئۇيغۇرچە","Uyghur"],
+  ["Қазақша","Kazakh"],
+  ["Кыргызча","Kyrgyz"],
+  ["Тоҷикӣ","Tajik"],
+  ["Türkmençe","Turkmen"],
+  ["O‘zbekcha","Uzbek"],
+  ["Azərbaycan dili","Azerbaijani"],
+  ["Татарча","Tatar"],
+  ["יידיש","Yiddish"],
+  ["Kurdî","Kurdish"],
+  ["Oromoo","Oromo"],
+  ["Kinyarwanda","Kinyarwanda"],
+  ["Kirundi","Kirundi"],
+  ["Shona","Shona"],
+  ["Sesotho","Sesotho"],
+  ["Setswana","Tswana"],
+  ["isiNdebele","Ndebele"],
+  ["Luganda","Luganda"],
+  ["Wolof","Wolof"],
+  ["Malagasy","Malagasy"],
+  ["Esperanto","Esperanto"],
+  ["Latina","Latin"],
+  ["Aramaic","Aramaic"],
+  ["Māori","Māori"],
+  ["Samoan","Samoan"],
+  ["Tongan","Tongan"],
+  ["Fijian","Fijian"],
+  ["Hawaiian","Hawaiian"],
+  ["Bislama","Bislama"],
+  ["Tok Pisin","Tok Pisin"],
+  ["Kalaallisut","Greenlandic"],
+  ["Davvisámegiella","Northern Sami"]
+];
+
+function renderLanguages(list){
+  const box = document.getElementById("languageList");
+  if(!box) return;
+
+  box.innerHTML = "";
+
+  list.forEach(function(item){
+    const row = document.createElement("button");
+
+    row.type = "button";
+
+    row.style.cssText = `
+      width:100%;
+      padding:16px 18px;
+      border:0;
+      border-bottom:1px solid #eee;
+      background:#fff;
+      text-align:left;
+      font-size:16px;
+      color:#263238;
+      cursor:pointer;
+    `;
+
+    row.textContent = item[0];
+
+    row.onclick = function(){
+
+      localStorage.setItem(
+        "livexaLanguage",
+        item[0]
+      );
+
+      const current =
+        document.getElementById("currentLanguage");
+
+      if(current){
+        current.textContent = item[0];
+      }
+
+      showPage("profile", null, true);
+    };
+
+    box.appendChild(row);
+  });
+}
+
+function filterLanguages(){
+
+  const input =
+    document.getElementById("languageSearch");
+
+  if(!input) return;
+
+  const value =
+    input.value.toLowerCase().trim();
+
+  const filtered =
+    livexaLanguages.filter(function(item){
+
+      return (
+        item[0].toLowerCase().includes(value) ||
+        item[1].toLowerCase().includes(value)
+      );
+
+    });
+
+  renderLanguages(filtered);
+}
+
+function initLivexaLanguages(){
+
+  const saved =
+    localStorage.getItem("livexaLanguage");
+
+  const current =
+    document.getElementById("currentLanguage");
+
+  if(current && saved){
+    current.textContent = saved;
+  }
+
+  renderLanguages(livexaLanguages);
+}
+
+initLivexaLanguages();
 </script>
 </body>
 </html>
