@@ -5271,45 +5271,348 @@ window.showDiamondHistory = function() {
 
   /* ================= PAGE NAVIGATION ================= */
 
-  window.showPage = function(page, button) {
+/* =====================================================
+   LIVEXA GLOBAL BACK SYSTEM
+   ===================================================== */
 
-    var pages = document.querySelectorAll(".page");
+(function(){
 
-    pages.forEach(function(p) {
-      p.classList.remove("active");
-    });
+  window.__livexaPageHistory = [];
 
-    var target = document.getElementById(page);
+  /* CREATE GLOBAL BACK BUTTON */
 
-    if (!target) {
+  var backButton = document.createElement("button");
 
-      if (page === "rooms") {
-        target = document.getElementById("rooms");
+  backButton.id = "livexaGlobalBack";
+
+  backButton.innerHTML = "‹";
+
+  backButton.setAttribute(
+    "aria-label",
+    "Back"
+  );
+
+  backButton.style.position = "fixed";
+  backButton.style.top = "18px";
+  backButton.style.left = "16px";
+  backButton.style.width = "46px";
+  backButton.style.height = "46px";
+  backButton.style.border = "0";
+  backButton.style.borderRadius = "50%";
+  backButton.style.background = "rgba(20,30,60,.88)";
+  backButton.style.color = "#fff";
+  backButton.style.fontSize = "34px";
+  backButton.style.lineHeight = "42px";
+  backButton.style.zIndex = "99998";
+  backButton.style.display = "none";
+  backButton.style.alignItems = "center";
+  backButton.style.justifyContent = "center";
+  backButton.style.boxShadow =
+    "0 6px 20px rgba(0,0,0,.18)";
+  backButton.style.cursor = "pointer";
+
+  document.body.appendChild(backButton);
+
+
+  /* SHOW / HIDE BACK */
+
+  window.__livexaUpdateBackButton = function(){
+
+    var activePage =
+      document.querySelector(".page.active");
+
+    var chat =
+      document.getElementById(
+        "livexaChatWindow"
+      );
+
+    /* Chat has its own back button */
+
+    if(chat){
+
+      backButton.style.display =
+        "none";
+
+      return;
+    }
+
+
+    var pageId =
+      activePage
+        ? activePage.id
+        : "home";
+
+
+    if(
+      pageId === "home" ||
+      window.__livexaPageHistory.length === 0
+    ){
+
+      backButton.style.display =
+        "none";
+
+    }else{
+
+      backButton.style.display =
+        "flex";
+
+    }
+
+  };
+
+
+  /* GLOBAL BACK ACTION */
+
+  backButton.onclick = function(){
+
+    /* If chat is open, close it first */
+
+    var chat =
+      document.getElementById(
+        "livexaChatWindow"
+      );
+
+    if(chat){
+
+      if(
+        typeof closeLivexaConversation ===
+        "function"
+      ){
+
+        closeLivexaConversation();
+
+      }
+
+      return;
+    }
+
+
+    if(
+      window.__livexaPageHistory.length === 0
+    ){
+
+      return;
+
+    }
+
+
+    var previous =
+      window.__livexaPageHistory.pop();
+
+
+    var previousPage =
+      document.getElementById(
+        previous.page
+      );
+
+
+    if(previousPage){
+
+      document
+        .querySelectorAll(".page")
+        .forEach(function(p){
+
+          p.classList.remove(
+            "active"
+          );
+
+        });
+
+
+      previousPage.classList.add(
+        "active"
+      );
+
+
+      document
+        .querySelectorAll(".nav-btn")
+        .forEach(function(b){
+
+          b.classList.remove(
+            "active"
+          );
+
+        });
+
+
+      if(previous.button){
+
+        previous.button.classList.add(
+          "active"
+        );
+
       }
 
     }
 
-    if (target) {
-      target.classList.add("active");
-    }
-
-    var buttons = document.querySelectorAll(".nav-btn");
-
-    buttons.forEach(function(b) {
-      b.classList.remove("active");
-    });
-
-    if (button) {
-      button.classList.add("active");
-    }
 
     window.scrollTo({
-      top: 0,
-      behavior: "smooth"
+      top:0,
+      behavior:"smooth"
     });
+
+
+    setTimeout(
+      window.__livexaUpdateBackButton,
+      50
+    );
 
   };
 
+
+  /* PAGE NAVIGATION */
+
+  window.showPage = function(
+    page,
+    button
+  ){
+
+    var current =
+      document.querySelector(
+        ".page.active"
+      );
+
+
+    var currentId =
+      current
+        ? current.id
+        : "home";
+
+
+    /* Save current page */
+
+    if(
+      currentId !== page
+    ){
+
+      window.__livexaPageHistory.push({
+
+        page: currentId,
+
+        button:
+          document.querySelector(
+            ".nav-btn.active"
+          )
+
+      });
+
+    }
+
+
+    /* Close chat if changing page */
+
+    var chat =
+      document.getElementById(
+        "livexaChatWindow"
+      );
+
+    if(chat){
+
+      if(
+        typeof closeLivexaConversation ===
+        "function"
+      ){
+
+        closeLivexaConversation();
+
+      }
+
+    }
+
+
+    /* Hide all pages */
+
+    document
+      .querySelectorAll(".page")
+      .forEach(function(p){
+
+        p.classList.remove(
+          "active"
+        );
+
+      });
+
+
+    /* Show target */
+
+    var target =
+      document.getElementById(page);
+
+
+    if(!target){
+
+      if(page === "rooms"){
+
+        target =
+          document.getElementById(
+            "rooms"
+          );
+
+      }
+
+    }
+
+
+    if(target){
+
+      target.classList.add(
+        "active"
+      );
+
+    }
+
+
+    /* Update navigation */
+
+    document
+      .querySelectorAll(".nav-btn")
+      .forEach(function(b){
+
+        b.classList.remove(
+          "active"
+        );
+
+      });
+
+
+    if(button){
+
+      button.classList.add(
+        "active"
+      );
+
+    }
+
+
+    window.scrollTo({
+      top:0,
+      behavior:"smooth"
+    });
+
+
+    setTimeout(
+      window.__livexaUpdateBackButton,
+      50
+    );
+
+  };
+
+
+  /* INITIAL STATE */
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+      setTimeout(
+        window.__livexaUpdateBackButton,
+        100
+      );
+
+    }
+  );
+
+})();
 
   /* ================= OPEN ROOM ================= */
 
