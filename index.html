@@ -6768,6 +6768,40 @@ window.openRoom = function(roomName) {
 
 })();
 </script>
+<script>
+window.showPage = function(page, button){
 
+  document
+    .querySelectorAll(".page")
+    .forEach(function(p){
+      p.classList.remove("active");
+    });
+
+  var target = document.getElementById(page);
+
+  if(!target){
+    return;
+  }
+
+  target.classList.add("active");
+
+  document
+    .querySelectorAll(".nav-btn")
+    .forEach(function(btn){
+      btn.classList.remove("active");
+    });
+
+  if(button){
+    button.classList.add("active");
+  }
+
+  window.__livexaLastPage = page;
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+};
+</script>
 </body>
 </html>
