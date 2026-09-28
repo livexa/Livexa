@@ -3468,112 +3468,104 @@ body:has(#messages.active) header::after{
     border:0;
     border-radius:50%;
 
-    background:#263b68;
-
-    color:white;
-
-    font-size:20px;
 }
 /* =====================================================
-   LIVEXA MOBILE APP SCROLL FIX
+   LIVEXA MOBILE PAGE + PULL TO REFRESH FIX
    ===================================================== */
 
 @media (max-width:600px){
 
   html,
   body{
-    height:100%;
-    overflow:hidden !important;
-  }
+    width:100%;
+    min-height:100%;
+    margin:0;
+    padding:0;
 
-  .layout{
-    height:100vh;
-    min-height:0 !important;
-  }
-
-  main{
-    height:100%;
-    min-height:0 !important;
-    overflow-y:auto !important;
     overflow-x:hidden !important;
+    overflow-y:auto !important;
+
+    overscroll-behavior-y:auto !important;
     -webkit-overflow-scrolling:touch;
+  }
+
+  /* MAIN PAGE */
+  main{
+    width:100%;
+    min-height:100vh;
+
+    overflow:visible !important;
+
     padding-bottom:90px !important;
   }
 
-  /* Message خودش اسکرول جداگانه نداشته باشد */
+  /* MESSAGE FULL SCREEN */
   #messages{
-    min-height:auto !important;
-    height:auto !important;
-    overflow:visible !important;
-  }
-
-  /* صفحه‌های دیگر هم داخل main حرکت کنند */
-  .page{
-    min-height:auto;
-  }
-
-  /* نوار پایین همیشه ثابت بماند */
-  .modern-bottom-nav{
-    position:fixed !important;
-    bottom:10px !important;
-    left:10px !important;
-    right:10px !important;
-    z-index:99999 !important;
-  }
-
-}
-/* =====================================================
-   LIVEXA MESSAGE FULL SCREEN
-   ===================================================== */
-
-@media (max-width:600px){
-
-  #messages{
-    position:fixed !important;
-    top:0 !important;
-    left:0 !important;
-    right:0 !important;
-    bottom:0 !important;
+    position:relative !important;
 
     width:100vw !important;
-    height:100vh !important;
-
     min-height:100vh !important;
 
     margin:0 !important;
-    padding:0 0 90px 0 !important;
 
-    overflow-y:auto !important;
-    overflow-x:hidden !important;
+    padding:0 0 100px 0 !important;
 
-    z-index:100 !important;
+    overflow:visible !important;
+
     box-sizing:border-box !important;
   }
 
   #messages .messages-wrap{
     width:100% !important;
     max-width:none !important;
+
     margin:0 !important;
+
     padding:0 10px !important;
+
     box-sizing:border-box !important;
   }
 
-  /* چت باز شده تمام فضای Message را بگیرد */
+  /* BOTTOM NAV FIXED */
+  .modern-bottom-nav{
+    position:fixed !important;
+
+    left:10px !important;
+    right:10px !important;
+    bottom:10px !important;
+
+    width:auto !important;
+
+    z-index:99999 !important;
+  }
+
+  /* CHAT FULL SCREEN */
   #livexaChatWindow{
     position:fixed !important;
-    top:0 !important;
+
     left:0 !important;
     right:0 !important;
+    top:0 !important;
     bottom:78px !important;
 
     width:100vw !important;
     height:auto !important;
+
     max-height:none !important;
 
     margin:0 !important;
+
     border-radius:0 !important;
 
-    z-index:10000 !important;
+    z-index:100000 !important;
+
+    overflow:hidden !important;
+  }
+
+  /* CHAT MESSAGES CAN SCROLL */
+  #livexaChatWindow .livexa-chat-messages{
+    overflow-y:auto !important;
+    -webkit-overflow-scrolling:touch;
   }
 
 }
