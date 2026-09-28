@@ -4188,16 +4188,63 @@ body:has(#profileDetail.active){
 
 <header>
 
-  <div class="logo" style="display:flex;align-items:center;gap:7px;">
-  <span style="color:#111 !important;font-weight:900;">Live</span><span style="color:#e53935 !important;font-weight:900;">Xa</span>
+  <div class="logo"
+       style="display:flex;align-items:center;gap:7px;">
+
+    <span style="color:#111 !important;font-weight:900;">
+      Live
+    </span>
+
+    <span style="color:#e53935 !important;font-weight:900;">
+      Xa
+    </span>
+
   </div>
 
+
   <div class="coin-wallet">
-    🪙 <span id="coinCount">12,450</span>
+
+    🪙
+    <span id="coinCount">12,450</span>
 
     <button onclick="showPage('wallet')">
       +
     </button>
+
+  </div>
+
+
+  <div class="lx-home-header"
+       aria-label="Home navigation">
+
+    <button class="lx-home-house"
+            type="button"
+            onclick="showPage('home',this)"
+            aria-label="Home">
+      ⌂
+    </button>
+
+
+    <div class="lx-home-switch">
+
+      <button type="button">
+        Mine
+      </button>
+
+      <button class="active"
+              type="button">
+        Popular
+      </button>
+
+    </div>
+
+
+    <button class="lx-home-search"
+            type="button"
+            onclick="showNotice('Search coming soon')">
+      ⌕
+    </button>
+
   </div>
 
 </header>
@@ -4239,62 +4286,170 @@ body:has(#profileDetail.active){
 
 <section id="home" class="page active">
 
-  <div class="hero">
+  <div class="lx-home-banner">
+    <div class="lx-banner-copy">
+      <strong>ROOM SUPPORT</strong>
+      <span>Support rooms & send gifts</span>
+    </div>
 
-    <h1>Welcome to Livexa ✨</h1>
+    <div class="lx-banner-art">🎙️ 🎁 🪙</div>
 
-    <p>
-      Live rooms • Friends • Games • Gifts
-    </p>
+    <div class="lx-banner-dots">
+      <i class="on"></i><i></i><i></i><i></i><i></i>
+      <i></i><i></i><i></i><i></i><i></i>
+    </div>
+  </div>
 
-    <button class="primary"
+
+  <div class="lx-feature-row">
+
+    <button class="lx-feature lx-feature-ranking"
+            type="button"
+            onclick="showPage('contribution')">
+
+      <b>Ranking</b>
+      <span>🥇 🥈 🥉</span>
+
+    </button>
+
+
+    <button class="lx-feature lx-feature-family"
+            type="button"
             onclick="showPage('rooms')">
-      Explore Rooms
+
+      <b>Family</b>
+      <span>🏠 👥</span>
+
+    </button>
+
+
+    <button class="lx-feature lx-feature-friend"
+            type="button"
+            onclick="showPage('profile')">
+
+      <b>CP / Friend</b>
+      <span>💞 💞</span>
+
     </button>
 
   </div>
 
 
-  <h2 class="section-title">
-    ⚡ Quick Access
-  </h2>
+  <div class="lx-home-tabs" id="lxHomeTabs">
 
-<div class="quick-grid">
+    <button class="active"
+            type="button"
+            onclick="lxHomeTab(this,'popular')">
+      🔥 Popular
+    </button>
 
-    <div class="quick"
-         onclick="showPage('live')">
+    <button type="button"
+            onclick="lxHomeTab(this,'game')">
+      Game
+    </button>
 
-        <div class="quick-icon">🔴</div>
-        <span>Live</span>
+    <button type="button"
+            onclick="lxHomeTab(this,'video')">
+      Video/Music
+    </button>
 
-    </div>
+  </div>
 
-    <div class="quick"
-         onclick="showPage('rooms')">
 
-        <div class="quick-icon">🏠</div>
-        <span>Rooms</span>
+  <div class="lx-room-grid" id="lxRoomGrid">
 
-    </div>
+    <article class="lx-room-card"
+             data-type="popular">
 
-    <div class="quick"
-         onclick="showPage('contribution')">
+      <div class="lx-room-image lx-room-img-1">
+        <span class="lx-level">60</span>
+        <span class="lx-viewers">▮▮ 4</span>
+      </div>
 
-        <div class="quick-icon">🏆</div>
-        <span>Ranking</span>
+      <div class="lx-room-name">
+        🇦🇫 خوش آمدید کاربران جدید
+      </div>
 
-    </div>
+    </article>
 
-    <div class="quick"
-         onclick="showPage('wallet')">
 
-        <div class="quick-icon">🪙</div>
-        <span>Coins</span>
+    <article class="lx-room-card"
+             data-type="popular video">
 
-    </div>
+      <div class="lx-room-image lx-room-img-2">
+        <span class="lx-level">7</span>
+        <span class="lx-viewers">▮▮ 7</span>
+      </div>
 
-</div>
-</section>     
+      <div class="lx-room-name">
+        🇦🇫 مینه امینه وافا
+      </div>
+
+    </article>
+
+
+    <article class="lx-room-card"
+             data-type="popular video">
+
+      <div class="lx-room-image lx-room-img-3">
+        <span class="lx-level">2</span>
+        <span class="lx-viewers">▮▮ 2</span>
+      </div>
+
+      <div class="lx-room-name">
+        🇦🇫 دریا
+      </div>
+
+    </article>
+
+
+    <article class="lx-room-card"
+             data-type="popular video">
+
+      <div class="lx-room-image lx-room-img-4">
+        <span class="lx-level">8</span>
+        <span class="lx-viewers">▮▮ 8</span>
+      </div>
+
+      <div class="lx-room-name">
+        🇦🇫 عایشه
+      </div>
+
+    </article>
+
+
+    <article class="lx-room-card"
+             data-type="game">
+
+      <div class="lx-room-image lx-room-img-5">
+        <span class="lx-level">12</span>
+        <span class="lx-viewers">▮▮ 12</span>
+      </div>
+
+      <div class="lx-room-name">
+        🎮 Game Arena
+      </div>
+
+    </article>
+
+
+    <article class="lx-room-card"
+             data-type="video">
+
+      <div class="lx-room-image lx-room-img-6">
+        <span class="lx-level">5</span>
+        <span class="lx-viewers">▮▮ 5</span>
+      </div>
+
+      <div class="lx-room-name">
+        🎵 Music Room
+      </div>
+
+    </article>
+
+  </div>
+
+</section>
 <!-- ================= LIVE ================= -->
 
 <section id="live" class="page">
@@ -5023,6 +5178,364 @@ height:135px !important;
 #profileEdit .profile-edit-bio > span{
   bottom:8px !important;
   font-size:14px !important;
+}
+/* ===== LiveXa Home Screenshot Design ===== */
+
+@media(max-width:760px){
+
+body:has(#home.active) header{
+  height:165px !important;
+  padding:0 20px !important;
+  align-items:flex-start !important;
+  justify-content:center !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+  background:
+    linear-gradient(180deg,#19cdb0 0%,#42d9cf 100%) !important;
+}
+
+body:has(#home.active) header .logo,
+body:has(#home.active) header .coin-wallet{
+  display:none !important;
+}
+
+.lx-home-header{
+  width:100%;
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding-top:20px;
+}
+
+.lx-home-house,
+.lx-home-search{
+  width:44px;
+  height:44px;
+  border:0;
+  background:transparent;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:34px;
+}
+
+.lx-home-search{
+  font-size:39px;
+  transform:rotate(-20deg);
+}
+
+.lx-home-switch{
+  display:flex;
+  align-items:center;
+  gap:28px;
+  margin-top:8px;
+}
+
+.lx-home-switch button{
+  border:0;
+  background:transparent;
+  color:rgba(255,255,255,.58);
+  font-size:25px;
+  font-weight:700;
+  padding:4px 0;
+}
+
+.lx-home-switch button.active{
+  color:#fff;
+  font-size:30px;
+  position:relative;
+}
+
+.lx-home-switch button.active:after{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:-9px;
+  width:26px;
+  height:3px;
+  border-radius:5px;
+  background:#fff;
+  transform:translateX(-50%);
+}
+
+main{
+  padding:0 20px 92px !important;
+}
+
+#home{
+  padding-top:0 !important;
+}
+
+.lx-home-banner{
+  height:194px;
+  margin:0 0 16px;
+  border-radius:0 0 15px 15px;
+  position:relative;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  padding:22px 18px;
+  background:
+    radial-gradient(circle at 76% 40%,rgba(255,255,255,.4),transparent 20%),
+    linear-gradient(135deg,#1cc9d2,#62d8d5 55%,#5ec6dd);
+}
+
+.lx-home-banner:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 80% 82%,rgba(255,255,255,.36),transparent 18%);
+}
+
+.lx-banner-copy{
+  position:relative;
+  z-index:2;
+  color:#fff;
+  max-width:55%;
+}
+
+.lx-banner-copy strong{
+  display:block;
+  font-size:29px;
+  line-height:1.05;
+}
+
+.lx-banner-copy span{
+  display:block;
+  margin-top:9px;
+  font-size:12px;
+  opacity:.9;
+}
+
+.lx-banner-art{
+  position:absolute;
+  right:10px;
+  bottom:36px;
+  font-size:49px;
+  letter-spacing:-12px;
+  transform:rotate(-4deg);
+}
+
+.lx-banner-dots{
+  position:absolute;
+  left:50%;
+  bottom:10px;
+  transform:translateX(-50%);
+  display:flex;
+  gap:5px;
+}
+
+.lx-banner-dots i{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:rgba(255,255,255,.58);
+}
+
+.lx-banner-dots i.on{
+  width:18px;
+  border-radius:8px;
+  background:#fff;
+}
+
+.lx-feature-row{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+  margin-bottom:18px;
+}
+
+.lx-feature{
+  height:104px;
+  border:0;
+  border-radius:18px;
+  padding:10px 6px;
+  color:#fff;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:space-between;
+  overflow:hidden;
+}
+
+.lx-feature b{
+  font-size:16px;
+}
+
+.lx-feature span{
+  font-size:28px;
+  letter-spacing:-7px;
+  white-space:nowrap;
+}
+
+.lx-feature-ranking{
+  background:linear-gradient(145deg,#2bd7b7,#3ed8df);
+}
+
+.lx-feature-family{
+  background:linear-gradient(145deg,#ffcb45,#ffe36e);
+}
+
+.lx-feature-friend{
+  background:linear-gradient(145deg,#f052c8,#f39be9);
+}
+
+.lx-home-tabs{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  margin:0 0 18px;
+  overflow-x:auto;
+  scrollbar-width:none;
+}
+
+.lx-home-tabs::-webkit-scrollbar{
+  display:none;
+}
+
+.lx-home-tabs button{
+  flex:0 0 auto;
+  border:0;
+  border-radius:25px;
+  background:#e9e9e9;
+  color:#666;
+  padding:11px 21px;
+  font-size:18px;
+  font-weight:700;
+  white-space:nowrap;
+}
+
+.lx-home-tabs button.active{
+  background:#ffe889;
+  color:#343434;
+}
+
+.lx-room-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:18px 15px;
+}
+
+.lx-room-card{
+  min-width:0;
+  background:transparent;
+  border:0;
+  box-shadow:none;
+}
+
+.lx-room-image{
+  height:310px;
+  border-radius:15px;
+  position:relative;
+  overflow:hidden;
+  background-size:cover;
+  background-position:center;
+}
+
+.lx-room-img-1{
+  background:
+    radial-gradient(circle at 50% 70%,#f0b27e 0 11%,transparent 12%),
+    linear-gradient(145deg,#ffe0bd,#f9d0a8 52%,#b97d61);
+}
+
+.lx-room-img-2{
+  background:
+    radial-gradient(circle at 62% 48%,#f4d0ac 0 14%,transparent 15%),
+    linear-gradient(135deg,#8b9c6f,#d9d0a0 48%,#66755b);
+}
+
+.lx-room-img-3{
+  background:
+    radial-gradient(ellipse at 55% 63%,#18202a 0 12%,transparent 13%),
+    linear-gradient(180deg,#9ad4d9,#f4d7a8 48%,#5e917a);
+}
+
+.lx-room-img-4{
+  background:
+    radial-gradient(circle at 52% 42%,#efd3bd 0 16%,transparent 17%),
+    linear-gradient(145deg,#d7c1b3,#f1e6df 48%,#b5a098);
+}
+
+.lx-room-img-5{
+  background:
+    radial-gradient(circle at 50% 50%,rgba(255,255,255,.7),transparent 18%),
+    linear-gradient(135deg,#7b52e8,#4b9eff);
+}
+
+.lx-room-img-6{
+  background:
+    radial-gradient(circle at 55% 48%,rgba(255,255,255,.7),transparent 12%),
+    linear-gradient(135deg,#ef6cae,#8f6be8);
+}
+
+.lx-level{
+  position:absolute;
+  top:9px;
+  right:9px;
+  min-width:35px;
+  height:35px;
+  padding:0 7px;
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(115,70,90,.78);
+  color:#fff;
+  font-size:14px;
+  font-weight:800;
+}
+
+.lx-viewers{
+  position:absolute;
+  right:9px;
+  bottom:9px;
+  color:#fff;
+  font-size:13px;
+  font-weight:700;
+  text-shadow:0 1px 4px rgba(0,0,0,.55);
+}
+
+.lx-room-name{
+  padding:9px 2px 0;
+  color:#2f3437;
+  font-size:14px;
+  line-height:1.35;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+}
+
+@media(max-width:390px){
+
+.lx-home-switch{
+  gap:18px;
+}
+
+.lx-home-switch button{
+  font-size:22px;
+}
+
+.lx-home-switch button.active{
+  font-size:27px;
+}
+
+.lx-home-banner{
+  height:184px;
+}
+
+.lx-room-image{
+  height:255px;
+}
+
+.lx-feature{
+  height:94px;
+}
+
 }
 </style>
 
@@ -9345,6 +9858,22 @@ function closeProfilePicture(){
   }
 
 }
+/* ===== LiveXa Home tabs ===== */
+window.lxHomeTab = function(button,type){
+  document.querySelectorAll("#lxHomeTabs button").forEach(function(b){
+    b.classList.remove("active");
+  });
+
+  button.classList.add("active");
+
+  document.querySelectorAll("#lxRoomGrid .lx-room-card").forEach(function(card){
+    const types = (card.getAttribute("data-type") || "").split(" ");
+    card.style.display =
+      (type === "popular" || types.indexOf(type) >= 0)
+      ? ""
+      : "none";
+  });
+};
 </script>
 </body>
 </html>
