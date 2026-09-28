@@ -3935,113 +3935,479 @@ body:has(#messages.active) header::after{
 </section>
 <section id="profileEdit" class="page">
 
-  <div style="padding:18px;">
+<style>
+#profileEdit{
+  background:#fff !important;
+  min-height:100vh !important;
+  padding:0 !important;
+  margin:0 !important;
+}
 
-    <h1 class="section-title">✎ Edit Profile</h1>
+#profileEdit .profile-edit-screen{
+  min-height:100vh;
+  background:#fff;
+  color:#252525;
+}
 
-    <div style="
-      background:#fff;
-      border-radius:22px;
-      padding:20px;
-      box-shadow:0 6px 22px rgba(25,80,70,.08);
-    ">
+#profileEdit .profile-edit-topbar{
+  height:62px;
+  display:grid;
+  grid-template-columns:52px 1fr 52px;
+  align-items:center;
+  border-bottom:1px solid #eeeeee;
+  padding:0 8px;
+  box-sizing:border-box;
+}
 
-      <div style="text-align:center;margin-bottom:20px;">
+#profileEdit .profile-edit-topbar h1{
+  margin:0;
+  text-align:center;
+  font-size:20px;
+  font-weight:800;
+  color:#252525;
+}
 
-        <div id="editProfileAvatar"
-          style="
-            width:100px;
-            height:100px;
-            margin:0 auto 12px;
-            border-radius:50%;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            font-size:46px;
-            background:#e8faf6;
-            border:4px solid #fff;
-            box-shadow:0 6px 18px rgba(25,80,70,.12);
-          ">
-          👤
-        </div>
+#profileEdit .profile-edit-back,
+#profileEdit .profile-edit-save{
+  width:44px;
+  height:44px;
+  border:0;
+  background:transparent;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+}
 
-        <button type="button"
-          onclick="document.getElementById('profilePhotoInput').click()"
-          style="
-            border:0;
-            background:#e9faf6;
-            color:#12b99b;
-            padding:10px 18px;
-            border-radius:20px;
-            font-weight:700;
-          ">
-          📷 Change Photo
-        </button>
+#profileEdit .profile-edit-back{
+  font-size:42px;
+  font-weight:300;
+  line-height:1;
+  color:#333;
+}
+
+#profileEdit .profile-edit-save{
+  font-size:38px;
+  font-weight:500;
+  line-height:1;
+  color:#333;
+}
+
+#profileEdit .profile-edit-photo-area{
+  text-align:center;
+  padding:27px 20px 24px;
+}
+
+#profileEdit .profile-edit-photo{
+  position:relative;
+  width:150px;
+  height:150px;
+  padding:0;
+  border:0;
+  background:transparent;
+  border-radius:50%;
+  cursor:pointer;
+}
+
+#profileEdit #editProfileAvatar{
+  width:150px;
+  height:150px;
+  border-radius:50%;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#eef4f5;
+  font-size:55px;
+  box-sizing:border-box;
+}
+
+#profileEdit #editProfileAvatar img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+#profileEdit .profile-edit-camera{
+  position:absolute;
+  right:-4px;
+  bottom:1px;
+  width:46px;
+  height:46px;
+  border-radius:50%;
+  background:#45d7b5;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:27px;
+  font-weight:500;
+  border:4px solid #fff;
+  box-sizing:border-box;
+}
+
+#profileEdit .profile-edit-photo-text{
+  margin-top:15px;
+  font-size:19px;
+  color:#6c6c6c;
+}
+
+#profileEdit .profile-edit-fields{
+  padding:0 25px 110px;
+}
+
+#profileEdit .profile-edit-field{
+  padding:0 0 14px;
+  border-bottom:1px solid #eeeeee;
+  margin-bottom:23px;
+}
+
+#profileEdit .profile-edit-field label,
+#profileEdit .profile-edit-label{
+  display:block;
+  margin:0 0 13px;
+  font-size:18px;
+  color:#6c6c6c;
+  font-weight:500;
+}
+
+#profileEdit .profile-edit-input-row{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+#profileEdit .profile-edit-input-row input,
+#profileEdit .profile-edit-bio textarea{
+  width:100%;
+  border:0;
+  outline:0;
+  background:transparent;
+  color:#333;
+  font-size:20px;
+  font-weight:500;
+  padding:0;
+  margin:0;
+  font-family:inherit;
+  box-sizing:border-box;
+}
+
+#profileEdit .profile-edit-input-row input{
+  min-width:0;
+}
+
+#profileEdit .profile-edit-input-row span,
+#profileEdit .profile-edit-bio > span{
+  flex:none;
+  color:#999;
+  font-size:16px;
+  white-space:nowrap;
+}
+
+#profileEdit .profile-edit-row{
+  width:100%;
+  min-height:94px;
+  padding:0;
+  border:0;
+  border-bottom:1px solid #eeeeee;
+  background:#fff;
+  display:grid;
+  grid-template-columns:1fr auto auto;
+  align-items:center;
+  column-gap:14px;
+  text-align:left;
+  cursor:pointer;
+}
+
+#profileEdit .profile-edit-row .profile-edit-label{
+  margin:0;
+  align-self:start;
+  padding-top:15px;
+}
+
+#profileEdit .profile-edit-row .profile-edit-value{
+  font-size:20px;
+  color:#3d3d3d;
+  font-weight:500;
+  padding-top:15px;
+}
+
+#profileEdit .profile-edit-row b{
+  font-size:34px;
+  font-weight:400;
+  color:#222;
+  padding-top:8px;
+}
+
+#profileEdit .profile-edit-bio{
+  position:relative;
+  padding-bottom:18px;
+  margin-top:23px;
+}
+
+#profileEdit .profile-edit-bio label{
+  margin-bottom:13px;
+}
+
+#profileEdit .profile-edit-bio textarea{
+  min-height:72px;
+  line-height:1.65;
+  resize:none;
+}
+
+#profileEdit .profile-edit-bio > span{
+  position:absolute;
+  right:0;
+  bottom:18px;
+}
+
+#profileEdit .profile-hidden-picker{
+  position:fixed !important;
+  width:1px !important;
+  height:1px !important;
+  opacity:0 !important;
+  pointer-events:none !important;
+}
+
+#profile .me-avatar{
+  overflow:hidden !important;
+}
+
+#profile .me-avatar img{
+  width:100% !important;
+  height:100% !important;
+  object-fit:cover !important;
+  border-radius:50% !important;
+  display:block !important;
+}
+
+@media(max-width:600px){
+
+  #profileEdit .profile-edit-topbar{
+    height:60px;
+  }
+
+  #profileEdit .profile-edit-topbar h1{
+    font-size:20px;
+  }
+
+  #profileEdit .profile-edit-photo-area{
+    padding-top:27px;
+  }
+
+  #profileEdit .profile-edit-fields{
+    padding-left:25px;
+    padding-right:25px;
+  }
+
+  #profileEdit .profile-edit-photo{
+    width:148px;
+    height:148px;
+  }
+
+  #profileEdit #editProfileAvatar{
+    width:148px;
+    height:148px;
+  }
+}
+</style>
+
+<div class="profile-edit-screen">
+
+  <div class="profile-edit-topbar">
+
+    <button
+      type="button"
+      class="profile-edit-back"
+      onclick="showPage('profile',null,true)"
+      aria-label="Back">
+      ‹
+    </button>
+
+    <h1>Profile Modify</h1>
+
+    <button
+      type="button"
+      class="profile-edit-save"
+      onclick="saveProfileChanges()"
+      aria-label="Save">
+      ✓
+    </button>
+
+  </div>
+
+  <div class="profile-edit-photo-area">
+
+    <button
+      type="button"
+      class="profile-edit-photo"
+      onclick="document.getElementById('profilePhotoInput').click()">
+
+      <div id="editProfileAvatar">
+        👤
+      </div>
+
+      <span class="profile-edit-camera">
+        ✎
+      </span>
+
+    </button>
+
+    <div class="profile-edit-photo-text">
+      Tap to change photo
+    </div>
+
+    <input
+      id="profilePhotoInput"
+      type="file"
+      accept="image/*"
+      style="display:none"
+      onchange="previewProfilePhoto(event)"
+    >
+
+  </div>
+
+  <div class="profile-edit-fields">
+
+    <div class="profile-edit-field">
+
+      <label>Nickname</label>
+
+      <div class="profile-edit-input-row">
 
         <input
-          id="profilePhotoInput"
-          type="file"
-          accept="image/*"
-          style="display:none"
-          onchange="previewProfilePhoto(event)"
+          id="profileNameInput"
+          type="text"
+          maxlength="20"
+          placeholder="Enter nickname"
+          oninput="updateProfileCounters()"
         >
+
+        <span id="profileNameCount">
+          0/20
+        </span>
 
       </div>
 
-      <label style="display:block;margin-bottom:7px;font-weight:700;">
-        Name
-      </label>
+    </div>
 
-      <input
-        id="profileNameInput"
-        type="text"
-        placeholder="Enter your name"
-        maxlength="30"
-        style="
-          width:100%;
-          box-sizing:border-box;
-          padding:14px;
-          margin-bottom:16px;
-        "
-      >
+    <button
+      type="button"
+      class="profile-edit-row"
+      onclick="document.getElementById('profileGenderPicker').click()">
 
-      <label style="display:block;margin-bottom:7px;font-weight:700;">
-        Bio
-      </label>
+      <span class="profile-edit-label">
+        Gender
+      </span>
+
+      <span
+        class="profile-edit-value"
+        id="profileGenderValue">
+        Boy
+      </span>
+
+      <b>›</b>
+
+    </button>
+
+    <select
+      id="profileGenderPicker"
+      class="profile-hidden-picker"
+      onchange="changeProfileGender(this.value)">
+
+      <option value="Boy">Boy</option>
+      <option value="Girl">Girl</option>
+      <option value="Other">Other</option>
+
+    </select>
+
+    <button
+      type="button"
+      class="profile-edit-row"
+      onclick="document.getElementById('profileBirthdayPicker').click()">
+
+      <span class="profile-edit-label">
+        Birthday
+      </span>
+
+      <span
+        class="profile-edit-value"
+        id="profileBirthdayValue">
+        25-06-2002
+      </span>
+
+      <b>›</b>
+
+    </button>
+
+    <input
+      id="profileBirthdayPicker"
+      class="profile-hidden-picker"
+      type="date"
+      onchange="changeProfileBirthday(this.value)"
+    >
+
+    <div class="profile-edit-field profile-edit-bio">
+
+      <label>Bio</label>
 
       <textarea
         id="profileBioInput"
-        placeholder="Tell people about yourself"
         maxlength="120"
-        rows="4"
-        style="
-          width:100%;
-          box-sizing:border-box;
-          padding:14px;
-          resize:none;
-          margin-bottom:18px;
-        "
+        rows="3"
+        placeholder="Tell people about yourself"
+        oninput="updateProfileCounters()"
       ></textarea>
 
-      <button
-        type="button"
-        onclick="saveProfileChanges()"
-        style="
-          width:100%;
-          padding:14px;
-          border:0;
-          border-radius:16px;
-          background:linear-gradient(135deg,#20d3b2,#42d9cf);
-          color:#fff;
-          font-size:16px;
-          font-weight:800;
-        ">
-        Save Changes
-      </button>
+      <span id="profileBioCount">
+        0/120
+      </span>
 
     </div>
 
+    <button
+      type="button"
+      class="profile-edit-row"
+      onclick="document.getElementById('profileCountryPicker').click()">
+
+      <span class="profile-edit-label">
+        Country/Region
+      </span>
+
+      <span
+        class="profile-edit-value"
+        id="profileCountryValue">
+        Afghanistan
+      </span>
+
+      <b>›</b>
+
+    </button>
+
+    <select
+      id="profileCountryPicker"
+      class="profile-hidden-picker"
+      onchange="changeProfileCountry(this.value)">
+
+      <option>Afghanistan</option>
+      <option>Pakistan</option>
+      <option>Iran</option>
+      <option>India</option>
+      <option>Turkey</option>
+      <option>United Arab Emirates</option>
+      <option>United Kingdom</option>
+      <option>United States</option>
+      <option>Canada</option>
+      <option>Germany</option>
+      <option>France</option>
+      <option>Other</option>
+
+    </select>
+
   </div>
+
+</div>
 
 </section>
 <section id="language" class="page">
@@ -6983,6 +7349,7 @@ window.showPage = function(page, button, fromBack){
     page !== "home" &&
     page !== "messages" &&
     page !== "profile" &&
+    page !== "profileEdit" &&    
     window.__livexaBackStack.length > 0
   ){
 
@@ -7231,62 +7598,147 @@ function previewProfilePhoto(event){
 
   if(!file) return;
 
-  const reader =
-    new FileReader();
+  if(!file.type.startsWith("image/")) return;
+
+  const reader = new FileReader();
 
   reader.onload = function(e){
 
+    const photo =
+      e.target.result;
+
     const avatar =
-      document.getElementById(
-        "editProfileAvatar"
-      );
+      document.getElementById("editProfileAvatar");
 
     if(avatar){
-
-      avatar.innerHTML = "";
-
-      const img =
-        document.createElement("img");
-
-      img.src = e.target.result;
-
-      img.style.cssText = `
-        width:100%;
-        height:100%;
-        object-fit:cover;
-        border-radius:50%;
-      `;
-
-      avatar.appendChild(img);
+      avatar.innerHTML =
+        '<img src="' + photo + '" alt="Profile photo">';
     }
 
     localStorage.setItem(
       "livexaProfilePhoto",
-      e.target.result
+      photo
     );
+
+    updateProfileAvatarOnMain();
   };
 
   reader.readAsDataURL(file);
 }
 
 
-function saveProfileChanges(){
+function updateProfileAvatarOnMain(){
+
+  const saved =
+    localStorage.getItem("livexaProfilePhoto");
+
+  const avatar =
+    document.querySelector("#profile .me-avatar");
+
+  if(!avatar) return;
+
+  if(saved){
+    avatar.innerHTML =
+      '<img src="' + saved + '" alt="Profile photo">';
+  }else{
+    avatar.innerHTML = "👤";
+  }
+}
+
+
+function updateProfileCounters(){
 
   const nameInput =
-    document.getElementById(
-      "profileNameInput"
-    );
+    document.getElementById("profileNameInput");
 
   const bioInput =
-    document.getElementById(
-      "profileBioInput"
-    );
+    document.getElementById("profileBioInput");
+
+  const nameCount =
+    document.getElementById("profileNameCount");
+
+  const bioCount =
+    document.getElementById("profileBioCount");
+
+  if(nameCount){
+    nameCount.textContent =
+      (nameInput ? nameInput.value.length : 0) + "/20";
+  }
+
+  if(bioCount){
+    bioCount.textContent =
+      (bioInput ? bioInput.value.length : 0) + "/120";
+  }
+}
+
+
+function changeProfileGender(value){
+
+  if(!value) return;
+
+  document.getElementById(
+    "profileGenderValue"
+  ).textContent = value;
+}
+
+
+function changeProfileBirthday(value){
+
+  if(!value) return;
+
+  const parts =
+    value.split("-");
+
+  const formatted =
+    parts[2] + "-" + parts[1] + "-" + parts[0];
+
+  document.getElementById(
+    "profileBirthdayValue"
+  ).textContent = formatted;
+
+  localStorage.setItem(
+    "livexaProfileBirthdayISO",
+    value
+  );
+}
+
+
+function changeProfileCountry(value){
+
+  if(!value) return;
+
+  document.getElementById(
+    "profileCountryValue"
+  ).textContent = value;
+}
+
+
+function saveProfileChanges(){
 
   const name =
-    nameInput ? nameInput.value.trim() : "";
+    document.getElementById(
+      "profileNameInput"
+    ).value.trim();
 
   const bio =
-    bioInput ? bioInput.value.trim() : "";
+    document.getElementById(
+      "profileBioInput"
+    ).value.trim();
+
+  const gender =
+    document.getElementById(
+      "profileGenderValue"
+    ).textContent.trim();
+
+  const birthday =
+    document.getElementById(
+      "profileBirthdayValue"
+    ).textContent.trim();
+
+  const country =
+    document.getElementById(
+      "profileCountryValue"
+    ).textContent.trim();
 
   localStorage.setItem(
     "livexaProfileName",
@@ -7296,6 +7748,21 @@ function saveProfileChanges(){
   localStorage.setItem(
     "livexaProfileBio",
     bio
+  );
+
+  localStorage.setItem(
+    "livexaProfileGender",
+    gender
+  );
+
+  localStorage.setItem(
+    "livexaProfileBirthday",
+    birthday
+  );
+
+  localStorage.setItem(
+    "livexaProfileCountry",
+    country
   );
 
   const profileName =
@@ -7318,8 +7785,161 @@ function saveProfileChanges(){
       bio || "Good Vibes Only 🖤";
   }
 
-  showPage("profile", null, true);
+  updateProfileAvatarOnMain();
+
+  showPage(
+    "profile",
+    null,
+    true
+  );
 }
+
+
+function initLivexaProfile(){
+
+  const savedName =
+    localStorage.getItem(
+      "livexaProfileName"
+    ) || "";
+
+  const savedBio =
+    localStorage.getItem(
+      "livexaProfileBio"
+    ) || "";
+
+  const savedGender =
+    localStorage.getItem(
+      "livexaProfileGender"
+    ) || "Boy";
+
+  const savedBirthday =
+    localStorage.getItem(
+      "livexaProfileBirthday"
+    ) || "25-06-2002";
+
+  const savedBirthdayISO =
+    localStorage.getItem(
+      "livexaProfileBirthdayISO"
+    ) || "2002-06-25";
+
+  const savedCountry =
+    localStorage.getItem(
+      "livexaProfileCountry"
+    ) || "Afghanistan";
+
+  const nameInput =
+    document.getElementById(
+      "profileNameInput"
+    );
+
+  const bioInput =
+    document.getElementById(
+      "profileBioInput"
+    );
+
+  const gender =
+    document.getElementById(
+      "profileGenderValue"
+    );
+
+  const birthday =
+    document.getElementById(
+      "profileBirthdayValue"
+    );
+
+  const country =
+    document.getElementById(
+      "profileCountryValue"
+    );
+
+  const genderPicker =
+    document.getElementById(
+      "profileGenderPicker"
+    );
+
+  const birthdayPicker =
+    document.getElementById(
+      "profileBirthdayPicker"
+    );
+
+  const countryPicker =
+    document.getElementById(
+      "profileCountryPicker"
+    );
+
+  if(nameInput){
+    nameInput.value = savedName;
+  }
+
+  if(bioInput){
+    bioInput.value = savedBio;
+  }
+
+  if(gender){
+    gender.textContent = savedGender;
+  }
+
+  if(birthday){
+    birthday.textContent = savedBirthday;
+  }
+
+  if(country){
+    country.textContent = savedCountry;
+  }
+
+  if(genderPicker){
+    genderPicker.value = savedGender;
+  }
+
+  if(birthdayPicker){
+    birthdayPicker.value = savedBirthdayISO;
+  }
+
+  if(countryPicker){
+    countryPicker.value = savedCountry;
+  }
+
+  const profileName =
+    document.querySelector(
+      "#profile .me-info h2"
+    );
+
+  const profileBio =
+    document.querySelector(
+      "#profile .me-info span"
+    );
+
+  if(profileName){
+    profileName.textContent =
+      savedName || "LiveXa User 👑";
+  }
+
+  if(profileBio){
+    profileBio.textContent =
+      savedBio || "Good Vibes Only 🖤";
+  }
+
+  const savedPhoto =
+    localStorage.getItem(
+      "livexaProfilePhoto"
+    );
+
+  const editAvatar =
+    document.getElementById(
+      "editProfileAvatar"
+    );
+
+  if(savedPhoto && editAvatar){
+    editAvatar.innerHTML =
+      '<img src="' + savedPhoto + '" alt="Profile photo">';
+  }
+
+  updateProfileAvatarOnMain();
+  updateProfileCounters();
+}
+
+
+initLivexaProfile();
 </script>
 </body>
 </html>
