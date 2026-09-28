@@ -6769,7 +6769,23 @@ window.openRoom = function(roomName) {
 })();
 </script>
 <script>
-window.showPage = function(page, button){
+<script>
+window.__livexaBackStack = window.__livexaBackStack || [];
+
+window.showPage = function(page, button, fromBack){
+
+  var current = document.querySelector(".page.active");
+  var currentId = current ? current.id : "home";
+
+  if(!fromBack && currentId !== page){
+
+    if(currentId !== "home"){
+      window.__livexaBackStack.push(currentId);
+    }else{
+      window.__livexaBackStack = [];
+    }
+
+  }
 
   document
     .querySelectorAll(".page")
@@ -6793,6 +6809,44 @@ window.showPage = function(page, button){
 
   if(button){
     button.classList.add("active");
+  }
+
+  target
+    .querySelectorAll(".livexa-modern-back")
+    .forEach(function(el){
+      el.remove();
+    });
+
+  if(
+    page !== "home" &&
+    page !== "messages" &&
+    page !== "profile" &&
+    window.__livexaBackStack.length > 0
+  ){
+
+    var backRow = document.createElement("div");
+
+    backRow.className = "livexa-modern-back";
+
+    backRow.innerHTML = `
+      <button type="button" aria-label="Back">
+        <span>‹</span>
+        <b>Back</b>
+      </button>
+    `;
+
+    backRow.querySelector("button").onclick = function(){
+
+      var previous =
+        window.__livexaBackStack.pop() || "home";
+
+      window.showPage(previous, null, true);
+    };
+
+    target.insertBefore(
+      backRow,
+      target.firstChild
+    );
   }
 
   window.__livexaLastPage = page;
