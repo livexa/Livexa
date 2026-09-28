@@ -3822,10 +3822,10 @@ body:has(#messages.active) header::after{
 <section id="profile" class="page">
 
   <div class="me-header">
-    <div class="me-avatar">👤</div>
+<div class="me-avatar" onclick="openProfileDetail()" style="cursor:pointer;">👤</div>
 
     <div class="me-info">
-      <h2>LiveXa User 👑</h2>
+<h2 onclick="openProfileDetail()" style="cursor:pointer;">LiveXa User 👑</h2>
       <p>ID 297415</p>
       <span>Good Vibes Only 🖤</span>
     </div>
@@ -4408,6 +4408,415 @@ body:has(#messages.active) header::after{
   </div>
 
 </div>
+
+</section>
+<section id="profileDetail" class="page">
+
+  <div class="pd-screen">
+
+    <div class="pd-topbar">
+
+      <button
+        type="button"
+        class="pd-back"
+        onclick="showPage('profile',null,true)"
+        aria-label="Back">
+        ‹
+      </button>
+
+      <div class="pd-top-title">
+        Profile
+      </div>
+
+      <button
+        type="button"
+        class="pd-more"
+        aria-label="More">
+        ⋯
+      </button>
+
+    </div>
+
+
+    <div class="pd-cover">
+
+      <div class="pd-main">
+
+        <button
+          type="button"
+          class="pd-avatar"
+          id="pdAvatar"
+          onclick="showProfilePicture()">
+          👤
+        </button>
+
+
+        <div class="pd-user">
+
+          <h1
+            class="pd-name"
+            id="pdName">
+            LiveXa User 👑
+          </h1>
+
+          <p class="pd-id">
+            ID 297415
+          </p>
+
+          <div
+            class="pd-meta"
+            id="pdAge">
+            Boy · 24
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="pd-actions">
+
+        <button
+          type="button"
+          onclick="showProfilePicture()">
+          🖼 Picture
+        </button>
+
+        <button
+          type="button"
+          onclick="showPage('profileEdit')">
+          ✎ Edit
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div class="pd-stats">
+
+      <div class="pd-stat">
+
+        <strong>
+          532
+        </strong>
+
+        <span>
+          Followers
+        </span>
+
+      </div>
+
+
+      <div class="pd-stat">
+
+        <strong>
+          13
+        </strong>
+
+        <span>
+          Following
+        </span>
+
+      </div>
+
+
+      <div class="pd-stat">
+
+        <strong>
+          2K
+        </strong>
+
+        <span>
+          Visitors
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <section class="pd-section">
+
+      <div class="pd-section-head">
+
+        <h2>
+          About Me
+        </h2>
+
+        <span>
+          Profile
+        </span>
+
+      </div>
+
+
+      <p
+        class="pd-bio"
+        id="pdBio">
+        Good Vibes Only 🖤
+      </p>
+
+    </section>
+
+
+    <section class="pd-section">
+
+      <div class="pd-section-head">
+
+        <h2>
+          Personal Info
+        </h2>
+
+        <span>
+          Details
+        </span>
+
+      </div>
+
+
+      <div class="pd-info-grid">
+
+        <div class="pd-info">
+
+          <small>
+            Gender
+          </small>
+
+          <strong id="pdGender">
+            Boy
+          </strong>
+
+        </div>
+
+
+        <div class="pd-info">
+
+          <small>
+            Birthday
+          </small>
+
+          <strong id="pdBirthday">
+            25-06-2002
+          </strong>
+
+        </div>
+
+
+        <div class="pd-info">
+
+          <small>
+            Country / Region
+          </small>
+
+          <strong id="pdCountry">
+            Afghanistan
+          </strong>
+
+        </div>
+
+
+        <div class="pd-info">
+
+          <small>
+            Level
+          </small>
+
+          <strong>
+            Lv.140
+          </strong>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <section class="pd-section">
+
+      <div class="pd-section-head">
+
+        <h2>
+          Badges & Achievements
+        </h2>
+
+        <span>
+          Lv.140
+        </span>
+
+      </div>
+
+
+      <div class="pd-badges">
+
+        <div class="pd-badge">
+
+          <div class="pd-badge-icon">
+            👑
+          </div>
+
+          VIP
+
+        </div>
+
+
+        <div class="pd-badge">
+
+          <div class="pd-badge-icon">
+            ⭐
+          </div>
+
+          Level
+
+        </div>
+
+
+        <div class="pd-badge">
+
+          <div class="pd-badge-icon">
+            💎
+          </div>
+
+          Diamond
+
+        </div>
+
+
+        <div class="pd-badge">
+
+          <div class="pd-badge-icon">
+            🏆
+          </div>
+
+          Winner
+
+        </div>
+
+
+        <div class="pd-badge">
+
+          <div class="pd-badge-icon">
+            🎁
+          </div>
+
+          Gifts
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <section class="pd-section">
+
+      <div class="pd-section-head">
+
+        <h2>
+          Family
+        </h2>
+
+        <span>
+          ›
+        </span>
+
+      </div>
+
+
+      <div class="pd-family">
+
+        <div class="pd-family-icon">
+          🏠
+        </div>
+
+
+        <div class="pd-family-info">
+
+          <strong>
+            My Family
+          </strong>
+
+          <span>
+            Family ID: 92219718 · 58/1650 Members
+          </span>
+
+        </div>
+
+
+        <b>
+          ›
+        </b>
+
+      </div>
+
+    </section>
+
+
+    <section class="pd-section">
+
+      <div class="pd-section-head">
+
+        <h2>
+          CP / Friends
+        </h2>
+
+        <span>
+          ›
+        </span>
+
+      </div>
+
+
+      <div class="pd-cp">
+
+        <div class="pd-cp-icon">
+          🤝
+        </div>
+
+
+        <div class="pd-cp-text">
+
+          <strong>
+            CP / Friends
+          </strong>
+
+          <span>
+            Your connections will appear here
+          </span>
+
+        </div>
+
+
+        <b>
+          ›
+        </b>
+
+      </div>
+
+    </section>
+
+  </div>
+
+
+  <div
+    id="profilePictureViewer"
+    onclick="closeProfilePicture()">
+
+    <img
+      id="profilePictureImage"
+      src=""
+      alt="Profile photo">
+
+
+    <button
+      type="button"
+      onclick="event.stopPropagation();closeProfilePicture()"
+      aria-label="Close">
+      ×
+    </button>
+
+  </div>
 
 </section>
 <section id="language" class="page">
@@ -7940,6 +8349,188 @@ function initLivexaProfile(){
 
 
 initLivexaProfile();
+function renderProfileDetail(){
+
+  const name =
+    localStorage.getItem("livexaProfileName") ||
+    "LiveXa User 👑";
+
+  const bio =
+    localStorage.getItem("livexaProfileBio") ||
+    "Good Vibes Only 🖤";
+
+  const gender =
+    localStorage.getItem("livexaProfileGender") ||
+    "Boy";
+
+  const birthday =
+    localStorage.getItem("livexaProfileBirthday") ||
+    "25-06-2002";
+
+  const country =
+    localStorage.getItem("livexaProfileCountry") ||
+    "Afghanistan";
+
+  const photo =
+    localStorage.getItem("livexaProfilePhoto");
+
+  const nameEl =
+    document.getElementById("pdName");
+
+  const bioEl =
+    document.getElementById("pdBio");
+
+  const genderEl =
+    document.getElementById("pdGender");
+
+  const birthdayEl =
+    document.getElementById("pdBirthday");
+
+  const countryEl =
+    document.getElementById("pdCountry");
+
+  const avatar =
+    document.getElementById("pdAvatar");
+
+  if(nameEl){
+    nameEl.textContent = name;
+  }
+
+  if(bioEl){
+    bioEl.textContent = bio;
+  }
+
+  if(genderEl){
+    genderEl.textContent = gender;
+  }
+
+  if(birthdayEl){
+    birthdayEl.textContent = birthday;
+  }
+
+  if(countryEl){
+    countryEl.textContent = country;
+  }
+
+  if(avatar){
+
+    if(photo){
+
+      avatar.innerHTML =
+        '<img src="' + photo + '" alt="Profile photo">';
+
+    }else{
+
+      avatar.innerHTML = "👤";
+
+    }
+
+  }
+
+  const ageEl =
+    document.getElementById("pdAge");
+
+  if(ageEl){
+
+    const parts =
+      birthday.split("-");
+
+    if(parts.length === 3){
+
+      const birth =
+        new Date(
+          Number(parts[2]),
+          Number(parts[1]) - 1,
+          Number(parts[0])
+        );
+
+      const now =
+        new Date();
+
+      let age =
+        now.getFullYear() -
+        birth.getFullYear();
+
+      const beforeBirthday =
+        now.getMonth() < birth.getMonth() ||
+        (
+          now.getMonth() === birth.getMonth() &&
+          now.getDate() < birth.getDate()
+        );
+
+      if(beforeBirthday){
+        age--;
+      }
+
+      ageEl.textContent =
+        gender + " · " + age;
+
+    }else{
+
+      ageEl.textContent = gender;
+
+    }
+
+  }
+
+}
+
+
+function openProfileDetail(){
+
+  renderProfileDetail();
+
+  showPage(
+    "profileDetail"
+  );
+
+}
+
+
+function showProfilePicture(){
+
+  const photo =
+    localStorage.getItem(
+      "livexaProfilePhoto"
+    );
+
+  if(!photo) return;
+
+  const viewer =
+    document.getElementById(
+      "profilePictureViewer"
+    );
+
+  const image =
+    document.getElementById(
+      "profilePictureImage"
+    );
+
+  if(!viewer || !image) return;
+
+  image.src = photo;
+
+  viewer.classList.add("show");
+
+}
+
+
+function closeProfilePicture(){
+
+  const viewer =
+    document.getElementById(
+      "profilePictureViewer"
+    );
+
+  if(viewer){
+
+    viewer.classList.remove(
+      "show"
+    );
+
+  }
+
+}
 </script>
 </body>
 </html>
