@@ -5269,200 +5269,189 @@ window.showDiamondHistory = function() {
   };
 
 
-  /* ================= PAGE NAVIGATION ================= */
+  /* PAGE NAVIGATION */
+const ROOT_PAGES = ["home", "messages", "me"];
 
-/* =====================================================
-   LIVEXA GLOBAL BACK SYSTEM
-   ===================================================== */
+window.__livexaBackHistory = window.__livexaBackHistory || [];
+window.__livexaLastPage = window.__livexaLastPage || "";
 
-(function(){
+function getActivePage(){
+  return document.querySelector(".page.active");
+}
 
-  window.__livexaPageHistory = [];
+function getPageId(){
+  const page = getActivePage();
+  return page && page.id ? page.id : "home";
+}
 
-  /* CREATE GLOBAL BACK BUTTON */
+function removeBack(){
+  document
+    .querySelectorAll(".livexa-modern-back")
+    .forEach(el => el.remove());
+}
 
-  var backButton = document.createElement("button");
+function addBack(){
+  removeBack();
 
-  backButton.id = "livexaGlobalBack";
+  const currentId = getPageId();
 
-  backButton.innerHTML = "‹";
+  if(ROOT_PAGES.includes(currentId)){
+    return;
+  }
 
-  backButton.setAttribute(
-    "aria-label",
-    "Back"
-  );
+  if(window.__livexaBackHistory.length === 0){
+    return;
+  }
 
-  backButton.style.position = "fixed";
-  backButton.style.top = "18px";
-  backButton.style.left = "16px";
-  backButton.style.width = "46px";
-  backButton.style.height = "46px";
-  backButton.style.border = "0";
-  backButton.style.borderRadius = "50%";
-  backButton.style.background = "rgba(20,30,60,.88)";
-  backButton.style.color = "#fff";
-  backButton.style.fontSize = "34px";
-  backButton.style.lineHeight = "42px";
-  backButton.style.zIndex = "99998";
-  backButton.style.display = "none";
-  backButton.style.alignItems = "center";
-  backButton.style.justifyContent = "center";
-  backButton.style.boxShadow =
-    "0 6px 20px rgba(0,0,0,.18)";
-  backButton.style.cursor = "pointer";
+  const page = getActivePage();
 
-  document.body.appendChild(backButton);
+  if(!page){
+    return;
+  }
 
+  const row = document.createElement("div");
+  row.className = "livexa-modern-back";
 
-  /* SHOW / HIDE BACK */
+  row.innerHTML = `
+    <button type="button" aria-label="Back">
+      <span>‹</span>
+      <b>Back</b>
+    </button>
+  `;
 
-  window.__livexaUpdateBackButton = function(){
+  const button = row.querySelector("button");
 
-    var activePage =
-      document.querySelector(".page.active");
+  button.onclick = function(){
 
-    var chat =
-      document.getElementById(
-        "livexaChatWindow"
-      );
+    const previous = window.__livexaBackHistory.pop();
 
-    /* Chat has its own back button */
-
-    if(chat){
-
-      backButton.style.display =
-        "none";
-
+    if(!previous){
+      removeBack();
       return;
     }
 
+    document
+      .querySelectorAll(".page")
+      .forEach(p => p.classList.remove("active"));
 
-    var pageId =
-      activePage
-        ? activePage.id
-        : "home";
+    const target = document.getElementById(previous);
 
-
-    if(
-      pageId === "home" ||
-      window.__livexaPageHistory.length === 0
-    ){
-
-      backButton.style.display =
-        "none";
-
-    }else{
-
-      backButton.style.display =
-        "flex";
-
+    if(target){
+      target.classList.add("active");
     }
 
-  };
+    document
+      .querySelectorAll(".nav-btn")
+      .forEach(btn => btn.classList.remove("active"));
 
-
-  /* GLOBAL BACK ACTION */
-
-  backButton.onclick = function(){
-
-    /* If chat is open, close it first */
-
-    var chat =
-      document.getElementById(
-        "livexaChatWindow"
-      );
-
-    if(chat){
-
-      if(
-        typeof closeLivexaConversation ===
-        "function"
-      ){
-
-        closeLivexaConversation();
-
-      }
-
-      return;
-    }
-
-
-    if(
-      window.__livexaPageHistory.length === 0
-    ){
-
-      return;
-
-    }
-
-
-    var previous =
-      window.__livexaPageHistory.pop();
-
-
-    var previousPage =
-      document.getElementById(
-        previous.page
-      );
-
-
-    if(previousPage){
-
-      document
-        .querySelectorAll(".page")
-        .forEach(function(p){
-
-          p.classList.remove(
-            "active"
-          );
-
-        });
-
-
-      previousPage.classList.add(
-        "active"
-      );
-
-
-      document
-        .querySelectorAll(".nav-btn")
-        .forEach(function(b){
-
-          b.classList.remove(
-            "active"
-          );
-
-        });
-
-
-      if(previous.button){
-
-        previous.button.classList.add(
-          "active"
-        );
-
-      }
-
-    }
-
-
-    window.scrollTo({
-      top:0,
-      behavior:"smooth"
-    });
-
-
-    setTimeout(
-      window.__livexaUpdateBackButton,
-      50
+    const nav = document.querySelector(
+      '.nav-btn[data-page="' + previous + '"]'
     );
 
+    if(nav){
+      nav.classList.add("active");
+    }
+
+    window.__livexaLastPage = previous;
+
+    addBack();
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
   };
 
+  page.insertBefore(row, page.firstChild);
+      }
+  function trackPage(){
 
-  /* PAGE NAVIGATION */
+    const current = getPageId();
 
-  window.showPage = function(
+    if(!window.__livexaLastPage){
+      window.__livexaLastPage = current;
+      return;
+    }
+
+    if(current !== window.__livexaLastPage){
+
+      if(
+        window.__livexaLastPage !== current &&
+        current !== "home"
+      ){
+        window.__livexaBackHistory.push(
+          window.__livexaLastPage
+        );
+      }
+
+      window.__livexaLastPage = current;
+
+      addBack();
+    }
+  }
+
+  const style = document.createElement("style");
+
+  style.textContent = `
+    .livexa-modern-back{
+      width:100%;
+      padding:12px 16px 4px;
+      box-sizing:border-box;
+      position:relative;
+      z-index:5;
+    }
+
+    .livexa-modern-back button{
+      display:inline-flex;
+      align-items:center;
+      gap:7px;
+      height:38px;
+      padding:0 14px 0 10px;
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:12px;
+      background:rgba(255,255,255,.06);
+      color:inherit;
+      font-size:14px;
+      font-weight:600;
+      cursor:pointer;
+      transition:.2s ease;
+    }
+
+    .livexa-modern-back button:active{
+      transform:scale(.96);
+    }
+
+    .livexa-modern-back button span{
+      font-size:25px;
+      line-height:1;
+      font-weight:300;
+      margin-top:-2px;
+    }
+
+    .livexa-modern-back button b{
+      font-weight:600;
+    }
+  `;
+
+  document.head.appendChild(style);
+
+  const observer = new MutationObserver(function(){
+    trackPage();
+  });
+
+  observer.observe(document.body,{
+    subtree:true,
+    attributes:true,
+    attributeFilter:["class"]
+  });
+
+  setTimeout(function(){
+    window.__livexaLastPage = getPageId();
+  },100);
+
+})();
+
+window.showPage = function(
     page,
     button
   ){
@@ -5589,34 +5578,7 @@ window.showDiamondHistory = function() {
       behavior:"smooth"
     });
 
-
-    setTimeout(
-      window.__livexaUpdateBackButton,
-      50
-    );
-
   };
-
-
-  /* INITIAL STATE */
-
-  document.addEventListener(
-    "DOMContentLoaded",
-    function(){
-
-      setTimeout(
-        window.__livexaUpdateBackButton,
-        100
-      );
-
-    }
-  );
-
-})();
-
-  /* ================= OPEN ROOM ================= */
-
-  window.openRoom = function(roomName) {
 
     var container =
       document.getElementById("roomContainer");
