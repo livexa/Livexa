@@ -8892,7 +8892,9 @@ window.openRoom = function(roomName) {
   function createLivexaSeats() {
 
     var area =
-      document.getElementById("livexaSeats");
+      document.getElementById(
+        "livexaSeats"
+      );
 
     if (!area) return;
 
@@ -8906,92 +8908,131 @@ window.openRoom = function(roomName) {
       b.dataset.seat = i;
 
       b.onclick = function () {
-
         selectLivexaSeat(
           Number(this.dataset.seat)
         );
-
       };
 
       b.style.cssText = `
         border:0;
         background:transparent;
         color:white;
-        padding:2px;
+        padding:4px 2px;
+        cursor:pointer;
+        min-width:0;
+        position:relative;
+        transition:transform .2s ease;
       `;
+
+      b.onmousedown = function(){
+        this.style.transform = "scale(.94)";
+      };
+
+      b.onmouseup = function(){
+        this.style.transform = "scale(1)";
+      };
+
+      b.ontouchstart = function(){
+        this.style.transform = "scale(.94)";
+      };
+
+      b.ontouchend = function(){
+        this.style.transform = "scale(1)";
+      };
 
       b.innerHTML = `
         <div id="seatCircle${i}" style="
-          width:54px;
-          height:54px;
+          width:64px;
+          height:64px;
           margin:auto;
           border-radius:50%;
           display:flex;
           align-items:center;
           justify-content:center;
+          position:relative;
+
           background:
             ${i===1
-              ? "linear-gradient(135deg,#7657ff,#a45cff)"
-              : "#25293a"};
-          border:2px solid
+              ? "radial-gradient(circle at 35% 25%,#fff0a8 0%,#ffc83d 18%,#8c36ff 48%,#25105e 100%)"
+              : "radial-gradient(circle at 35% 25%,#38427d 0%,#171d42 48%,#090d20 100%)"};
+
+          border:
+            2px solid
             ${i===1
-              ? "rgba(190,160,255,.8)"
-              : "rgba(255,255,255,.07)"};
-          font-size:21px;
+              ? "#ffd85c"
+              : "rgba(126,143,210,.48)"};
+
+          box-shadow:
+            ${i===1
+              ? "0 0 0 3px rgba(255,211,82,.10),0 0 22px rgba(159,74,255,.65),inset 0 0 18px rgba(255,220,100,.22)"
+              : "0 0 0 3px rgba(82,104,190,.06),0 0 16px rgba(70,89,180,.20),inset 0 0 14px rgba(96,116,220,.08)"};
+
+          font-size:26px;
+          transition:.2s ease;
         ">
-          ${i===1 ? "👑" : "🎧"}
+
+          <span style="
+            position:absolute;
+            inset:-6px;
+            border-radius:50%;
+            border:1px solid
+              ${i===1
+                ? "rgba(255,214,91,.55)"
+                : "rgba(107,127,215,.22)"};
+            pointer-events:none;
+          "></span>
+
+          <span style="
+            position:absolute;
+            inset:4px;
+            border-radius:50%;
+            border:1px solid rgba(255,255,255,.07);
+            pointer-events:none;
+          "></span>
+
+          <span style="
+            position:relative;
+            z-index:2;
+            filter:
+              ${i===1
+                ? "drop-shadow(0 2px 7px rgba(255,211,82,.55))"
+                : "drop-shadow(0 2px 5px rgba(0,0,0,.5))"};
+          ">
+            ${i===1 ? "👑" : "🎧"}
+          </span>
         </div>
 
         <div id="seatName${i}" style="
-          margin-top:5px;
-          font-size:10px;
+          margin-top:9px;
+          font-size:11px;
+          font-weight:
+            ${i===1 ? "700" : "600"};
+          color:
+            ${i===1 ? "#ffe28a" : "#e0e4f7"};
           white-space:nowrap;
           overflow:hidden;
           text-overflow:ellipsis;
+          text-shadow:0 2px 8px rgba(0,0,0,.7);
         ">
-          ${i===1 ? "Host" : "Seat "+i}
+          ${i===1 ? "Owner" : "Seat "+i}
         </div>
 
         <div id="seatStatus${i}" style="
-          margin-top:2px;
+          margin-top:3px;
           font-size:8px;
-          opacity:.45;
+          color:
+            ${i===1 ? "#9fffe1" : "#8d96ba"};
+          letter-spacing:.2px;
+          opacity:
+            ${i===1 ? "1" : ".82"};
         ">
-          ${i===1 ? "Live" : "Tap to join"}
+          ${i===1 ? "● LIVE" : "Tap to join"}
         </div>
       `;
 
       area.appendChild(b);
     }
   }
-
-
-  window.selectLivexaSeat = function (seat) {
-
-    if (mySeat === seat) {
-
-      mySeat = null;
-      micOn = false;
-
-      updateSeats();
-
-      roomNotice(
-        "You left Seat " + seat
-      );
-
-      return;
-    }
-
-    mySeat = seat;
-
-    updateSeats();
-
-    roomNotice(
-      "You joined Seat " + seat
-    );
-  };
-
-
   window.joinLivexaSeat = function () {
 
     if (!mySeat) {
